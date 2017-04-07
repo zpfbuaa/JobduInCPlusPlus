@@ -52,52 +52,11 @@ bool cmp(Stu a, Stu b){
 >  #
 ># #      
 ></pre>
-
-><pre>
->Level 2 picture will be
 >
-# #    # #
- #      #
-# #    # #
-    # #   
-     #    
-    # #   
-# #    # #
- #      # 
-# #    # #
-></pre>
+![Level 2](http://files.cnblogs.com/files/zpfbuaa/1161_Level2.gif)
 >
-><pre>
 >Level 3 picture will be
->
-# #   # #         # #   # #
- #     #           #     # 
-# #   # #         # #   # #
-   # #               # #   
-    #                 #    
-   # #               # #   
-# #   # #         # #   # #
- #     #           #     # 
-# #   # #         # #   # #
-         # #   # #         
-          #     #          
-         # #   # #         
-            # #            
-             #             
-            # #            
-         # #   # #         
-          #     #          
-         # #   # #         
-# #   # #         # #   # #
- #     #           #     # 
-# #   # #         # #   # #
-   # #               # #   
-    #                 #    
-   # #               # #   
-# #   # #         # #   # #
- #     #           #     # 
-# #   # #         # #   # #
-</pre>
+>![Level 3](http://files.cnblogs.com/files/zpfbuaa/1161_Level3.gif)
 #### Source code:<br>
 [http://www.cnblogs.com/zpfbuaa/p/6680422.html](http://www.cnblogs.com/zpfbuaa/p/6680422.html)
 #### <font color = Blue size = 5> Analysis:</font>
