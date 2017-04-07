@@ -1,12 +1,51 @@
 # JobduInCPlusPlus
 
 ## List
+*	[题目1019：简单计算器(栈的使用)](#1019)
 *	[题目1061：成绩排序（自定义排序)](#1061)
 * 	[题目1161：Repeater (规律输出)](#1161)
 
 ## Detail
 
-#### <font color = Green> <span id="1061">题目1061：成绩排序</span></font>
+#### <font color = Green> <span id="1019">题目1019：简单计算器</span></font><br>
+
+#### Jobdu Link:<br>
+[http://ac.jobdu.com/problem.php?pid=1019](http://ac.jobdu.com/problem.php?pid=1019)
+#### Problem description:<br>
+>读入一个只包含 +, -, *, / 的非负整数计算表达式，计算该表达式的值。
+>
+>输入要求: 测试输入包含若干测试用例，每个测试用例占一行，每行不超过200个字符，整数和运算符之间用一个空格分隔。没有非法表达式。当一行中只有0时输入结束，相应的结果不要输出。
+>
+>输出要求：对每个测试用例输出1行，即该表达式的值，精确到小数点后2位。
+
+#### Source code:<br>
+
+[http://www.cnblogs.com/zpfbuaa/p/6680719.html](http://www.cnblogs.com/zpfbuaa/p/6680719.html)
+
+#### <font color = Blue size = 5> Analysis:</font>
+>首先题目给出的已知信息有很多，需要认真读题。注意到一下几点：
+>
+>1. 读入的字符只有`+ - * /`.故考虑运算顺序时，乘法除法在前面进行计算，最后进行加法减法运算。
+>2. 读入的数据肯定是非负整数<br>
+>3. 整数和符号之间存在一个空格<br>
+>4. 一行只有0时输出结束，相应结果不许输出。这句话有待考核，按照提交的AC代码来看，这里应该修改为`表达式的第一个非负整数等于0时结束输出`。并且只有0输入时，这个计算结果是0，但是不能把这个0输出。`其实就是第一个非负整数等于0时，结束程序`<brs>
+>5. 输出结果精确到小数点后2位。故在中间运算结果保存时需要用double类型的变量。
+>
+>看到题目首先可以想到的思路就是可以将计算表达式转化为后缀表达式，比如1 + 2 * 3 + 4  * 5 可以转换为1 2 3 * 4 5 * + + 这样每当遇到一个运算符时可以取出最后面的两个数进行运算然后放回去（这样一看就是使用到了栈）。但是考虑到前缀表达式转为后缀表达式并不是这道题的考点，因此这种方法可行但不适用。（另外推荐参考博客[http://www.cnblogs.com/hust_wsh/archive/2013/01/01/2841657.html](http://www.cnblogs.com/hust_wsh/archive/2013/01/01/2841657.html)得到中缀表达式转为后缀表示式的具体方法）
+>
+>但是上面的分析并不是毫无作用的，使用栈这一点对解决该问题目是很重要的。那么怎样完成使用栈完成表达式的计算呢？由于不存在小括号或其他优先级更高的运算符，那么在计算表达式时，只要遇到*或者/，那么就可以直接拿符号前后的数字进行运算即可.但是这样我们只能解决乘法和除法问题，剩下的加法和除法在最后无法判断使用加法还是减法。但是减法也是一种加法呀，等于加上一个负数嘛，虽然题目说的都是非负整数，但是我们自己可以将其转为负数来进行计算的。
+>
+>因此最后我们选择使用栈来保存计算结果，逐个字符进行读入。在此需要注意的地方如下：
+>
+>1. 数字和字符之间以空格分隔<br>
+>2. 在输入第一个非负整数以及空格后，其他的数字输入都是按照这样的组合进行输入的：`操作符+空格+非负整数+空格`。但是当这个表达式输入结束之后，最后一个就不再是空格了，组合变成了`操作符+空格+非负整数+回车`。因此可以通过判断最后一个字符进行判断表达式是否输入结束。<br>
+>3. 在Xcode中遇到的问题，printf()不加'\n'时，会导致无法输出结果。具体原因和解决方法可参见博客[http://www.cnblogs.com/zpfbuaa/p/6675938.html](http://www.cnblogs.com/zpfbuaa/p/6675938.html)<br>
+>4. 注意输出结果精确到小数点后两位 可采用printf("%2.lf\n",yourAns);
+>
+>按照上面的方法就可以完成简单的计算器了。
+
+
+#### <font color = Green> <span id="1061">题目1061：成绩排序</span></font><br>
 
 #### Jobdu Link:<br>
 [http://ac.jobdu.com/problem.php?pid=1061](http://ac.jobdu.com/problem.php?pid=1061)
@@ -36,10 +75,10 @@ bool cmp(Stu a, Stu b){
 >
 >最关键的就是通过STL提供的sort函数进行排序操作。代码：`sort(stu,stu+n,cmp);`
 
-#### <font color = Green> <span id="1161">题目1161：Repeater</span></font>
+#### <font color = Green> <span id="1161">题目1161：Repeater</span></font><br>
 
 
-#### LeetCode Link:<br>
+#### Jobdu Link:<br>
 [http://ac.jobdu.com/problem.php?pid=1161](http://ac.jobdu.com/problem.php?pid=1161)
 #### Problem description:<br>
 >给定一个模板，根据输入的迭代层数，利用模板图形输出第n次迭代后的图形。
@@ -56,6 +95,7 @@ bool cmp(Stu a, Stu b){
 ![Level 2](http://files.cnblogs.com/files/zpfbuaa/1161_Level2.gif)
 >
 >Level 3 picture will be
+>
 >![Level 3](http://files.cnblogs.com/files/zpfbuaa/1161_Level3.gif)
 #### Source code:<br>
 [http://www.cnblogs.com/zpfbuaa/p/6680422.html](http://www.cnblogs.com/zpfbuaa/p/6680422.html)
