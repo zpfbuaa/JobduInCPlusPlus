@@ -9,7 +9,7 @@
 * 	[题目1153：括号匹配问题(栈的使用)](#-题目1153括号匹配问题)
 * 	[题目1161：Repeater (规律输出)](#-题目1161repeater)
 * 	[题目1438：最小公倍数(利用最大公约数)](#-题目1438最小公倍数)
-*	[题目1439：Least Common Multiple(最小公倍数)](-题目1439least-common-multiple)
+*	[题目1439：Least Common Multiple(最小公倍数)](#-题目1439least-common-multiple)
 
 ## Detail
 
