@@ -51,7 +51,7 @@
 >
 >按照上面的方法就可以完成简单的计算器了。
 
-## [Back to list](##list)
+## [Back to list](#list)
 
 #### <font color = Green> <span id="1061">题目1061：成绩排序</span></font><br>
 
@@ -83,7 +83,7 @@ bool cmp(Stu a, Stu b){
 >
 >最关键的就是通过STL提供的sort函数进行排序操作。代码：`sort(stu,stu+n,cmp);`
 
-## [Back to list](##list)
+## [Back to list](#list)
 
 #### <font color = Green> <span id="1078">题目1078：二叉树遍历</span></font>
 
@@ -122,7 +122,7 @@ bool cmp(Stu a, Stu b){
 >
 >按照上述思路，解决由前序遍历和中序遍历得到后序遍历。
 
-## [Back to list](##list)
+## [Back to list](#list)
 
 #### <font color = Green> <span id="1080">题目1080：进制转换</span></font>
 
@@ -151,7 +151,7 @@ bool cmp(Stu a, Stu b){
 >data[]数组里面保存的是 待转化的数，因为这里数比较大，不能直接除以2，求模。要一步一步算。首先是第一位1除以2，余数是0，模是1，然后考虑第二个数，注意第二个数的值应该是前一个数与2取模之后得到的1再乘以10，再加上2，即12。然后循环下去，当到了最后一个数的时候，将余数1保存到output数组里面去。这只是第一次相除，因为余数061728394不等于0，所以还要继续循环，模拟除以2的过程，直到各个位都为0，即sum(保存各个位的和)＝ 0，最终的结果就是output数组的倒序输出。
 >
 
-## [Back to list](##list)
+## [Back to list](#list)
 
 #### <font color = Green> <span id="1083">题目1083：特殊乘法</span></font>
 
@@ -173,7 +173,7 @@ bool cmp(Stu a, Stu b){
 >
 >这里觉得第二种方法对于负数好像没有办法使用哎，不知道大家注意到了没有。可以尝试一下在OJ上提交第二种方法的代码。
 
-## [Back to list](##list)
+## [Back to list](#list)
 
 #### <font color = Green> <span id="1153">题目1153：括号匹配问题</span></font>
 
@@ -203,7 +203,7 @@ bool cmp(Stu a, Stu b){
 >2.	如果遇到是右括号')'，那么进一步判断该位置是否标记为已经匹配，如果匹配则输出空格' '，如果不匹配则输出'?'.<br>
 >3. 其他字符军输出空格' ' <br>
 
-## [Back to list](##list)
+## [Back to list](#list)
 
 #### <font color = Green> <span id="1161">题目1161：Repeater</span></font><br>
 
@@ -241,7 +241,7 @@ bool cmp(Stu a, Stu b){
 >
 >通过上述分析，可以利用给定的模板，以及所指定的迭代层数得到最终的结果。
 
-## [Back to list](##list)
+## [Back to list](#list)
 
 #### <font color = Green> <span id="1438">题目1438：最小公倍数</span></font>
 
@@ -268,7 +268,7 @@ bool cmp(Stu a, Stu b){
 >![](http://files.cnblogs.com/files/zpfbuaa/1438_最大公约数_1.gif)<br>
 >![](http://files.cnblogs.com/files/zpfbuaa/1438_最大公约数_2.gif)<br>
 
-## [Back to list](##list)
+## [Back to list](#list)
 
 #### <font color = Green> <span id="1439">题目1439：Least Common Multiple</span></font>
 
@@ -289,4 +289,4 @@ bool cmp(Stu a, Stu b){
 >但是考虑到题目中的数据可能会超过存储范围，因此可以先计算除法然后再计算乘法即`a/gcd(a,b)*b`<br>
 >本题目可以采用输入域求解同时进行，也就是每输入一个数字就进行一次最小公倍数的求解。由于题目描述的不明确，没有采用数组存储所有的输入之后进行遍历的求解方法，反倒是激发自己选择占用空间更小的方法来完成本题目。题目只是说明了所有的数字都在32位整数范围内，但是如果申请如此大的空间来保存输入是不切实际的，同样题目所测试的数据量也不会那么大。但是由于不清楚具体测试数据量的大小，还是采用变输入变求解的方法比较稳。
 
-## [Back to list](##list)
+## [Back to list](#list)
