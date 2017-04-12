@@ -2,6 +2,7 @@
 
 ## List
 *	[题目1019：简单计算器(栈的使用)](#-题目1019简单计算器)
+*	[题目1040：Prime Number(第k个素数)](#-1040)
 *	[题目1061：成绩排序（自定义排序)](#-题目1061成绩排序)
 * 	[题目1078：二叉树遍历(二叉树操作)](#-题目1078二叉树遍历)
 *	[题目1080：进制转换(大整数任意进制转换)](#-题目1080进制转换)
@@ -10,6 +11,7 @@
 * 	[题目1161：Repeater (规律输出)](#-题目1161repeater)
 * 	[题目1438：最小公倍数(利用最大公约数)](#-题目1438最小公倍数)
 *	[题目1439：Least Common Multiple(最小公倍数)](#-题目1439least-common-multiple)
+*	[题目1440：Goldbach's Conjecture(哥德巴赫猜想)](#-1440)
 
 
 ## Detail
@@ -50,6 +52,49 @@
 >4. 注意输出结果精确到小数点后两位 可采用printf("%2.lf\n",yourAns);
 >
 >按照上面的方法就可以完成简单的计算器了。
+
+## [Back to list](#list)
+
+#### <font color = Green> <span id="1040">题目1040：Prime Number</span></font>
+
+
+#### Jobdu Link:<br>
+[http://ac.jobdu.com/problem.php?pid=1040](http://ac.jobdu.com/problem.php?pid=1040)
+#### Problem description:<br>
+>Output the k-th prime number. 输出第k个素数<br>
+>输入要求：多组数据，并且输入的k满足: k≤10000<br>
+>输出要求：输出第k个素数,每组数据加换行<br>
+
+#### Source code:<br>
+[http://www.cnblogs.com/zpfbuaa/p/6701522.html](http://www.cnblogs.com/zpfbuaa/p/6701522.html)
+#### <font color = Blue size = 5> Analysis:</font>
+>素数判断可以使用求模运算符进行判断，其中核心代码如下所示：
+><pre>
+>bool isPrime(long long  n){
+    if(n <= 1) return false;
+    long long  x = sqrt(n)+1;
+    for(long long  i = 2 ; i <= x ; i ++){
+        if(0 == n % i) return false;
+    }
+    return true;
+>}
+></pre><br>
+>另外的一种方法就是素数标记法，利用倍数关系将所有满足倍数关系的数字标记为非素数。
+><pre>
+>void init(){
+    memset(prime,1,sizeof(prime));
+    prime[0] = false;
+    prime[1] = false;  
+    int x = sqrt(max_size) + 1 ;
+    for(int i = 2; i < x ; i++){
+        if(prime[i] == true ){
+            for(int j = i + i ; j < max_size ; j += i)
+                prime[j] = false ;
+        }
+    }
+}
+></pre><br>
+>进行素数表的初始化之后，进行循环遍历，并利用计数器记录当前是第几个素数，如果满足等于输入的k，那么停止遍历，输出当前的素数并换行。
 
 ## [Back to list](#list)
 
@@ -288,5 +333,24 @@ bool cmp(Stu a, Stu b){
 >先看两个正数的最小公倍数的求解过程。通过求出两个数的最大公倍数`gcd(a,b)`。然后通过`a*b/gcd(a,b)`即可得到a和b的最小公倍数。<br>
 >但是考虑到题目中的数据可能会超过存储范围，因此可以先计算除法然后再计算乘法即`a/gcd(a,b)*b`<br>
 >本题目可以采用输入域求解同时进行，也就是每输入一个数字就进行一次最小公倍数的求解。由于题目描述的不明确，没有采用数组存储所有的输入之后进行遍历的求解方法，反倒是激发自己选择占用空间更小的方法来完成本题目。题目只是说明了所有的数字都在32位整数范围内，但是如果申请如此大的空间来保存输入是不切实际的，同样题目所测试的数据量也不会那么大。但是由于不清楚具体测试数据量的大小，还是采用变输入变求解的方法比较稳。
+
+## [Back to list](#list)
+
+#### <font color = Green> <span id="1440">题目1440：Goldbach's Conjecture</span></font>
+
+
+#### Jobdu Link:<br>
+[http://ac.jobdu.com/problem.php?pid=1440]
+#### Problem description:<br>
+>一个大于等于4的合数可以拆分为两个素数之和。当然这道题不是让我们去证明这个猜想的。只要求找出一个合数，一共有多少中不同的拆分方式，满足合数n=素数a+素数b。其中组合(a,b)和组合(b,a)是同一种组合。<br>
+>输入要求：多组数据，输入一个大于等于4并且不超过2^15的数，当输入0时结束。<br>
+>输出要求：输出对应的组合总数。每组数据加换行。
+
+#### Source code:<br>
+[http://www.cnblogs.com/zpfbuaa/p/6701440.html](http://www.cnblogs.com/zpfbuaa/p/6701440.html)
+#### <font color = Blue size = 5> Analysis:</font>
+>合数也就是所谓的偶数，但是这里大于等于4，因此2不再这个范围内。哥德巴赫猜想，一个大于等于4的合数总可以拆分为两个素数之和。因此需要额外的函数进行素数的判断。<br>
+>要求出所有的组合，只需要从小打到进行遍历即可，并且由于组合(a,b)和组合(b,a)是同一种组合，因此在遍历过程中，不需要从头遍历至尾。只需要遍历所给合数的一半即可。同时遍历初始化的i并不是2,因为2是偶数，所给的合数大于等于4因此最小i应该从3开始。<br>
+>除上述之外,循环遍历的步长不是1，而是2。因为是从3开始，3是一个素数，每次加2一定跳过了偶数部分，可以减判断次数，防止超时。<br>
 
 ## [Back to list](#list)
