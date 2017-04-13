@@ -2,7 +2,7 @@
 
 ## List
 *	[题目1019：简单计算器(栈的使用)](#-题目1019简单计算器)
-*	[题目1040：Prime Number(第k个素数)](#-题目1040prime-number)
+*	[题目1040：Prime Number(第k个素数)](#-1040)
 *	[题目1061：成绩排序（自定义排序)](#-题目1061成绩排序)
 * 	[题目1078：二叉树遍历(二叉树操作)](#-题目1078二叉树遍历)
 *	[题目1080：进制转换(大整数任意进制转换)](#-题目1080进制转换)
@@ -12,7 +12,7 @@
 * 	[题目1161：Repeater (规律输出)](#-题目1161repeater)
 * 	[题目1438：最小公倍数(利用最大公约数)](#-题目1438最小公倍数)
 *	[题目1439：Least Common Multiple(最小公倍数)](#-题目1439least-common-multiple)
-*	[题目1440：Goldbach's Conjecture(哥德巴赫猜想)](#-题目1440goldbachs-conjecture)
+*	[题目1440：Goldbach's Conjecture(哥德巴赫猜想)](#-1440)
 
 
 ## Detail
@@ -239,6 +239,9 @@ bool cmp(Stu a, Stu b){
 >如果不能使用求余数判断是否整除，那么需要考虑其他的方法。<br>
 >如果a能整除b即`(b%a==0)`，那么可以将a进行质因数分解a = x1^e1 * x2^e2 * x3^e3 ... * xn^en,同时将b进行质因数分解。那么b一定包含a中所有的质因数，并且b中的每一个质因数的指数大于等于a中的相应指数。<br>
 >e(i)>=e'(i)k => k <= e(i)/e'(i)。要使所有的i使不等式都成立，只需求出最小的k即可。<br>
+![](http://files.cnblogs.com/files/zpfbuaa/1140_%E6%95%B4%E6%95%B0%E9%97%AE%E9%A2%98_1.gif)<br>
+![](http://files.cnblogs.com/files/zpfbuaa/1140_%E6%95%B4%E9%99%A4%E9%97%AE%E9%A2%98_2.gif)<br>
+![](http://files.cnblogs.com/files/zpfbuaa/1140_%E6%95%B4%E9%99%A4%E9%97%AE%E9%A2%98_3.gif)<br>
 >接下来就是对a和n!进行质因数分解工作。<br>
 >试着考虑n！中含有素因数p。n!中包含了从1到n内所有整数的乘积。每个p的倍数（包括p本身）都对n！至少贡献了一个p因子。<br>
 >1到n中p的倍数的个数是n/p个！！<br>
@@ -246,6 +249,7 @@ bool cmp(Stu a, Stu b){
 >那么贡献2个p因子，就至少为n/p*p，3个p因子为n/p^3。。。。。。<br>
 >对于2个p因子，原本应该算幂指数加2的，但是因为前面被一个p因子的已经计算过了一次，所以加1即可。其余多因子的也一样。<br>
 >这样就能计算出n！的各素因数的幂。<br>
+
 ## [Back to list](#list)
 
 #### <font color = Green> <span id="1153">题目1153：括号匹配问题</span></font>
