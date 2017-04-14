@@ -1,8 +1,8 @@
 # JobduInCPlusPlus
 
 ## List
-*	[题目1002：Grading(简单判断)](#-1002)
-*	[题目1003：A+B(带逗号的A+B)](#-1003)
+*	[题目1002：Grading(简单判断)](#-题目1002grading)
+*	[题目1003：A+B(带逗号的A+B)](#-题目1003ab)
 *	[题目1019：简单计算器(栈的使用)](#-题目1019简单计算器)
 *	[题目1040：Prime Number(第k个素数)](#-1040)
 *	[题目1061：成绩排序（自定义排序)](#-题目1061成绩排序)
@@ -142,8 +142,8 @@ else if(!flag1 && !flag2) printf("%d\n",0-num1-num2);
 >}
 ></pre><br>
 >另外的一种方法就是素数标记法，利用倍数关系将所有满足倍数关系的数字标记为非素数。
-><pre>
->void init(){
+<pre>
+void init(){
     memset(prime,1,sizeof(prime));
     prime[0] = false;
     prime[1] = false;  
@@ -155,7 +155,7 @@ else if(!flag1 && !flag2) printf("%d\n",0-num1-num2);
         }
     }
 }
-></pre><br>
+</pre><br>
 >进行素数表的初始化之后，进行循环遍历，并利用计数器记录当前是第几个素数，如果满足等于输入的k，那么停止遍历，输出当前的素数并换行。
 
 ## [Back to list](#list)
