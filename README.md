@@ -4,7 +4,7 @@
 *	[题目1002：Grading(简单判断)](#-题目1002grading)
 *	[题目1003：A+B(带逗号的A+B)](#-题目1003ab)
 *	[题目1019：简单计算器(栈的使用)](#-题目1019简单计算器)
-*	[题目1040：Prime Number(第k个素数)](#-1040)
+*	[题目1040：Prime Number(第k个素数)](#-题目1040prime-number)
 *	[题目1061：成绩排序（自定义排序)](#-题目1061成绩排序)
 * 	[题目1078：二叉树遍历(二叉树操作)](#-题目1078二叉树遍历)
 *	[题目1080：进制转换(大整数任意进制转换)](#-题目1080进制转换)
@@ -14,7 +14,7 @@
 * 	[题目1161：Repeater (规律输出)](#-题目1161repeater)
 * 	[题目1438：最小公倍数(利用最大公约数)](#-题目1438最小公倍数)
 *	[题目1439：Least Common Multiple(最小公倍数)](#-题目1439least-common-multiple)
-*	[题目1440：Goldbach's Conjecture(哥德巴赫猜想)](#-1440)
+*	[题目1440：Goldbach's Conjecture(哥德巴赫猜想)](#-题目1440goldbachs-conjecture)
 
 
 ## Detail
@@ -57,23 +57,23 @@
 >核心代码见下：
 ><pre>
 >int lena = (int)strlen(a);
-int size1 = 0;
-int num1 = 0;
-bool flag1 = (a[0]>='0'&&a[0]<='9') ? true : false;//默认0也是正数了！
-for(int i = lena -1 ; i >= 0 ; i--){
-    if(a[i]>='0' && a[i]<='9'){
-        num1+=(a[i]-'0')*pow(10,size1);
-        size1++;
-    }
-}
+>int size1 = 0;
+>int num1 = 0;
+>bool flag1 = (a[0]>='0'&&a[0]<='9') ? true : false;//默认0也是正数了！
+>for(int i = lena -1 ; i >= 0 ; i--){
+>    if(a[i]>='0' && a[i]<='9'){
+>        num1+=(a[i]-'0')*pow(10,size1);
+>        size1++;
+>    }
+>}
 ></pre>
 >
 >通过上述转换，可以得到最后的结果，然后根据A和B的符号进行相应的加法和减法操作即可。
 ><pre>
-if(flag1&&flag2) printf("%d\n",num1+num2);
-else if(flag1 && !flag2) printf("%d\n",num1-num2);
-else if(flag2 && !flag1) printf("%d\n",num2-num1);
-else if(!flag1 && !flag2) printf("%d\n",0-num1-num2);
+>if(flag1&&flag2) printf("%d\n",num1+num2);
+>else if(flag1 && !flag2) printf("%d\n",num1-num2);
+>else if(flag2 && !flag1) printf("%d\n",num2-num1);
+>else if(!flag1 && !flag2) printf("%d\n",0-num1-num2);
 ></pre>
 
 ## [Back to list](#list)
@@ -133,28 +133,28 @@ else if(!flag1 && !flag2) printf("%d\n",0-num1-num2);
 >素数判断可以使用求模运算符进行判断，其中核心代码如下所示：
 ><pre>
 >bool isPrime(long long  n){
-    if(n <= 1) return false;
-    long long  x = sqrt(n)+1;
-    for(long long  i = 2 ; i <= x ; i ++){
-        if(0 == n % i) return false;
-    }
-    return true;
+>    if(n <= 1) return false;
+>    long long  x = sqrt(n)+1;
+>    for(long long  i = 2 ; i <= x ; i ++){
+>        if(0 == n % i) return false;
+>    }
+>    return true;
 >}
 ></pre><br>
 >另外的一种方法就是素数标记法，利用倍数关系将所有满足倍数关系的数字标记为非素数。
-<pre>
-void init(){
-    memset(prime,1,sizeof(prime));
-    prime[0] = false;
-    prime[1] = false;  
-    int x = sqrt(max_size) + 1 ;
-    for(int i = 2; i < x ; i++){
-        if(prime[i] == true ){
-            for(int j = i + i ; j < max_size ; j += i)
-                prime[j] = false ;
-        }
-    }
-}
+><pre>
+>void init(){
+>    memset(prime,1,sizeof(prime));
+>    prime[0] = false;
+>    prime[1] = false;  
+>    int x = sqrt(max_size) + 1 ;
+>    for(int i = 2; i < x ; i++){
+>        if(prime[i] == true ){
+>            for(int j = i + i ; j < max_size ; j += i)
+>                prime[j] = false ;
+>        }
+>    }
+>}
 </pre><br>
 >进行素数表的初始化之后，进行循环遍历，并利用计数器记录当前是第几个素数，如果满足等于输入的k，那么停止遍历，输出当前的素数并换行。
 
