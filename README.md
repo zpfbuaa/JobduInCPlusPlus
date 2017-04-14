@@ -1,6 +1,8 @@
 # JobduInCPlusPlus
 
 ## List
+*	[题目1002：Grading(简单判断)](#-1002)
+*	[题目1003：A+B(带逗号的A+B)](#-1003)
 *	[题目1019：简单计算器(栈的使用)](#-题目1019简单计算器)
 *	[题目1040：Prime Number(第k个素数)](#-1040)
 *	[题目1061：成绩排序（自定义排序)](#-题目1061成绩排序)
@@ -16,6 +18,65 @@
 
 
 ## Detail
+
+#### <font color = Green> <span id="1002">题目1002：Grading</span></font>
+
+
+#### Jobdu Link:<br>
+[http://ac.jobdu.com/problem.php?pid=1002](http://ac.jobdu.com/problem.php?pid=1002)
+#### Problem description:<br>
+>题目背景为高考试卷批改打分制度。对于每一道题，至少需要两位评审老师进行打分，当两个老师的打分结果相差在可接受范围内，那么该题最终得分为两位老师所给分数的平均分。<br>
+>当打分相差较大超过可接受范围时，需要第三位评审老师打分。<br>
+>如果第三位评审老师所给分数之和其中一位老师所给分数相差在可接受范围内，则最终分数为这两位老师所给分数的平均分。<br>
+>如果第三位老师所给分数和前面两位老师所给分数之差均为可接受范围内，则最终分数取三位老师所给分数的最高分。<br>
+>如果第三位老师所给分数和前面两位所给分数之差均超过可接受范围，则需要第四位评审老师给出分数，最终分数为第四位老师所给分数。
+
+#### Source code:<br>
+[http://www.cnblogs.com/zpfbuaa/p/6711256.html](http://www.cnblogs.com/zpfbuaa/p/6711256.html)
+#### <font color = Blue size = 5> Analysis:</font>
+>原题目为英文，看懂题目就很简单了。注意使用类型为double。并要注意输出精确到小数点后一位，使用`printf("%.1lf\n",ans)`
+
+## [Back to list](#list)
+
+#### <font color = Green> <span id="1003">题目1003：A+B</span></font>
+
+
+#### Jobdu Link:<br>
+[http://ac.jobdu.com/problem.php?pid=1003](http://ac.jobdu.com/problem.php?pid=1003)
+#### Problem description:<br>
+>给定两个整数A和B，其表示形式是：从个位开始，每三位数用逗号","隔开。<br>
+>现在请计算A+B的结果，并以正常形式输出。
+>输入要求：输入包含多组数据数据，每组数据占一行，由两个整数A和B组成（-10^9 < A,B < 10^9）。<br>
+>输出要求：请计算A+B的结果，并以正常形式输出，每组数据加换行。<br>
+
+#### Source code:<br>
+[http://www.cnblogs.com/zpfbuaa/p/6711267.html](http://www.cnblogs.com/zpfbuaa/p/6711267.html)
+#### <font color = Blue size = 5> Analysis:</font>
+>两个整数带逗号，因此数据可使用char数组保存。之后需要将char数组保存的数据转为相对于的int类型的数字。转换方法有很多，下面给出一种：<br>
+>求出char数组中保存数据的长度len，然后设置一个保存最终转换结果的int型变量并且初始化为0.除此之外设置一个记录当前数字长度的变量，用于倒序读取char数组，不断更新最终结果。然后还需要一个变量进行对转换的数字标记是正数还是负数，可以使用bool变量.
+>核心代码见下：
+><pre>
+>int lena = (int)strlen(a);
+int size1 = 0;
+int num1 = 0;
+bool flag1 = (a[0]>='0'&&a[0]<='9') ? true : false;//默认0也是正数了！
+for(int i = lena -1 ; i >= 0 ; i--){
+    if(a[i]>='0' && a[i]<='9'){
+        num1+=(a[i]-'0')*pow(10,size1);
+        size1++;
+    }
+}
+></pre>
+>
+>通过上述转换，可以得到最后的结果，然后根据A和B的符号进行相应的加法和减法操作即可。
+><pre>
+if(flag1&&flag2) printf("%d\n",num1+num2);
+else if(flag1 && !flag2) printf("%d\n",num1-num2);
+else if(flag2 && !flag1) printf("%d\n",num2-num1);
+else if(!flag1 && !flag2) printf("%d\n",0-num1-num2);
+></pre>
+
+## [Back to list](#list)
 
 #### <font color = Green> <span id="1019">题目1019：简单计算器</span></font><br>
 
