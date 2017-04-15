@@ -16,7 +16,7 @@
 *	[题目1439：Least Common Multiple(最小公倍数)](#-题目1439least-common-multiple)
 *	[题目1440：Goldbach's Conjecture(哥德巴赫猜想)](#-题目1440goldbachs-conjecture)
 *	[题目1441：人见人爱 A ^ B(二分求幂)](#-题目1441人见人爱-a--b)
-*	[题目1442：A sequence of numbers(数列计算)](#-1442)
+*	[题目1442：A sequence of numbers(数列计算)](#-题目1442a-sequence-of-numbers)
 
 
 ## Detail
