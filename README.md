@@ -16,6 +16,7 @@
 *	[题目1439：Least Common Multiple(最小公倍数)](#-题目1439least-common-multiple)
 *	[题目1440：Goldbach's Conjecture(哥德巴赫猜想)](#-题目1440goldbachs-conjecture)
 *	[题目1441：人见人爱 A ^ B(二分求幂)](#-题目1441人见人爱-a--b)
+*	[题目1442：A sequence of numbers(数列计算)](#-1442)
 
 
 ## Detail
@@ -490,4 +491,30 @@ bool cmp(Stu a, Stu b){
 >     a%=1000;
 >}
 ></pre>
+## [Back to list](#list)
+
+#### <font color = Green> <span id="1442">题目1442：A sequence of numbers</span></font>
+
+
+#### Jobdu Link:<br>
+[http://ac.jobdu.com/problem.php?pid=1442](http://ac.jobdu.com/problem.php?pid=1442)
+#### Problem description:<br>
+>第一行输入一个整数n，代表接下来有n组数据。<br>
+>接下来的n行，每一行输入4个正数a,b,c,k.每一行为一组数据，其中a,b,c为一个非递减数列的相邻的前三个元素。并且数列要么是等差数列要么是等比数列中.<br>
+>k表示要求出该数列的第k个元素。<br>
+>对于每组数据输出一行，取出第k个元素的值。每组数据加换行。<brs>
+>输入数据：a,b,c取值范围为[0, 2^63)， k取值范围为(0,10^9]<br>
+>输出要求： K-th number module (%) 200907.
+#### Source code:<br>
+[http://www.cnblogs.com/zpfbuaa/p/6715544.html](http://www.cnblogs.com/zpfbuaa/p/6715544.html)
+#### <font color = Blue size = 5> Analysis:</font>
+>等差数列通项公式:`an = a1 + (n-1)*d`<br>
+>等比数列通项公式:`an = a1 * q^(n-1)` <br>
+>由于数据较大，因此在数据保存中使用long long，并且最终结果要求对200907进行求模，那么在中间计算过程中可以直接进行求模操作，防止数据溢出。<br>
+>对于等差数列，相邻的三个数a,b,c满足关系式 `b-a == c-b`<br>
+>对于等比数列，相邻的三个数a,b,c满足关系式 `b/a == c/b`<br>
+>对于本题来说，只需要判断是否为等差数列即可,减法计算所耗时间比除法要低。并且有些数列可能既是等差数列又是等比数列，这样可以将等差数列判断放在前面，如果满足就不需要再进入相对复杂的等比数列的计算。<br>
+>等比数列计算通过上面的公式`an = a1 * q^(n-1)`看到可以使用二分求幂的方法，也就是`题目1441：人见人爱 A ^ B`所给出的方法。<br>
+>需要注意在计算中需要对200907进行求模操作。可以通过宏定义`#define ret 200907`来简化. 
+
 ## [Back to list](#list)
