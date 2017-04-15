@@ -15,7 +15,7 @@
 * 	[题目1438：最小公倍数(利用最大公约数)](#-题目1438最小公倍数)
 *	[题目1439：Least Common Multiple(最小公倍数)](#-题目1439least-common-multiple)
 *	[题目1440：Goldbach's Conjecture(哥德巴赫猜想)](#-题目1440goldbachs-conjecture)
-*	[题目1441：人见人爱 A ^ B(二分求幂)](#-1441)
+*	[题目1441：人见人爱 A ^ B(二分求幂)](#-题目1441人见人爱-a--b)
 
 
 ## Detail
@@ -465,7 +465,9 @@ bool cmp(Stu a, Stu b){
 #### <font color = Blue size = 5> Analysis:</font>
 ><pre>
 >可能使用for循环的求幂方法：
->int ans = 1;>for (int i = 1;i <= b;i ++) {>    ans *= a; 
+>int ans = 1;
+>for (int i = 1;i <= b;i ++) {
+>    ans *= a; 
 >}
 ></pre><br>
 >但是对于本题目中A，B的取值范围为[1,10000]。首先数据结果甚至已经超过了保存范围，其次循环次数较大.<br>
