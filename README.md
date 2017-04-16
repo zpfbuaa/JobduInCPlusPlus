@@ -215,7 +215,6 @@ bool cmp(Stu a, Stu b){
 >数组中保存的数据为从低位到高位，因此输出时需要先找到最高位，因此在计算中可以使用一个int变量来保存当前计算结果的位数length，然后倒序输出最终计算结果。<br>
 >核心代码如下所示：<br>
 ><pre>
->```cpp
 >for(i = 1 ; i <= n ; i++){
 >	int carry = 0;
 >	for(j = 0 ; j < length ; j++){
