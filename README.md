@@ -6,6 +6,7 @@
 *	[题目1019：简单计算器(栈的使用)](#-题目1019简单计算器)
 *	[题目1040：Prime Number(第k个素数)](#-题目1040prime-number)
 *	[题目1061：成绩排序（自定义排序)](#-题目1061成绩排序)
+*	[题目1076：N的阶乘(大数乘法)](#-1076)
 * 	[题目1078：二叉树遍历(二叉树操作)](#-题目1078二叉树遍历)
 *	[题目1080：进制转换(大整数任意进制转换)](#-题目1080进制转换)
 *	[题目1083：特殊乘法(求模运算符使用)](#-题目1083特殊乘法)
@@ -193,6 +194,46 @@ bool cmp(Stu a, Stu b){
 >
 >最关键的就是通过STL提供的sort函数进行排序操作。代码：`sort(stu,stu+n,cmp);`
 
+## [Back to list](#list)
+
+#### <font color = Green> <span id="1076">题目1076：N的阶乘</span></font>
+
+
+#### Jobdu Link:<br>
+[http://ac.jobdu.com/problem.php?pid=1076](http://ac.jobdu.com/problem.php?pid=1076)
+#### Problem description:<br>
+>输入一个正整数N，输出N的阶乘。<br>
+>输入要求：正整数N(0<=N<=1000)<br>
+>输出要求：输入可能包括多组数据，对于每一组输入数据，输出N的阶乘<br>
+
+#### Source code:<br>
+[http://www.cnblogs.com/zpfbuaa/p/6718904.html](http://www.cnblogs.com/zpfbuaa/p/6718904.html)
+#### <font color = Blue size = 5> Analysis:</font>
+>阶乘n!中n的取值范围为[0,1000]，因此最终结果会很长，使用所提供的数据类型int或long long会overflow.可以使用int数组保存计算的每一位。<br
+>乘法的操作，一个数的每一位都与另一个数相乘，产生进位，保存每一位结果。<br>
+>如果进位长度超过一位，那么需要保存所有的进位结果。<br>
+>数组中保存的数据为从低位到高位，因此输出时需要先找到最高位，因此在计算中可以使用一个int变量来保存当前计算结果的位数length，然后倒序输出最终计算结果。<br>
+>核心代码如下所示：<br>
+><pre>
+>```cpp
+>for(i = 1 ; i <= n ; i++){
+>	int carry = 0;
+>	for(j = 0 ; j < length ; j++){
+>		pos[j] = pos[j] * i + carry;
+>       if(pos[j]>=10){
+>		 	carry = pos[j]/10;
+>       	pos[j] = pos[j]%10;
+>       }
+>       else{
+>       	carry = 0;
+>       }
+>	}
+>    while(carry!=0){
+>    	pos[length++] = carry % 10;
+>    	carry/=10;
+>    }
+>}
+></pre>
 ## [Back to list](#list)
 
 #### <font color = Green> <span id="1078">题目1078：二叉树遍历</span></font>
