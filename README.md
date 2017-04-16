@@ -210,7 +210,7 @@ bool cmp(Stu a, Stu b){
 #### Source code:<br>
 [http://www.cnblogs.com/zpfbuaa/p/6718904.html](http://www.cnblogs.com/zpfbuaa/p/6718904.html)
 #### <font color = Blue size = 5> Analysis:</font>
->阶乘n!中n的取值范围为[0,1000]，因此最终结果会很长，使用所提供的数据类型int或long long会overflow.可以使用int数组保存计算的每一位。<br
+>阶乘n!中n的取值范围为[0,1000]，因此最终结果会很长，使用所提供的数据类型int或long long会overflow.可以使用int数组保存计算的每一位。<br>
 >乘法的操作，一个数的每一位都与另一个数相乘，产生进位，保存每一位结果。<br>
 >如果进位长度超过一位，那么需要保存所有的进位结果。<br>
 >数组中保存的数据为从低位到高位，因此输出时需要先找到最高位，因此在计算中可以使用一个int变量来保存当前计算结果的位数length，然后倒序输出最终计算结果。<br>
