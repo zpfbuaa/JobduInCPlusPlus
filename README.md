@@ -15,7 +15,7 @@
 * 	[题目1153：括号匹配问题(栈的使用)](#-题目1153括号匹配问题)
 * 	[题目1161：Repeater (规律输出)](#-题目1161repeater)
 *	[题目1198：a+b(高精度加法实现)](#-题目1198ab)
-*	[题目1208：10进制 VS 2进制(任意进制转换&大数保存)](#-题目120810进制-vs-2进制)
+*	[题目1208：10进制 VS 2进制(任意进制转换&大数保存)](#-1208)
 * 	[题目1438：最小公倍数(利用最大公约数)](#-题目1438最小公倍数)
 *	[题目1439：Least Common Multiple(最小公倍数)](#-题目1439least-common-multiple)
 *	[题目1440：Goldbach's Conjecture(哥德巴赫猜想)](#-题目1440goldbachs-conjecture)
@@ -569,28 +569,29 @@ bool cmp(Stu a, Stu b){
 >按照上述的过程可以完成对二进制数到十进制数的转换。但是需要注意到数据量很大无法直接保存在long long中，需要将转换结果的每一位保存在数组中。因此这里还需要完成对进位操作。<br>
 >
 ><pre>
->		 int length = 1;
->        ans[0] = 0;//最内层为0*2 因此ans[0] = 0
->        for(int i = 0; i < size ; i++){//1011 --> (((0*2+1)*2+0)*2+1)*2+1
->            int carry = to[i] - '0';
->            for(int j = 0 ; j < length ; j++){
->                if(j==0)
->                    ans[j] = ans[j] * TO + carry;//只需要加一次即可，也就在最低位加carry即可
->                else
->                    ans[j] = ans[j] * TO;
->            }
->            for(int j = 0 ; j < length ; j++){//进位操作
->                if(j == length - 1 && ans[j] >=10){
->                    ans[j] = ans[j]%10;
->                    ans[++j] = 1;//这里最大的ans[j]=2*9+1 = 19因此进位只能是1
->                    length++;
->                }
->                else if (ans[j]>=10){
->                    ans[j] = ans[j]%10;
->                    ans[j+1]++;//产生进位的只能是1
->                }
->            }
->        }
+>int length = 1;
+>ans[0] = 0;//最内层为0*2 因此ans[0] = 0
+>for(int i = 0; i < size ; i++){//1011 --> (((0*2+1)*2+0)*2+1)*2+1
+>	int carry = to[i] - '0';
+>	for(int j = 0 ; j < length ; j++){
+>		if(j==0)
+>			ans[j] = ans[j] * TO + carry;//只需要加一次即可，也就在最低位加carry即可
+>      else
+>      	ans[j] = ans[j] * TO;
+>      }
+>      for(int j = 0 ; j < length ; j++){//进位操作
+>      	if(j == length - 1 && ans[j] >=10){
+>         	ans[j] = ans[j]%10;
+>         	ans[++j] = 1;//这里最大的ans[j]=2*9+1 = 19因此进位只能是1
+>         	length++;
+>         }
+>         else if (ans[j]>=10){
+>         	ans[j] = ans[j]%10;
+>         	ans[j+1]++;//产生进位的只能是1
+>         }
+>		}
+>	}
+>}
 ></pre>
 >
 >按照上述方法解决题目中的求二进制逆序数。
