@@ -101,19 +101,18 @@
 >介绍图论中的一种数据结构——集合，以及基于集合的相关操作——并查集。利用该数据结构来表示集合信息，用以实现确定某个集合含有哪些元素、判断某两个元素是否存在同一个集合中，求集合中元素的数量。<br>
 >
 >例如集合A={1,2,3,4}。可以利用树来表示：<br>
->![](http://files.cnblogs.com/files/zpfbuaa/1012_%E7%95%85%E9%80%9A%E5%B7%A5%E7%A8%8B_1.gif = 100x100)<br>
+><div align=center><img width="350" height="271" src="http://files.cnblogs.com/files/zpfbuaa/1012_%E7%95%85%E9%80%9A%E5%B7%A5%E7%A8%8B_1.gif"/></div>
 >
 >可以保存在数组中如下所示:<br>
->
->![](http://files.cnblogs.com/files/zpfbuaa/1012_%E7%95%85%E9%80%9A%E5%B7%A5%E7%A8%8B_2.gif)<br>
+><div align=center><img width="350" height="271" src="http://files.cnblogs.com/files/zpfbuaa/1012_%E7%95%85%E9%80%9A%E5%B7%A5%E7%A8%8B_2.gif"/></div>
 >
 >进行合并操作：<br>
 >
->![](http://files.cnblogs.com/files/zpfbuaa/1012_%E7%95%85%E9%80%9A%E5%B7%A5%E7%A8%8B_3.gif)<br>
+><div align=center><img width="350" height="271" src="http://files.cnblogs.com/files/zpfbuaa/1012_%E7%95%85%E9%80%9A%E5%B7%A5%E7%A8%8B_3.gif"/></div>
 >
 >合并前后的数组：<br>
 >
->![](http://files.cnblogs.com/files/zpfbuaa/1012_%E7%95%85%E9%80%9A%E5%B7%A5%E7%A8%8B_4.gif)<br>
+><div align=center><img width="350" height="271" src="http://files.cnblogs.com/files/zpfbuaa/1012_%E7%95%85%E9%80%9A%E5%B7%A5%E7%A8%8B_4.gif"/></div>
 >
 >查找结点x所在的树的根结点。递归的核心代码：<br>
 >
@@ -352,14 +351,15 @@ bool cmp(Stu a, Stu b){
 >前序遍历为FDXEAG，中序遍历为XDEFAG。首先从前序遍历得到根节点，前序遍历第一个元素为F，因此F是整棵树的根节点，接下来从中序遍历定位根节点F。中序遍历中在在根节点前面的元素为XDE，后面的为AG。因此左子树包含的结点有XDE,右子树包含的结点有AG。
 >
 >当前状态为下图所示：<br>
->![二叉树遍历](http://files.cnblogs.com/files/zpfbuaa/1078_%E4%BA%8C%E5%8F%89%E6%A0%91%E9%81%8D%E5%8E%86_1.gif)
+><div align=center><img width="350" height="271" src="http://files.cnblogs.com/files/zpfbuaa/1078_%E4%BA%8C%E5%8F%89%E6%A0%91%E9%81%8D%E5%8E%86_1.gif"/></div><br>
+>
 >确定左子树前序遍历结果为DXE,左子树中序遍历结果为XDE。<br>
 >得到D为该子树的根，X为该子树的左结点，E为该子树的右结点
 >
 >确定右子树前序遍历结果为AG,右子树中序遍历结果为AG。
 >得到A为该子树的根，该子树左结点为空，G为该子树的右结点
 >构造出该树如下图所示：<br>
->![二叉树遍历](http://files.cnblogs.com/files/zpfbuaa/1078_%E4%BA%8C%E5%8F%89%E6%A0%91%E9%81%8D%E5%8E%86_2.gif)
+><div align=center><img width="350" height="271" src="http://files.cnblogs.com/files/zpfbuaa/1078_%E4%BA%8C%E5%8F%89%E6%A0%91%E9%81%8D%E5%8E%86_2.gif"/></div><br>
 >
 >按照上述思路，解决由前序遍历和中序遍历得到后序遍历。
 
@@ -388,7 +388,8 @@ bool cmp(Stu a, Stu b){
 >参考博客[http://blog.csdn.net/jaster_wisdom/article/details/52107785](http://blog.csdn.net/jaster_wisdom/article/details/52107785)讲的很详细，里面讲解了如何实现任意进制的转换过程。里面每一次进行的计算，都会让前面的位逐渐变为0，并且直到最后的求和为0时结束循环。实现的功能就是直接将每一位直接转为相应的目标进制。
 >
 >下面摘出重要的分析：<br>
->![](http://files.cnblogs.com/files/zpfbuaa/1080_%E8%BF%9B%E5%88%B6%E8%BD%AC%E6%8D%A2.gif)<br>
+><div align=center><img width="400" height="425.5" src="http://files.cnblogs.com/files/zpfbuaa/1080_%E8%BF%9B%E5%88%B6%E8%BD%AC%E6%8D%A2.gif"/></div><br>
+>
 >data[]数组里面保存的是 待转化的数，因为这里数比较大，不能直接除以2，求模。要一步一步算。首先是第一位1除以2，余数是0，模是1，然后考虑第二个数，注意第二个数的值应该是前一个数与2取模之后得到的1再乘以10，再加上2，即12。然后循环下去，当到了最后一个数的时候，将余数1保存到output数组里面去。这只是第一次相除，因为余数061728394不等于0，所以还要继续循环，模拟除以2的过程，直到各个位都为0，即sum(保存各个位的和)＝ 0，最终的结果就是output数组的倒序输出。
 >
 
@@ -434,9 +435,12 @@ bool cmp(Stu a, Stu b){
 >如果不能使用求余数判断是否整除，那么需要考虑其他的方法。<br>
 >如果a能整除b即`(b%a==0)`，那么可以将a进行质因数分解a = x1^e1 * x2^e2 * x3^e3 ... * xn^en,同时将b进行质因数分解。那么b一定包含a中所有的质因数，并且b中的每一个质因数的指数大于等于a中的相应指数。<br>
 >e(i)>=e'(i)k => k <= e(i)/e'(i)。要使所有的i使不等式都成立，只需求出最小的k即可。<br>
-![](http://files.cnblogs.com/files/zpfbuaa/1140_%E6%95%B4%E6%95%B0%E9%97%AE%E9%A2%98_1.gif)<br>
-![](http://files.cnblogs.com/files/zpfbuaa/1140_%E6%95%B4%E9%99%A4%E9%97%AE%E9%A2%98_2.gif)<br>
-![](http://files.cnblogs.com/files/zpfbuaa/1140_%E6%95%B4%E9%99%A4%E9%97%AE%E9%A2%98_3.gif)<br>
+><div align=center><img width="488" height="736" src="http://files.cnblogs.com/files/zpfbuaa/1140_%E6%95%B4%E6%95%B0%E9%97%AE%E9%A2%98_1.gif"/></div><br>
+>
+><div align=center><img width="493" height="528" src="http://files.cnblogs.com/files/zpfbuaa/1140_%E6%95%B4%E9%99%A4%E9%97%AE%E9%A2%98_2.gif"/></div><br>
+>
+><div align=center><img width="472" height="485" src="http://files.cnblogs.com/files/zpfbuaa/1140_%E6%95%B4%E9%99%A4%E9%97%AE%E9%A2%98_3.gif"/></div><br>
+>
 >接下来就是对a和n!进行质因数分解工作。<br>
 >试着考虑n！中含有素因数p。n!中包含了从1到n内所有整数的乘积。每个p的倍数（包括p本身）都对n！至少贡献了一个p因子。<br>
 >1到n中p的倍数的个数是n/p个！！<br>
@@ -560,11 +564,14 @@ bool cmp(Stu a, Stu b){
 ># #      
 ></pre>
 >
-![Level 2](http://files.cnblogs.com/files/zpfbuaa/1161_Level2.gif)
+><div align=center><img width="342" height="486" src="http://files.cnblogs.com/files/zpfbuaa/1161_Level2.gif"/></div><br>
+>
 >
 >Level 3 picture will be
 >
->![Level 3](http://files.cnblogs.com/files/zpfbuaa/1161_Level3.gif)
+><div align=center><img width="274" height="672" src="http://files.cnblogs.com/files/zpfbuaa/1161_Level3.gif"/></div><br>
+>
+
 #### Source code:<br>
 [http://www.cnblogs.com/zpfbuaa/p/6680422.html](http://www.cnblogs.com/zpfbuaa/p/6680422.html)
 #### <font color = Blue size = 5> Analysis:</font>
@@ -709,8 +716,10 @@ bool cmp(Stu a, Stu b){
 >2.	其中一个为0，则最大公约数为不为0的那个数<br>
 >3.	两个数均不为0，则使用自调用b->a  a%b->b 即求解`gcd(a,b) = gcd(b,a%b)`<br>
 >证明见下图：<br>
->![](http://files.cnblogs.com/files/zpfbuaa/1438_最大公约数_1.gif)<br>
->![](http://files.cnblogs.com/files/zpfbuaa/1438_最大公约数_2.gif)<br>
+><div align=center><img width="492" height="594" src="http://files.cnblogs.com/files/zpfbuaa/1438_最大公约数_1.gif"/></div><br>
+>
+><div align=center><img width="523" height="564" src="http://files.cnblogs.com/files/zpfbuaa/1438_最大公约数_2.gif"/></div><br>
+>
 
 ## [Back to list](#list)
 
