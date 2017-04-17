@@ -3,6 +3,7 @@
 ## List
 *	[题目1002：Grading(简单判断)](#-题目1002grading)
 *	[题目1003：A+B(带逗号的A+B)](#-题目1003ab)
+*	[题目1012：畅通工程(并查集以及路径优化)](#-1012)
 *	[题目1019：简单计算器(栈的使用)](#-题目1019简单计算器)
 *	[题目1040：Prime Number(第k个素数)](#-题目1040prime-number)
 *	[题目1061：成绩排序（自定义排序)](#-题目1061成绩排序)
@@ -81,6 +82,94 @@
 >else if(flag2 && !flag1) printf("%d\n",num2-num1);
 >else if(!flag1 && !flag2) printf("%d\n",0-num1-num2);
 ></pre>
+
+## [Back to list](#list)
+
+#### <font color = Green> <span id="1012">题目1012：畅通工程</span></font>
+
+
+#### Jobdu Link:<br>
+[http://ac.jobdu.com/problem.php?pid=1012](http://ac.jobdu.com/problem.php?pid=1012)
+#### Problem description:<br>
+>测试输入包含若干测试用例。每个测试用例的第1行给出两个正整数，分别是城镇数目N ( < 1000 )和道路数目M；随后的M行对应M条道路，每行给出一对正整数，分别是该条道路直接连通的两个城镇的编号。<br>
+>
+>省政府“畅通工程”的目标是使全省任何两个城镇间都可以实现交通（但不一定有直接的道路相连，只要互相间接通过道路可达即可）。问最少还需要建设多少条道路？
+
+#### Source code:<br>
+[http://www.cnblogs.com/zpfbuaa/p/6725082.html](http://www.cnblogs.com/zpfbuaa/p/6725082.html)
+#### <font color = Blue size = 5> Analysis:</font>
+>介绍图论中的一种数据结构——集合，以及基于集合的相关操作——并查集。利用该数据结构来表示集合信息，用以实现确定某个集合含有哪些元素、判断某两个元素是否存在同一个集合中，求集合中元素的数量。<br>
+>
+>例如集合A={1,2,3,4}。可以利用树来表示：<br>
+>![](http://files.cnblogs.com/files/zpfbuaa/1012_%E7%95%85%E9%80%9A%E5%B7%A5%E7%A8%8B_1.gif)<br>
+>
+>可以保存在数组中如下所示:<br>
+>
+>![](http://files.cnblogs.com/files/zpfbuaa/1012_%E7%95%85%E9%80%9A%E5%B7%A5%E7%A8%8B_2.gif)<br>
+>
+>进行合并操作：<br>
+>
+>![](http://files.cnblogs.com/files/zpfbuaa/1012_%E7%95%85%E9%80%9A%E5%B7%A5%E7%A8%8B_3.gif)<br>
+>
+>合并前后的数组：<br>
+>
+>![](http://files.cnblogs.com/files/zpfbuaa/1012_%E7%95%85%E9%80%9A%E5%B7%A5%E7%A8%8B_4.gif)<br>
+>
+>查找结点x所在的树的根结点。递归的核心代码：<br>
+>
+><pre>
+>int findRoot(int x){
+>	if(Tree[x] == -1) return x;
+>	else return findRoot(Tree[x]);
+>}
+></pre>
+>
+>循环的核心代码：<br>
+>
+><pre>
+>int findRoot(int x){
+>	while(Tree[x]!=-1){
+>		x = Tree[x];
+>	}
+>}
+>return x;
+></pre>
+>
+>查找过程中的路径优化的递归代码:<br>
+>
+><pre>
+>int findRoot(int x){
+>	if(Tree[x] == -1) return x;
+>	else{
+>		int tmp = findRoot(Tree[x]);
+>		Tree[x] = tmp;
+>		return tmp;
+>	}
+>}
+></pre>
+>
+>查找过程中的路径优化的循环代码：<br>
+>
+><pre>
+>int findRoot(int x){
+>	int ret;
+>	int tmp = x;
+>	while(Tree[x]!=-1){
+>		x = Tree[x];
+>	}
+>	ret = x;
+>	x = tmp;
+>	while(Tree[x]!=-1){
+>		int t = Tree[x];
+>		Tree[x] = t;
+>		x = t;
+>	}
+>	return ret;
+>}
+></pre>
+>
+>本题目需要将相互连接的城市放到相同的集合中，集合的划分规则为能够互相连接的城市在一个集合中。因此最终结果是要求出还需要修建多少条道路。也就是将num个相互独立的集合连接需要的道路最小条数，那么就是num-1条道路即可。
+>
 
 ## [Back to list](#list)
 
