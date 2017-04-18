@@ -14,6 +14,7 @@
 *	[题目1083：特殊乘法(求模运算符使用)](#-题目1083特殊乘法)
 *	[题目1104：整除问题(大数相乘，素数问题)](#-题目1104整除问题)
 *	[题目1137：浮点数加法(高精度浮点数加法)](#-题目1137浮点数加法)
+*	[题目1144：Freckles(最小生成树进阶)](#-1144)
 * 	[题目1153：括号匹配问题(栈的使用)](#-题目1153括号匹配问题)
 * 	[题目1161：Repeater (规律输出)](#-题目1161repeater)
 *	[题目1198：a+b(高精度加法实现)](#-题目1198ab)
@@ -569,12 +570,68 @@ bool cmp(Stu a, Stu b){
 
 ## [Back to list](#list)
 
+#### <font color = Green> <span id="1144">题目1144：Freckles</span></font>
+
+
+#### Jobdu Link:<br>
+[http://ac.jobdu.com/problem.php?pid=1144](http://ac.jobdu.com/problem.php?pid=1144)
+#### Problem description:<br>
+>题目大致意思：平面中给出n个点(x1,y1),(x2,y2)...(xn,yn)。求出将所有的点连接起来消耗最少的墨水。<br>
+>
+>输入要求:第一行为n，表示有n个点。接下来有n行，每行有x,y两个浮点类型的值。<br>
+>
+>输出要求:输出将所有点连接起来的总长度，结果保留小数点后两位。<br>
+
+#### Source code:<br>
+[http://www.cnblogs.com/zpfbuaa/p/6731112.html](http://www.cnblogs.com/zpfbuaa/p/6731112.html)
+#### <font color = Blue size = 5> Analysis:</font>
+>其实也是一个最小生成树问题，主要是首先需要自己求出所有的点之间组成的边的长度。然后遇到的问题就是如何标记其中某一条边。<br>
+>
+>因为之前的都是给出了某个城市的编号，但是现在只是给出了点的坐标，因此可以构造一个点的结构体，同时可以计算出点之间的距离保存起来，并且给每一个点都进行编号。<br>
+>
+>这样就可以有n个点的编号，然后利用并查集操作。查找某条边的两个顶点是否属于同一个集合，如果不是同一个集合那么需要进行其中一个点移入另一个集合中。<br>
+>
+><pre>
+>struct Edge{ // define the edge which have line  a and  line b
+>    int a, b;
+>    double cost; // the length of point a to point b
+>    bool operator < (const Edge &A) const{
+>        return cost < A.cost;
+>    }
+>};
+> 
+>struct Point{ //define the point
+>    double x, y; //(x,y) the position of this dot
+>    double getDistance(Point A){ //get the lenght between (x,y) and (A.x, A.y)
+>        double tmp = (x-A.x)*(x-A.x) + (y-A.y)*(y-A.y);
+>        return sqrt(tmp);
+>    }
+>};
+></pre>
+>
+>获取每个点到另外n-1个点的距离。<br>
+>
+><pre>
+>int line_id = 0;//define the id of the line
+> for(int i = 1 ; i <= n ; i++){
+> 	for(int j = i+1 ; j <= n ; j++){
+>		edge[line_id].a = i;
+>		edge[line_id].b = j;
+>		edge[line_id].cost = point[i].getDistance(point[j]);
+>		line_id++;
+>	}
+>}
+> </pre>
+>
+
+## [Back to list](#list)
+
 #### <font color = Green> <span id="1153">题目1153：括号匹配问题</span></font>
 
 #### Jobdu Link:<br>
 [http://ac.jobdu.com/problem.php?pid=1153](http://ac.jobdu.com/problem.php?pid=1153)
 #### Problem description:<br>
->在某个字符串（长度不超过100）中有左括号、右括号和大小写字母；规定（与常见的算数式子一样）任何一个左括号都从内到外与在它右边且距离最近的右括号匹配。写一个程序，找到无法匹配的左括号和右括号，输出原来字符串，并在下一行标出不能匹配的括号。不能匹配的左括号用 "$"标注,不能匹配的右括号用"?"标注.
+>在某个字符串（长度不超过100）中有左括号、右括号和大小写字母；规定（与常见的算数式子一样）任何一个左括号都从内到外与在它右边且距离最近的右括号匹配。写一个程序，找到无法匹配的左括号和右括号，输出原来字符串，并在下一行标出不能匹配的括号。不能匹配的左括号用 "$"标注,不能匹配的右括号用"?"标注.<br>
 >
 >输入要求：输入包括多组数据，每组数据一行，包含一个字符串，只包含左右括号和大小写字母，字符串长度不超过100。
 >
