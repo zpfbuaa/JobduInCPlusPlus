@@ -22,6 +22,7 @@
 *	[题目1440：Goldbach's Conjecture(哥德巴赫猜想)](#-题目1440goldbachs-conjecture)
 *	[题目1441：人见人爱 A ^ B(二分求幂)](#-题目1441人见人爱-a--b)
 *	[题目1442：A sequence of numbers(数列计算)](#-题目1442a-sequence-of-numbers)
+* 	[题目1446：Head of a Gang(并查集操作)](#-1446)
 
 
 ## Detail
@@ -830,4 +831,87 @@ bool cmp(Stu a, Stu b){
 >等比数列计算通过上面的公式`an = a1 * q^(n-1)`看到可以使用二分求幂的方法，也就是`题目1441：人见人爱 A ^ B`所给出的方法。<br>
 >需要注意在计算中需要对200907进行求模操作。可以通过宏定义`#define ret 200907`来简化. 
 
+## [Back to list](#list)
+
+#### <font color = Green> <span id="1446">题目1446：Head of a Gang</span></font>
+
+
+#### Jobdu Link:<br>
+[http://ac.jobdu.com/problem.php?pid=1446](http://ac.jobdu.com/problem.php?pid=1446)
+#### Problem description:<br>
+>题目大致意思是找到一个团队集合中通话时间最长的(直接以及间接通话)，通话时间最长的就是captain.题目给出所有的通话组合（姓名a,姓名b,通话时长t）。以及最低时长k，要求找到满足所有满足上述两个条件的captain。并输出captain的姓名以及该集合团队成员个数。
+
+#### Source code:<br>
+[http://www.cnblogs.com/zpfbuaa/p/6728450.html](http://www.cnblogs.com/zpfbuaa/p/6728450.html)
+#### <font color = Blue size = 5> Analysis:</font>
+>并查集查找父节点:<br>
+><pre>
+>int findRoot(int x) {
+>    while (parent[x] != x) {
+>        x = parent[x];
+>    }
+>    return x;
+>}
+></pre><br>
+>并查集合并结点：<br>
+><pre>
+>void unionSet(int a, int b) {   
+>    a = findRoot(a);
+>    b = findRoot(b);
+>    if (a == b) return;
+>    if (a > b) {
+>        parent[a] = b;
+>    } else {
+>        parent[b] = a;
+>    }
+>}
+></pre>
+>
+>接下来需要每个人的通话时间：<br>
+>由于使用数组保存每个通话时间，因此每个人的姓名不能放在数组中也同时保存通话时间，题目指出姓名唯一不重复，意思就是每个人的姓名是独特的。<br>
+>那么可以将每个人的姓名进行编号处理，如果有n个人那么可以编号从1到n，那么需要一个map<string,map>来保存这个姓名到数字编号的记录。<br>
+>
+>将姓名与数字编号进行构造并保存在baseMap中，同时保存下来实际有多少个人在整个大的集合中即变量currNum。<br>
+><pre>
+>int getCurrentNum(char c[]) {
+>    int num = 0;
+>    map<string, int>::iterator it = baseMap.find(c);
+>    if (it == baseMap.end()) {
+>        currNum++;
+>        num = currNum;
+>        baseMap.insert(make_pair(c, num));
+>    } else {
+>        num = it->second;
+>    }
+>    return num;
+>}
+></pre>
+>1、如果要使用数组，需要将字母转换为数字，当然最后输出的时候要转换回去。<br>
+>2、并查集，读取两个name的时候，就合并。<br>
+>3、求父节点，并且算出集合个数。<br>
+>4、对每个集合做计算，求成员个数。符合条件，保留，不符合条件，忽略。<br>
+>5、按照字母序输出结果。<br>
+>
+>如何进行不同集合的划分也就是怎么去确定一个集合，需要遍历所有的编号（编号的个数前面保存在了currNum中）,当其findRoot(x) == x 时，此时的x为一个集合根节点。同时还要保存下来哪些结点编号为父节点（需要数组fatherArr），除此之外还要记录一共有多少个集合即变量tmpk，最终的captain的个数一定小于等于集合的个数。<br>
+>
+>循环所有的父节点个数为tmpk，下面嵌套循环所有的成员个数为currNum。找到所有集合中通话时间最长的人，并且计算出和其有通话的人的个数。如果满足通话时长大于k并且通话人数大于等于3，那么将该结果保存在nodes中,同时需要保存已经存储的查询结果的个数保存在变量num中。其中nodes为结构体，其结构如下所示：
+>
+><pre>
+>struct Node {
+>    char name[4];
+>    int size;
+>} nodes[maxn];
+></pre>
+>
+>然后对最终nodes中保存的数据进行排序，按照字典序从小到大进行排序，可以编写自定义的cmp函数，然后使用C++提供的STL的sort函数，实现对nodes的排序。<br>
+>
+><pre>
+>bool cmp(Node node1, Node node2) {
+>    return strcmp(node1.name, node2.name) < 0;
+>}
+></pre>
+>
+>最终结果的打印需要先输出满足条件的个数即前面的num。<br>
+>然后输出姓名+space+通话联系人个数。
+>
 ## [Back to list](#list)
