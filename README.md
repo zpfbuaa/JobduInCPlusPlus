@@ -4,6 +4,7 @@
 *	[题目1002：Grading(简单判断)](#-题目1002grading)
 *	[题目1003：A+B(带逗号的A+B)](#-题目1003ab)
 *	[题目1012：畅通工程(并查集以及路径优化)](#-题目1012畅通工程)
+*	[题目1017：还是畅通工程(最小生成树初步)](#-1017)
 *	[题目1019：简单计算器(栈的使用)](#-题目1019简单计算器)
 *	[题目1040：Prime Number(第k个素数)](#-题目1040prime-number)
 *	[题目1061：成绩排序（自定义排序)](#-题目1061成绩排序)
@@ -170,6 +171,54 @@
 >
 >本题目需要将相互连接的城市放到相同的集合中，集合的划分规则为能够互相连接的城市在一个集合中。因此最终结果是要求出还需要修建多少条道路。也就是将num个相互独立的集合连接需要的道路最小条数，那么就是num-1条道路即可。
 >
+
+## [Back to list](#list)
+
+#### <font color = Green> <span id="1017">题目1017：还是畅通工程</span></font>
+
+
+#### Jobdu Link:<br>
+[http://ac.jobdu.com/problem.php?pid=1017](http://ac.jobdu.com/problem.php?pid=1017)
+#### Problem description:<br>
+>
+
+#### Source code:<br>
+[http://www.cnblogs.com/zpfbuaa/p/6731021.html](http://www.cnblogs.com/zpfbuaa/p/6731021.html)
+#### <font color = Blue size = 5> Analysis:</font>
+>1.初始时所有结点属于孤立的集合。<br>
+>>2.按照边权递增顺序遍历所有的边，若遍历到的边两个顶点仍分属不同的集合(该边即为连通这两个集合的边中权值最小的那条)则确定该边为最小生成树上的一条边，并将这两个顶点分属的集合合并。<br>
+>>3.遍历完所有边后，原图上所有结点属于同一个集合则被选取的边和原图中所有结点构成最小生成树;否则原图不连通，最小生成树不存在。<br>
+>
+>按照上面的定理，首先需要将所有的边按照长度从小到大进行排序操作。可以通过定义结构体，结构体的边通过两个相连接的点确定。<br>
+>
+><pre>
+>struct Edge{
+>    int a, b;
+>    int cost;
+>    bool operator < (const Edge &A) const{//重载加法运算符
+>        return cost < A.cost;
+>    }
+>    Edge(){
+>        a = 0;
+>        b = 0;
+>        cost = 0;
+>    }
+>};
+></pre> <br>
+>
+>接下来从小到大遍历所有的边，如果该边的两个顶点不属于同一个集合那么将这两个顶点merge，同时将结果加上该边的长度。<br>
+>
+><pre>
+>int ans = 0;
+>for(int i = 1 ; i <= n*(n-1)/2 ; i++){
+>	int a = findRoot(edge[i].a);
+>	int b = findRoot(edge[i].b);
+>	if(a!=b){
+>		tree[a] = b;
+>		ans+=edge[i].cost;
+>	}
+>}
+></pre>
 
 ## [Back to list](#list)
 
