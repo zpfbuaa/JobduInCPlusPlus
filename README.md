@@ -3,6 +3,7 @@
 ## List
 *	[题目1002：Grading(简单判断)](#-题目1002grading)
 *	[题目1003：A+B(带逗号的A+B)](#-题目1003ab)
+*	[题目1008：最短路径问题(最短路径问题dijkstra算法)](#-1008)
 *	[题目1012：畅通工程(并查集以及路径优化)](#-题目1012畅通工程)
 *	[题目1017：还是畅通工程(最小生成树初步)](#-题目1017还是畅通工程)
 *	[题目1019：简单计算器(栈的使用)](#-题目1019简单计算器)
@@ -88,6 +89,47 @@
 >else if(flag2 && !flag1) printf("%d\n",num2-num1);
 >else if(!flag1 && !flag2) printf("%d\n",0-num1-num2);
 ></pre>
+
+## [Back to list](#list)
+
+#### <font color = Green> <span id="1008">题目1008：最短路径问题</span></font>
+
+
+#### Jobdu Link:<br>
+[http://ac.jobdu.com/problem.php?pid=1008](http://ac.jobdu.com/problem.php?pid=1008)
+#### Problem description:<br>
+>给你n个点，m条无向边，每条边都有长度d和花费p，给你起点s终点t，要求输出起点到终点的最短距离及其花费，如果最短距离有多条路线，则输出花费最少的。<br>
+>
+>输入要求：输入n,m，点的编号是1~n,然后是m行，每行4个数 a,b,d,p，表示a和b之间有一条边，且其长度为d，花费为p。最后一行是两个数 s,t;起点s，终点t。n和m为0时输入结束。<br>
+>n取值范围为(1,1000],m取值范围为(0,100000),并且s不等于t。<br>
+>
+>输出要求：输出 一行有两个数，最短距离及其花费，空格分隔。<br>
+>
+
+#### Source code:<br>
+[http://www.cnblogs.com/zpfbuaa/p/6736356.html](http://www.cnblogs.com/zpfbuaa/p/6736356.html)
+#### <font color = Blue size = 5> Analysis:</font>
+>同样使用dijkstra算法，但是由于存在多条最短路径，现在要求当最短路径有多个时需要输出花费最低的一条路径。并且最终结果需要输出最短路径长度以及对应的花费。<br>
+>
+>因此邻接矩阵的结构体需要增加一个成员变量cost来保存修路的花费。<br>
+><pre>
+>struct E{
+>    int next;
+>    int len;
+>    int cost;
+>};
+></pre>
+>
+>另外同时声明`int cost[MAX_SIZE];` `cost[i]`保存从起点s到其他点i的花费。<br>
+>
+><pre>
+>if(dis[next]==-1 || dis[next] > dis[newP]+len || (dis[next]==dis[newP]+len && cost[next] > cost[newP]+cos)){
+>		dis[next] = dis[newP] + len;
+>		cost[next] = cost[newP] + cos;
+>}
+></pre>
+>
+>
 
 ## [Back to list](#list)
 
