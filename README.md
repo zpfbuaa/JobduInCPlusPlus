@@ -25,6 +25,7 @@
 *	[题目1441：人见人爱 A ^ B(二分求幂)](#-题目1441人见人爱-a--b)
 *	[题目1442：A sequence of numbers(数列计算)](#-题目1442a-sequence-of-numbers)
 * 	[题目1446：Head of a Gang(并查集操作)](#-题目1446head-of-a-gang)
+*	[题目1447：最短路(floyd算法)](#-1447)
 
 
 ## Detail
@@ -1022,4 +1023,38 @@ bool cmp(Stu a, Stu b){
 >最终结果的打印需要先输出满足条件的个数即前面的num。<br>
 >然后输出姓名+space+通话联系人个数。
 >
+## [Back to list](#list)
+
+#### <font color = Green> <span id="1447">题目1447：最短路</span></font>
+
+
+#### Jobdu Link:<br>
+[http://ac.jobdu.com/problem.php?pid=1447](http://ac.jobdu.com/problem.php?pid=1447)
+#### Problem description:<br>
+>在每年的校赛里，所有进入决赛的同学都会获得一件很漂亮的t-shirt。但是每当我们的工作人员把上百件的衣服从商店运回到赛场的时候，却是非常累的！所以现在他们想要寻找最短的从商店到赛场的路线，你可以帮助他们吗？<br>
+>
+>输入要求：输入包括多组数据。每组数据第一行是两个整数N、M（N<=100，M<=10000），N表示成都的大街上有几个路口，标号为1的路口是商店所在地，标号为N的路口是赛场所在地，M则表示在成都有几条路。N=M=0表示输入结束。接下来M行，每行包括3个整数A，B，C（1<=A,B<=N,1<=C<=1000）,表示在路口A与路口B之间有一条路，我们的工作人员需要C分钟的时间走过这条路。输入保证至少存在1条商店到赛场的路线。<br>
+>
+>当输入为两个0时，输入结束。<br>
+>
+>输出要求：对于每组输入，输出一行，表示工作人员从商店走到赛场的最短时间<br>
+>
+
+#### Source code:<br>
+[http://www.cnblogs.com/zpfbuaa/p/6734644.html](http://www.cnblogs.com/zpfbuaa/p/6734644.html)
+#### <font color = Blue size = 5> Analysis:</font>
+>利用floyd算法，题目所给数据很直接，存储数据时注意当前路口到自身的距离初始化为0，其他的初始化一个特殊的值，标记为不可到达。floyd算法可以求出任意两个点之间的最短距离，在最终结果输出的时候注意选择起止点。<br>
+>
+><pre>
+>void floyd(){
+>    for(int k = 1 ; k <= n ; k ++)
+>    	   for(int i = 1 ; i <= n ; i++)
+>            for(int j = 1 ; j <= n ; j++)
+>                if(dist[i][k]==-1 || dist[k][j]==-1) continue;
+>                else if(dist[i][j]==-1 || dist[i][k]+dist[k][j]< dist[i][j])
+>                    dist[i][j] = dist[i][k]+dist[k][j];
+>}
+></pre>
+>
+
 ## [Back to list](#list)
