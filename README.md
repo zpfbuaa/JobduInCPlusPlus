@@ -25,7 +25,7 @@
 *	[题目1441：人见人爱 A ^ B(二分求幂)](#-题目1441人见人爱-a--b)
 *	[题目1442：A sequence of numbers(数列计算)](#-题目1442a-sequence-of-numbers)
 * 	[题目1446：Head of a Gang(并查集操作)](#-题目1446head-of-a-gang)
-*	[题目1447：最短路(floyd算法)](#-1447)
+*	[题目1447：最短路(floyd算法)](#-题目1447最短路)
 
 
 ## Detail
