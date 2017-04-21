@@ -31,7 +31,7 @@
 *	[题目1442：A sequence of numbers(数列计算)](#-题目1442a-sequence-of-numbers)
 * 	[题目1446：Head of a Gang(并查集操作)](#-题目1446head-of-a-gang)
 *	[题目1447：最短路(floyd算法)](#-题目1447最短路)
-*	[题目1448：Legal or Not(有向无环图——拓扑排序问题)](#-1448)
+*	[题目1448：Legal or Not(有向无环图——拓扑排序问题)](#-题目1448legal-or-not)
 
 
 ## Detail
