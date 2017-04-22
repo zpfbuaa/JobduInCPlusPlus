@@ -34,6 +34,7 @@
 *	[题目1448：Legal or Not(有向无环图——拓扑排序问题)](#-题目1448legal-or-not)
 *	[题目1449：确定比赛名次(有向无环图&优先队列——拓扑排序问题进阶题)](#-题目1449确定比赛名次)
 *	[题目1450：产生冠军(拓扑排序简单题)](#-题目1450产生冠军)
+*	[题目1456：胜利大逃亡(广度优先搜索BFS)](#-1456)
 
 
 ## Detail
@@ -1431,5 +1432,89 @@ bool cmp(Stu a, Stu b){
 >
 >需要注意的是：题目只是给出了有n组对选手，因此选手的个数最多为2*n个。所以在设置inDegree大小的时候需要考虑到这一点。并且对inDegree初始化时一定要将所用的范围都初始化到0。
 >
+
+## [Back to list](#list)
+
+#### <font color = Green> <span id="1456">题目1456：胜利大逃亡</span></font>
+
+
+#### Jobdu Link:<br>
+[http://ac.jobdu.com/problem.php?pid=1456](http://ac.jobdu.com/problem.php?pid=1456)
+#### Problem description:<br>
+>题目大致意思，存在一个A * B * C 的城堡，现在需要从坐标(0,0,0)到出口(A-1,B-1,C-1)，城堡坐标用(x,y,z)表示。其中当坐标值为1是表示为墙壁，为0时表示道路。每分钟能从一个坐标走到相邻的六个坐标中的其中一个。并且现在要求在T分钟之内走出城堡。给定城堡的结构图，求出如果能在T分钟内走出城堡则输出最少的分钟，如果不能走出则输出-1。<br>
+>
+>输入要求：输入数据的第一行是一个正整数K,表明测试数据的数量.每组测试数据的第一行是四个正整数A,B,C和T(1<=A,B,C<=50,1<=T<=1000),它们分别代表城堡的大小和魔王回来的时间.然后是A块输入数据(先是第0块,然后是第1块,第2块......),每块输入数据有B行,每行有C个正整数,代表迷宫的布局,其中0代表路,1代表墙。<br>
+>
+>输出要求：对于每组测试数据,如果Ignatius能够在魔王回来前离开城堡,那么请输出他最少需要多少分钟,否则输出-1。<br>
+>
+
+#### Source code:<br>
+[http://www.cnblogs.com/zpfbuaa/p/6747954.html](http://www.cnblogs.com/zpfbuaa/p/6747954.html)
+#### <font color = Blue size = 5> Analysis:</font>
+>广度优先搜索即对由状态间的相互转移构成的解答树进行的按层次遍历。<br>
+>
+>对于题目设置状态为四元组(x,y,z,t)。其中x,y,z表示坐标，t表示从入口(0,0,0)到当前坐标(x,y,z)所有最短时间。<br>
+>
+>因此最终搜索的目标为(A-1,B-1,C-1,t)。对于每一个状态(x,y,z,t)其下一个状态有六种分别为:`(x+1,y,z,t+1)`,`(x-1,y,z,t+1)`,`(x,y+1,z,t+1)`,`(x,y-1,z,t+1)`,`(x,y,z+1,t+1)`,`(x,y,z-1,t+1)`。<br>
+>
+>为了找到到达点(A-1、B-1、C-1)的最短时间，我们从初始状态 (0，0，0，0)开始，按照状态的不断扩展转移查找每一个状态。将初始状态视为根节点，并将每一个状态扩展得到的新状态视为该状态的子结点，那么状态的转移与生成就呈现出了树的形态，如下图所示：<br>
+>
+><div align=center><img width="464" height="364" src="http://files.cnblogs.com/files/zpfbuaa/1456_%E8%83%9C%E5%88%A9%E5%A4%A7%E9%80%83%E4%BA%A1_1.gif"/></div><br>
+>
+>因此可以采用队列来实现先进先出，从而实现广度遍历。为了减少遍历的次数，可以采用剪枝法，判断之前时候已经遍历过当期结点，另外判断当前位置是否合法包括超过城堡范围或者当前位置为墙壁。<br>
+>
+>可以使用change数组实现下一个位置的移动:<br>
+><pre>
+>int change[][3]={
+>    1,0,0,
+>    -1,0,0,
+>    0,1,0,
+>    0,-1,0,
+>    0,0,1,
+>    0,0,-1
+>};
+></pre>
+>
+>结构体保存状态信息:<br>
+>
+><pre>
+>struct N{
+>    int x;
+>    int y;
+>    int z;
+>    int t;
+>};
+>queue<N>myQueue;
+></pre>
+>
+>广度优先搜索的代码:<br>
+>
+><pre>
+>#define WALL 1
+>#define MOVE 6
+>int BFS(int a, int b , int c){
+>    while(!myQueue.empty()){
+>        N nowP = myQueue.front();
+>        myQueue.pop();
+>        for(int i = 0 ; i < MOVE ; i ++){
+>            int nx = nowP.x + change[i][0];
+>            int ny = nowP.y + change[i][1];
+>            int nz = nowP.z + change[i][2];
+>            if(nx<0 || nx>=a || ny<0 || ny>=b || nz<0 || nz>=c) continue;
+>            if(space[nx][ny][nz] == WALL) continue;
+>            if(visit[nx][ny][nz] == true) continue;
+>            N tmp;
+>            tmp.x = nx;
+>            tmp.y = ny;
+>            tmp.z = nz;
+>            tmp.t = nowP.t + 1;
+>            myQueue.push(tmp);
+>            visit[nx][ny][nz] = true;
+>            if(nx==a-1 && ny==b-1 && nz==c-1) return tmp.t;
+>        }
+>    }
+>    return -1;
+>}
+></pre>
 
 ## [Back to list](#list)
