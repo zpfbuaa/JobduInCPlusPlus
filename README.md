@@ -38,6 +38,7 @@
 *	[题目1457：非常可乐(广度优先搜素BFS)](#-题目1457非常可乐)
 *	[题目1458：汉诺塔III(递归算法)](#-1458)
 *	[题目1459：Prime ring problem(素数环问题)](#-1459)
+*	[题目1460：Oil Deposit(回溯法)](#-1460)
 
 ## Detail
 
@@ -1669,5 +1670,45 @@ bool cmp(Stu a, Stu b){
 >
 >其中数组`int ans[MAX_SIZE]`用于保存每一次的结果。数组`int used[MAX_SIZE]`用于保存数字是否以及插入到当前环中。<br>
 >
+
+## [Back to list](#list)
+
+#### <font color = Green> <span id="1460">题目1460：Oil Deposit</span></font>
+
+
+#### Jobdu Link:<br>
+[http://ac.jobdu.com/problem.php?pid=1460](http://ac.jobdu.com/problem.php?pid=1460)
+#### Problem description:<br>
+>题目大致意思：存在一个矩形油田，油田被划分为n*m的小区域，每块区域通过仪器探测之后进行标记，如果该区域存在石油则标记为'@'，如果不存在则标记为' * '。其中每一个有油田的小区域的前后左右四个对角都是相邻的，也就是说小油田组成了大的油田。现在给出油田的分布情况，求出一共有多少块不同油田。<br>
+>
+>输入要求：多组数据，每组数据第一行为n,m。其中n和m分别表示矩形油田的长和宽。并且n,m的取值范围均为[1,100]。接下来有n行，每一行有m个字符，分别为'*'或者'@'当中的一个。<br>
+>
+>输出要求：输出油田的个数。<br>
+>
+
+#### Source code:<br>
+[http://www.cnblogs.com/zpfbuaa/p/6753231.html](http://www.cnblogs.com/zpfbuaa/p/6753231.html)
+#### <font color = Blue size = 5> Analysis:</font>
+>首先对图上所有位置设置一个标记位，表示该位置是否已经被计算过，且该标记仅对地图上为@的点有效。这样我们按从左至右、从上往下的顺序依次遍历地图上所有位置，若遍历到@，且该点未被标记，则所有与其直接相邻、或者间接相邻的@点与其一起组成一个油田，该油田即为一个我们需要计算的油田，将该油田中所有的@位标记为已经计算。这样，当所有的位置被遍历过后，我们即得到了所需的答案。<br>
+>
+><pre>
+>
+>char plot[MAX_SIZE][MAX_SIZE];
+>bool visited[MAX_SIZE][MAX_SIZE];
+>int change[2][8]={{-1,-1,-1,0,0,1,1,1},{-1,0,1,-1,1,-1,0,1}};
+>int n, m;
+>void DFS(int x, int y){
+>    for(int i = 0 ; i < 8 ; i++){
+>        int nx = x + change[0][i];
+>        int ny = y + change[1][i];
+>        if(nx<0 || nx>=n || ny<0 || ny>=m) continue;
+>        if(plot[nx][ny]=='*') continue;
+>        if(visited[nx][ny]==true) continue;
+>        visited[nx][ny]=true;
+>        DFS(nx,ny);
+>    }
+>    return;
+>}
+></pre>
 
 ## [Back to list](#list)
