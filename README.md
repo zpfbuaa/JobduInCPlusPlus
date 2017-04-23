@@ -36,14 +36,11 @@
 *	[题目1450：产生冠军(拓扑排序简单题)](#-题目1450产生冠军)
 *	[题目1456：胜利大逃亡(广度优先搜索BFS)](#-题目1456胜利大逃亡)
 *	[题目1457：非常可乐(广度优先搜素BFS)](#-题目1457非常可乐)
-<<<<<<< HEAD
 *	[题目1458：汉诺塔III(递归算法)](#-1458)
 *	[题目1459：Prime ring problem(素数环问题)](#-1459)
 *	[题目1460：Oil Deposit(回溯法)](#-1460)
-=======
 *	[题目1458：汉诺塔III(递归算法)](#-题目1458汉诺塔iii)
 *	[题目1459：Prime ring problem(素数环问题)](#-题目1459prime-ring-problem)
->>>>>>> origin/master
 
 ## Detail
 
@@ -1677,7 +1674,6 @@ bool cmp(Stu a, Stu b){
 >
 
 ## [Back to list](#list)
-<<<<<<< HEAD
 
 #### <font color = Green> <span id="1460">题目1460：Oil Deposit</span></font>
 
