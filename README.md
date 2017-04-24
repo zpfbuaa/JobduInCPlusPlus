@@ -40,7 +40,7 @@
 *	[题目1458：汉诺塔III(递归算法)](#-题目1458汉诺塔iii)
 *	[题目1459：Prime ring problem(素数环问题)](#-题目1459prime-ring-problem)
 *	[题目1460：Oil Deposit(回溯法)](#-题目1460oil-deposit)
-*	[题目1461：Tempter of the bone(深度优先遍历)](#-1461)
+*	[题目1461：Tempter of the bone(深度优先遍历)](#-题目1461tempter-of-the-bone)
 ## Detail
 
 #### <font color = Green> <span id="1002">题目1002：Grading</span></font>
