@@ -40,6 +40,7 @@
 *	[题目1458：汉诺塔III(递归算法)](#-题目1458汉诺塔iii)
 *	[题目1459：Prime ring problem(素数环问题)](#-题目1459prime-ring-problem)
 *	[题目1460：Oil Deposit(回溯法)](#-题目1460oil-deposit)
+*	[题目1461：Tempter of the bone(深度优先遍历)](#-1461)
 ## Detail
 
 #### <font color = Green> <span id="1002">题目1002：Grading</span></font>
@@ -1763,6 +1764,64 @@ bool cmp(Stu a, Stu b){
 >    return;
 >}
 ></pre>
+
+## [Back to list](#list)
+
+#### <font color = Green> <span id="1461">题目1461：Tempter of the bone</span></font>
+
+
+#### Jobdu Link:<br>
+[http://ac.jobdu.com/problem.php?pid=1461](http://ac.jobdu.com/problem.php?pid=1461)
+#### Problem description:<br>
+>题目大致意思：一只可爱的狗狗被困在了矩形迷宫之中。迷宫只有一个出口，标记为'D'。狗狗所在位置标记为'S'。迷宫中的墙壁标记为'X'。迷宫中的道路标记为'.'。由于迷宫设置了机关，每次离开当前位置之后，该位置就会产生塌陷，无法再次回到该位置。此外，从当前时刻开始，迷宫的出口只有在t秒后才开启，如果超过t时刻则出口不再开启，如果提前到达出口也无法成功逃离。狗狗每次移动可以向左或右或者向上或向下移动一个方格，狗狗每秒只能移动一个方格。狗狗只有当其恰好t时刻出口时才能成功逃离迷宫。现在给出迷宫分布图以及狗狗的位置，请问狗狗能否安全逃离迷宫。<br>
+>
+>输入要求：多组数据，每组数据第一行为n, m,t。其中n，m分别表示迷宫的长和宽,t表示出口在t秒后开启。接下来的n行分别为迷宫的分布图。其中的字符只包含'X'、'S'、’D‘、'.'。另外n,m的取值范围为(1,7)，t的取值范围为(0,50)。<br>
+
+#### Source code:<br>
+[http://www.cnblogs.com/zpfbuaa/p/6756101.html](http://www.cnblogs.com/zpfbuaa/p/6756101.html)
+#### <font color = Blue size = 5> Analysis:</font>
+>为了判断狗狗能否逃离，需要遍历所有的路径。从当前位置开始，下一个位置可以从上下左右进行选择，选择之后，判断时候达到出口并且判断时间是否等于所给的t。然后继续从这个位置选择下一个位置，不断重复上述操作，同时将已经遍历的位置设置为已经遍历。如果当该位置无法选择下一个位置之后，回溯至上一个位置，选择上下左右位置的另外三种（因为有一种已经不能够通过）。<br>
+>
+>因此该方法为深度优先遍历。对于所有路径组成的树进行深度优先遍历，找到解则成功，如果找不到则进行回溯。直到所有路径均遍历。如果遍历结束仍没有找到则失败。因此需要设置默认值为false，当找到时修改为true。<br>
+>
+>同时为了简化位置移动的计算，可以利用change二维数组保存坐标(x,y)接下来的四种移动方式：(0,-1)、(0,1)、(-1,0)、(1,0)，分别表示向左右上下四种移动。`int change[2][4]={{0,0,-1,1},{-1,1,0,0}};//left right up down`。<br>
+>
+>为了保存某个是否已经遍历需要声明数组`int visited[MAX_SIZE][MAX_SIZE];`来进行保存。<br>
+>
+>此外对于本题目而言，由于出口开启时间固定，并且初始位置S和出口位置D可以求出。因此从初始位置S(x1,y1)到出口位置(x2,y2)需要移动的次数可以确定是奇数次还是偶数次。如果(x1+y1)%2==(x2+y2)%2，即初始位置和出口位置的奇偶相同，那么移动通过偶数次移动，那么所给t必须为偶数次。因此判断可以写为：`(start.x+start.y)%2 == ((over.x+over.y)%2+t%2) %2`。<br>
+>
+>可以通过下面的深度优先遍历DFS进行求解:<br>
+><pre>
+>struct Pos{
+>     int x;
+>     int y;
+> };
+> Pos start;
+> Pos over;
+> bool flag;
+> void DFS(Pos pos,int time){
+>     Pos nextP;
+>     for(int i = 0 ; i < 4 ; i ++){
+>         nextP.x = pos.x + change[0][i];
+>         nextP.y = pos.y + change[1][i];
+>         if(nextP.x<0 || nextP.x>=n || nextP.y<0 || nextP.y>=m) continue;
+>         if(plot[nextP.x][nextP.y] == 'X' || visited[nextP.x][nextP.y]==true) continue;
+>         if(plot[nextP.x][nextP.y] == 'D'){
+>             if(time+1==t){
+>                 flag = true;
+>                 return;
+>             }
+>             else{
+>                 continue;
+>             }
+>         }
+>         visited[nextP.x][nextP.y]=true;
+>         DFS(nextP,time+1);
+>         visited[nextP.x][nextP.y]=false;
+>         if(flag==true) return;
+>     }
+> }
+> </pre>
 
 ## [Back to list](#list)
 
