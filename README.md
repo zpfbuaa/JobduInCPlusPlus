@@ -17,6 +17,7 @@
 *	[题目1083：特殊乘法(求模运算符使用)](#-题目1083特殊乘法)
 *	[题目1100：最短路径(最短路径进阶)](#-题目1100最短路径)
 *	[题目1104：整除问题(大数相乘，素数问题)](#-题目1104整除问题)
+*	[题目1120：全排列(回溯法)](#-1120)
 *	[题目1137：浮点数加法(高精度浮点数加法)](#-题目1137浮点数加法)
 *	[题目1144：Freckles(最小生成树进阶)](#-题目1144freckles)
 * 	[题目1153：括号匹配问题(栈的使用)](#-题目1153括号匹配问题)
@@ -697,6 +698,59 @@ bool cmp(Stu a, Stu b){
 >那么贡献2个p因子，就至少为n/p*p，3个p因子为n/p^3。。。。。。<br>
 >对于2个p因子，原本应该算幂指数加2的，但是因为前面被一个p因子的已经计算过了一次，所以加1即可。其余多因子的也一样。<br>
 >这样就能计算出n！的各素因数的幂。<br>
+
+## [Back to list](#list)
+
+#### <font color = Green> <span id="1120">题目1120：全排列</span></font>
+
+
+#### Jobdu Link:<br>
+[http://ac.jobdu.com/problem.php?pid=1120](http://ac.jobdu.com/problem.php?pid=1120)
+#### Problem description:<br>
+>给定一个由不同的小写字母组成的字符串，输出这个字符串的所有全排列。<br>
+>
+>我们假设对于小写字母有'a' < 'b' < ... < 'y' < 'z'，而且给定的字符串中的字母已经按照从小到大的顺序排列。<br>
+>
+>输入要求：输入只有一行，是一个由不同的小写字母组成的字符串，已知字符串的长度在1到6之间。<br>
+>
+>输出要求：输出这个字符串的所有排列方式，每行一个排列。要求字母序比较小的排列在前面。<br>
+>
+>字母序如下定义：<br>
+>
+>已知S = s1s2...sk , T = t1t2...tk，则S < T 等价于，存在p (1 <= p <= k)，使得s1 = t1, s2 = t2, ..., sp - 1 = tp - 1, sp < tp成立。<br>
+>
+
+#### Source code:<br>
+[http://www.cnblogs.com/zpfbuaa/p/6755032.html](http://www.cnblogs.com/zpfbuaa/p/6755032.html)
+#### <font color = Blue size = 5> Analysis:</font>
+>全排列问题，按照字典序递增输出结果。使用数组保存原始输入数据。需要注意题目指出：所给字符串的字母已经按照从小到大的顺序排列。因此为了寻找所有的排列组合，需要不断可以从小到大进行遍历操作。<br>
+>
+>为了保存每个排列组合，需要另外的数组`int ans[MAX_SIZE];`保存每次的一个排列组合。<br>
+>
+>另外回溯法需要不断进行满足边界条件时的回溯。因此当每次遍历使用一个字母之后需要将其对应的位置设置为已经使用。需要数组`int used[MAX_SIZE];`。回溯时需要将最后加到ans数组的字母重新设置为未访问。<br>
+>
+><pre>
+>char str[MAX_SIZE];
+>char ans[MAX_SIZE];
+>bool used[MAX_SIZE];
+>int len;
+>void prem(int x){
+>    if(x == len){
+>        ans[x]='\0';
+>        printf("%s\n",ans);
+>        return;
+>    }
+>    for(int i = 0 ; i < len ; i++){
+>        if(!used[i]){
+>            used[i] = true;
+>            ans[x] = str[i];
+>            prem(x+1);
+>            used[i]=false;
+>        }
+>    }
+>}
+></pre>
+>
 
 ## [Back to list](#list)
 
