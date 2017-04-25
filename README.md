@@ -41,6 +41,7 @@
 *	[题目1451：不容易系列之一(递推求解)](#-题目1451不容易系列之一)
 *	[题目1452：搬寝室(dp题目)](#-题目1452搬寝室)
 *	[题目1453：Greedy Tino(dp题目)](#-题目1453greedy-tino)
+*	[题目1454：Piggy-Bank(完全背包问题)](#-1454)
 *	[题目1456：胜利大逃亡(广度优先搜索BFS)](#-题目1456胜利大逃亡)
 *	[题目1457：非常可乐(广度优先搜素BFS)](#-题目1457非常可乐)
 *	[题目1458：汉诺塔III(递归算法)](#-题目1458汉诺塔iii)
@@ -1720,6 +1721,49 @@ bool cmp(Stu a, Stu b){
 >					  dp[i-1][j-weight[i]+OFFSET]+weight[i],),
 >					  dp[i-1][j+OFFSET]))
 ></pre>
+## [Back to list](#list)
+
+#### <font color = Green> <span id="1454">题目1454：Piggy-Bank</span></font>
+
+
+#### Jobdu Link:<br>
+[http://ac.jobdu.com/problem.php?pid=1454](http://ac.jobdu.com/problem.php?pid=1454)
+#### Problem description:<br>
+>现在有一个小猪存钱罐，每当有零钱时就会把零钱放到存钱罐中。由于存钱罐的设计原因，只有打碎存钱罐才能知道当前已存数目。但是总会发生打碎存钱罐去购买物品却发现当前钱币总额不够。因此为了避免这种提前打碎存钱罐的情况，现在需要根据已知信息求出当前存钱罐内最少的总额。<br>
+>
+>输入要求：第一行为t，表示测试数据组数为t组。接下来一行为空的存钱罐的质量e以及当前存钱罐的质量f。并且e,f取值范围均为[1,10000]接下来一行为正数n，表示当前存钱罐内钱币的种类，n的取值范围为[1,500]。接下来的n行，每一行都有两个正数p和w，其中p表示钱币的面值，w表示这种面值的钱币的质量。并且p的取值范围为[1,50000],w的取值范围为[1,10000]。<br>
+>
+>输出要求：如果存在满足题目要求的钱币组合那么给出最低总额ans，输出格式如下：`The minimum amount of money in the piggy-bank is ans.`。<br>
+>如果不存在满足题目要求的组合，则输出：`This is impossible.`。<br>
+>
+
+#### Source code:<br>
+[http://www.cnblogs.com/zpfbuaa/p/6763141.html](http://www.cnblogs.com/zpfbuaa/p/6763141.html)
+#### <font color = Blue size = 5> Analysis:</font>
+>由于现在不知道每一种钱币的数量，并且题目要求的是总额最小，因此每种钱币的数量可视为无限个。因此该题目为完全背包问题。另外需要注意的一点为：已知空的存钱罐的质量e和当前存钱罐的质量f，那么求出的钱币组合一定满足质量=f-e。<br>
+>
+>因此需要设置初始化条件为：<br>
+><pre>
+>for(int i = 0 ; i <= space ; i++){
+>    i == 0 ? dp[i] = 0 : dp[i] = INT_MAX;
+>}
+></pre>
+>那么在进行循环时需要顺序循环,满足每个物品有无限个（对于0-1背包问题则是逆序循环，每个物品要么放入为1，要么不放入为0）：<br>
+><pre>
+>struct Coin{
+>    int value;
+>    int space;
+>};
+>for(int i = 1 ; i <= n ; i++){
+>    for(int j = coin[i].space ; j <= space ; j++){
+>        if(dp[j-coin[i].space] != INT_MAX)
+>            dp[j] = min(dp[j], dp[j-coin[i].space]+coin[i].value);
+>		}
+>}
+></pre>
+>
+>需要注意：输出时候别丢掉了判断!=INT_MAX以及每句话结尾的字符'.'。如果不加这个'.'报Wrong Answer，而不是Presentation Error。真的好坑的小数点。<br>
+
 ## [Back to list](#list)
 
 #### <font color = Green> <span id="1456">题目1456：胜利大逃亡</span></font>
