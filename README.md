@@ -42,6 +42,7 @@
 *	[题目1452：搬寝室(dp题目)](#-题目1452搬寝室)
 *	[题目1453：Greedy Tino(dp题目)](#-题目1453greedy-tino)
 *	[题目1454：Piggy-Bank(完全背包问题)](#-题目1454piggy-bank)
+* 	[题目1455：珍惜现在，感恩生活(多重背包问题)](#-1455)
 *	[题目1456：胜利大逃亡(广度优先搜索BFS)](#-题目1456胜利大逃亡)
 *	[题目1457：非常可乐(广度优先搜素BFS)](#-题目1457非常可乐)
 *	[题目1458：汉诺塔III(递归算法)](#-题目1458汉诺塔iii)
@@ -1764,6 +1765,66 @@ bool cmp(Stu a, Stu b){
 >
 >需要注意：输出时候别丢掉了判断!=INT_MAX以及每句话结尾的字符'.'。如果不加这个'.'报Wrong Answer，而不是Presentation Error。真的好坑的小数点。<br>
 
+## [Back to list](#list)
+
+#### <font color = Green> <span id="1455">题目1455：珍惜现在，感恩生活</span></font>
+
+
+#### Jobdu Link:<br>
+[http://ac.jobdu.com/problem.php?pid=1455](http://ac.jobdu.com/problem.php?pid=1455)
+#### Problem description:<br>
+>为了挽救灾区同胞的生命，心系灾区同胞的你准备自己采购一些粮食支援灾区，现在假设你一共有资金n元，而市场有m种大米，每种大米都是袋装产品，其价格不等，并且只能整袋购买。请问：你用有限的资金最多能采购多少公斤粮食呢？<br>
+>
+>输入要求：输入数据首先包含一个正整数C，表示有C组测试用例，每组测试用例的第一行是两个整数n和m(1<=n<=100, 1<=m<=100),分别表示经费的金额和大米的种类，然后是m行数据，每行包含3个数p，h和c(1<=p<=20,1<=h<=200,1<=c<=20)，分别表示每袋的价格、每袋的重量以及对应种类大米的袋数。<br>
+>
+>输出要求：对于每组测试数据，请输出能够购买大米的最多重量，你可以假设经费买不光所有的大米，并且经费你可以不用完。每个实例的输出占一行。
+
+#### Source code:<br>
+[http://www.cnblogs.com/zpfbuaa/p/6763894.html](http://www.cnblogs.com/zpfbuaa/p/6763894.html)
+#### <font color = Blue size = 5> Analysis:</font>
+>多重背包问题，每件物品的个数不止一件但是也不是无穷件，对于每件物品都要各自的重量、价格、数目。选择合适的物品组合，实现最大化收益。注意对于背包问题要先明确是哪一种类型的背包（0-1背包、0-1背包改进版、完全背包、多重背包等）。<br>
+>
+>多重背包问题可以按照每个物品的件数num，进行按照0-1背包进行求解，但是这样造成的时间复杂度不再是之前的O(n * m)。其中n为背包的容纳最大重量，m为物品的个数。而现在为O(n * m * num)。因此时间复杂度会很高，对于某些问题而言会超时。因此需要寻找新的求解方法。<br>
+>
+>为了简化物品的数目，可以将某一类型的物品按照1、2、4、8、。。。划分在一起，这样物品的件数会从num减少至log(num)。从而减低了时间复杂度。<br>
+>
+>按照上述分析编写多重背包的代码如下所示：<br>
+><pre>
+>\#define MAX_SIZE 101
+>\#define MAX_NUM 2001
+> struct Rice{
+>     int price;
+>     int weight;
+> };
+> int dp[MAX_SIZE];
+> Rice rice[MAX_NUM];
+>scanf("%d%d",&n,&m);// n means the money yout have, m means there are m different kinds of rice in market.
+> int cnt = 0;//divide the rice into different heap
+> for(int i = 1 ; i <= m ; i++){
+>     scanf("%d%d%d",&price,&weight,&num);//input each kind of rice's price, weight, num
+>     int x = 1;
+>     while(num-x>0){
+>         num-=x;
+>         cnt++;
+>         rice[cnt].price = x * price;
+>         rice[cnt].weight = x * weight;
+>         x*=2;
+>     }
+>     cnt++;
+>     rice[cnt].price = num * price;
+>     rice[cnt].weight = num * weight;
+> }
+> //initation the dp[j] means: with money j the total weight rice you can buy.
+> for(int i = 1 ; i <= n ; i++){
+>     dp[i]=0;
+> }
+> //change the problem into 0-1 backpage
+> for(int i = 1 ; i <= cnt ; i++){
+>     for(int j = n ; j >= rice[i].price ; j--){
+>         dp[j] = max(dp[j],dp[j-rice[i].price]+rice[i].weight);
+>     }
+> }
+></pre>
 ## [Back to list](#list)
 
 #### <font color = Green> <span id="1456">题目1456：胜利大逃亡</span></font>
