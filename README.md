@@ -40,7 +40,7 @@
 *	[题目1450：产生冠军(拓扑排序简单题)](#-题目1450产生冠军)
 *	[题目1451：不容易系列之一(递推求解)](#-题目1451不容易系列之一)
 *	[题目1452：搬寝室(dp题目)](#-题目1452搬寝室)
-*	[题目1453：Greedy Tino(dp题目)](#-1453)
+*	[题目1453：Greedy Tino(dp题目)](#-题目1453greedy-tino)
 *	[题目1456：胜利大逃亡(广度优先搜索BFS)](#-题目1456胜利大逃亡)
 *	[题目1457：非常可乐(广度优先搜素BFS)](#-题目1457非常可乐)
 *	[题目1458：汉诺塔III(递归算法)](#-题目1458汉诺塔iii)
@@ -1716,9 +1716,9 @@ bool cmp(Stu a, Stu b){
 >
 >状态转移方程为：<br>
 ><pre>
->`dp[i][j+OFFSET]=max(max(dp[i-1][j+weight[i]+OFFSET]+weight[i], 
+>dp[i][j+OFFSET]=max(max(dp[i-1][j+weight[i]+OFFSET]+weight[i], 
 >					  dp[i-1][j-weight[i]+OFFSET]+weight[i],),
->					  dp[i-1][j+OFFSET]))`
+>					  dp[i-1][j+OFFSET]))
 ></pre>
 ## [Back to list](#list)
 
