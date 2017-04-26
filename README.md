@@ -26,6 +26,7 @@
 * 	[题目1153：括号匹配问题(栈的使用)](#-题目1153括号匹配问题)
 * 	[题目1161：Repeater (规律输出)](#-题目1161repeater)
 *	[题目1162：I Wanna Go Home(最短路径问题进阶)](#-题目1162i-wanna-go-home)
+*	[题目1168：字符串的查找删除(字符串操作)](#-1168)
 *	[题目1198：a+b(高精度加法实现)](#-题目1198ab)
 *	[题目1208：10进制 VS 2进制(任意进制转换&大数保存)](#-题目120810进制-vs-2进制)
 * 	[题目1438：最小公倍数(利用最大公约数)](#-题目1438最小公倍数)
@@ -1136,6 +1137,79 @@ bool cmp(Stu a, Stu b){
 >    else  printf("-1\n");
 >}
 ></pre>
+
+## [Back to list](#list)
+
+#### <font color = Green> <span id="1168">题目1168：字符串的查找删除</span></font>
+
+
+#### Jobdu Link:<br>
+[http://ac.jobdu.com/problem.php?pid=1168](http://ac.jobdu.com/problem.php?pid=1168)
+#### Problem description:<br>
+>给定一个短字符串（不含空格），再给定若干字符串，在这些字符串中删除所含有的短字符串。<br>
+>
+>输入要求：输入只有1组数据。输入一个短字符串（不含空格），再输入若干字符串直到文件结束为止。<br>
+>
+>输出要求：删除输入的短字符串(不区分大小写)并去掉空格,输出。<br>
+>
+#### Source code:<br>
+[http://www.cnblogs.com/zpfbuaa/p/6767977.html](http://www.cnblogs.com/zpfbuaa/p/6767977.html)
+#### <font color = Blue size = 5> Analysis:</font>
+>两种方法，相同点均为保存下短字符串，不同点为：第一种方法为逐个读入字符，进行匹配判断；第二种方法为存储全部的字符，然后进行查找操作。<br>
+>
+>第一种方法需要记录下当前字符是否和短字符匹配，以及匹配的长度。如果匹配则不输出，如果不匹配那么需要输出当前的字符，并且重置匹配长度为0。<br>
+>
+>第二种方法为保存字符，然后利用string中提供的find函数，以及string::npos，不断查找满足条件的字符，然后利用erase函数，擦除长度等于短字符长度的字符个数。<br>
+>
+>第一种方法如下所示：<br>
+><pre>
+>while((ch=getchar())!=EOF){
+>     if(tolower(ch)==tolower(c[match_len])) {
+>         match_len++;
+>         if(match_len>=len) match_len=0;
+>     }
+>     else{
+>         if(match_len==0){
+>             if(ch!=' ') cout<<ch;
+>         }
+>         else{
+>             for(int k=0;k<match_len;k++){
+>                 cout<<(c[k]);
+>             }
+>             match_len=0;
+>             if(ch != ' ')  putchar(ch);
+>         }
+>     }
+> }
+> </pre>
+
+> 第二种方法如下所示：<br>
+> <pre>
+> for(int i = 0 ; i < lena ; i++){
+>     a[i] = tolower(a[i]);
+> }
+> while(gets(str)){
+>     string b = str;
+>     string c = b;
+>     int lenb = (int)b.size();
+>     for(int i = 0 ; i < lenb ; i++){
+>         b[i]=tolower(b[i]);
+>     }
+>     int pos = (int)b.find(a,0);
+>     while(pos!=string::npos){
+>         c.erase(pos,lena);
+>         b.erase(pos,lena);
+>         pos = (int)b.find(a,pos);
+>     }
+>     pos = (int)c.find(' ',0);
+>     while(pos!=string::npos){
+>         c.erase(pos,1);
+>         pos = (int)c.find(' ',0);
+>     }
+>     cout<<c<<endl;
+> }
+> </pre>
+
 
 ## [Back to list](#list)
 
