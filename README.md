@@ -26,7 +26,7 @@
 * 	[题目1153：括号匹配问题(栈的使用)](#-题目1153括号匹配问题)
 * 	[题目1161：Repeater (规律输出)](#-题目1161repeater)
 *	[题目1162：I Wanna Go Home(最短路径问题进阶)](#-题目1162i-wanna-go-home)
-*	[题目1168：字符串的查找删除(字符串操作)](#-1168)
+*	[题目1168：字符串的查找删除(字符串操作)](#-题目1168字符串的查找删除)
 *	[题目1198：a+b(高精度加法实现)](#-题目1198ab)
 *	[题目1208：10进制 VS 2进制(任意进制转换&大数保存)](#-题目120810进制-vs-2进制)
 * 	[题目1438：最小公倍数(利用最大公约数)](#-题目1438最小公倍数)
@@ -1161,28 +1161,6 @@ bool cmp(Stu a, Stu b){
 >
 >第二种方法为保存字符，然后利用string中提供的find函数，以及string::npos，不断查找满足条件的字符，然后利用erase函数，擦除长度等于短字符长度的字符个数。<br>
 >
->第一种方法如下所示：<br>
-><pre>
->while((ch=getchar())!=EOF){
->     if(tolower(ch)==tolower(c[match_len])) {
->         match_len++;
->         if(match_len>=len) match_len=0;
->     }
->     else{
->         if(match_len==0){
->             if(ch!=' ') cout<<ch;
->         }
->         else{
->             for(int k=0;k<match_len;k++){
->                 cout<<(c[k]);
->             }
->             match_len=0;
->             if(ch != ' ')  putchar(ch);
->         }
->     }
-> }
-> </pre>
-
 > 第二种方法如下所示：<br>
 > <pre>
 > for(int i = 0 ; i < lena ; i++){
