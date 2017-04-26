@@ -18,6 +18,7 @@
 *	[题目1083：特殊乘法(求模运算符使用)](#-题目1083特殊乘法)
 *	[题目1100：最短路径(最短路径进阶)](#-题目1100最短路径)
 *	[题目1104：整除问题(大数相乘，素数问题)](#-题目1104整除问题)
+*	[题目1111：单词替换(字符串查找)](#-1111)
 *	[题目1112：拦截导弹(最长非递增子序列)](#-题目1112拦截导弹)
 *	[题目1120：全排列(回溯法)](#-题目1120全排列)
 *	[题目1131：合唱队形(最长递增子序列进阶题)](#-题目1131合唱队形)
@@ -745,6 +746,43 @@ bool cmp(Stu a, Stu b){
 
 ## [Back to list](#list)
 
+#### <font color = Green> <span id="1111">题目1111：单词替换</span></font>
+
+
+#### Jobdu Link:<br>
+[http://ac.jobdu.com/problem.php?pid=1111](http://ac.jobdu.com/problem.php?pid=1111)
+#### Problem description:<br>
+>输入一个字符串，以回车结束（字符串长度<=100）。该字符串由若干个单词组成，单词之间用一个空格隔开，所有单词区分大小写。现需要将其中的某个单词替换成另一个单词，并输出替换之后的字符串。<br>
+>
+>输入要求：多组数据。每组数据输入包括3行，<br>
+> 第1行是包含多个单词的字符串 s，<br>
+> 第2行是待替换的单词a，(长度<=100)<br>
+> 第3行是a将被替换的单词b。(长度<=100)<br>
+> s, a, b 最前面和最后面都没有空格.<br>
+> 
+> 输出要求：每个测试数据输出只有 1 行，将s中所有单词a替换成b之后的字符串。<br>
+
+#### Source code:<br>
+[http://www.cnblogs.com/zpfbuaa/p/6769869.html](http://www.cnblogs.com/zpfbuaa/p/6769869.html)
+#### <font color = Blue size = 5> Analysis:</font>
+>分析题目，题目中的单词定义为，以空格为分割的字符串为一个单词。其中第一个单词只有后置空格，最后一个单词只有前置空格。因此对于单词的替换需要进行多整个字符串进行查找操作，但是需要判断找到的是否满足是一个单词。<br>
+>
+>判断过程如下所示:<br>
+><pre>
+> int lenstr = (int)str.size();
+> int lena = (int)a.size();
+> int pos = (int)str.find(a,0);
+> while(pos!=string::npos){
+>     if((pos!=0 && str[pos-1]!=' ') || (pos+lena < lenstr && str[pos+lena]!=' ')){
+>         pos = (int)str.find(a,pos+1);
+>         continue;
+>     }
+>     str.replace(pos,lena,b);
+>     pos = (int)str.find(a,pos+1);
+> }
+> </pre>
+
+## [Back to list](#list)
 #### <font color = Green> <span id="1112">题目1112：拦截导弹</span></font>
 
 
