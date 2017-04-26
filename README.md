@@ -1160,34 +1160,6 @@ bool cmp(Stu a, Stu b){
 >第一种方法需要记录下当前字符是否和短字符匹配，以及匹配的长度。如果匹配则不输出，如果不匹配那么需要输出当前的字符，并且重置匹配长度为0。<br>
 >
 >第二种方法为保存字符，然后利用string中提供的find函数，以及string::npos，不断查找满足条件的字符，然后利用erase函数，擦除长度等于短字符长度的字符个数。<br>
->
-> 第二种方法如下所示：<br>
-> <pre>
-> for(int i = 0 ; i < lena ; i++){
->     a[i] = tolower(a[i]);
-> }
-> while(gets(str)){
->     string b = str;
->     string c = b;
->     int lenb = (int)b.size();
->     for(int i = 0 ; i < lenb ; i++){
->         b[i]=tolower(b[i]);
->     }
->     int pos = (int)b.find(a,0);
->     while(pos!=string::npos){
->         c.erase(pos,lena);
->         b.erase(pos,lena);
->         pos = (int)b.find(a,pos);
->     }
->     pos = (int)c.find(' ',0);
->     while(pos!=string::npos){
->         c.erase(pos,1);
->         pos = (int)c.find(' ',0);
->     }
->     cout<<c<<endl;
-> }
-> </pre>
-
 
 ## [Back to list](#list)
 
