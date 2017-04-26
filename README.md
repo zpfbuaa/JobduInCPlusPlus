@@ -11,6 +11,7 @@
 *	[题目1028：继续畅通工程(最小生成树kruskal算法)](#-题目1028继续畅通工程)
 *	[题目1040：Prime Number(第k个素数)](#-题目1040prime-number)
 *	[题目1042：Coincidence(最长公共子序列dp题目)](#-题目1042coincidence)
+*	[题目1049：字符串去特定字符(简单判断)](#-1049)
 *	[题目1061：成绩排序（自定义排序)](#-题目1061成绩排序)
 *	[题目1076：N的阶乘(大数乘法)](d#-题目1076n的阶乘)
 * 	[题目1078：二叉树遍历(二叉树操作)](#-题目1078二叉树遍历)
@@ -494,7 +495,32 @@
 >因此最终结果输出`dp[lens1][lens2]`即可。
 
 ## [Back to list](#list)
+#### <font color = Green> <span id="1049">题目1049：字符串去特定字符</span></font>
 
+
+#### Jobdu Link:<br>
+[http://ac.jobdu.com/problem.php?pid=1049](http://ac.jobdu.com/problem.php?pid=1049)
+#### Problem description:<br>
+>输入字符串s和字符c，要求去掉s中所有的c字符，并输出结果。<br>
+>
+>输入要求：测试数据有多组，每组输入字符串s和字符c。<br>
+>
+>输出要求：对于每组输入,输出去除c字符后的结果。<br>
+
+#### Source code:<br>
+[http://www.cnblogs.com/zpfbuaa/p/6771377.html](http://www.cnblogs.com/zpfbuaa/p/6771377.html)
+#### <font color = Blue size = 5> Analysis:</font>
+>输入字符串s，保存在数组中，遍历字符数组，如果当前字符`s[i]!=c`那么输出当前字符。简单的遍历判断。<br>
+><pre>
+> int len = (int)strlen(str);
+> for(int i = 0 ; i < len ; i++){
+>     if(str[i]!=c){
+>         cout\<\<str[i];
+>     }
+> }
+> </pre>
+
+## [Back to list](#list)
 
 #### <font color = Green> <span id="1061">题目1061：成绩排序</span></font><br>
 
