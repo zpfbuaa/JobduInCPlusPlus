@@ -3,6 +3,7 @@
 ## List
 *	[题目1002：Grading(简单判断)](#-题目1002grading)
 *	[题目1003：A+B(带逗号的A+B)](#-题目1003ab)
+*	[题目1005：Graduate Admission(录取算法)](#-1005)
 *	[题目1008：最短路径问题(最短路径问题dijkstra算法)](#-题目1008最短路径问题)
 *	[题目1012：畅通工程(并查集以及路径优化)](#-题目1012畅通工程)
 *	[题目1017：还是畅通工程(最小生成树初步)](#-题目1017还是畅通工程)
@@ -111,6 +112,118 @@
 >else if(!flag1 && !flag2) printf("%d\n",0-num1-num2);
 ></pre>
 
+## [Back to list](#list)
+
+#### <font color = Green> <span id="1005">题目1005：Graduate Admission</span></font>
+
+
+#### Jobdu Link:<br>
+[http://ac.jobdu.com/problem.php?pid=1005](http://ac.jobdu.com/problem.php?pid=1005)
+#### Problem description:<br>
+>题目大致意思：现在有n个学生填报志愿，一共有m个学校招生，每个学生的填报志愿个数为k个。其中n取值范围为[1,40000]。m取值范围为[1,100],k取值范围为[1,5]。每个学生的成绩由两部分组成，初试成绩为GE,复试成绩为GI，最终成绩GF为(GE+GI)/2。学生成绩排名规则如下所示：按照最终成绩排名，如果最终成绩相同，那么初试成绩GE越高排名越靠前；如果初试成绩也相同，那么排名相同。学校录取规则如下：每个学校有额定录取名额，一旦录取人数达到录取名额则不再录取，但是如果多个人的排名相同（GF相同并且GE也相同）那么无论超过录取名额多少都要录取。<br>
+>
+>输入要求：多组数据，第一行为三个整数，n,m,k。分别代表学生个数，学校个数，志愿个数。接下来一行有m个正数，表示每个学校的额定录取人数。学校编号从0到m-1，编号为i的录取人数为第i个正数。接下来有n行，每一行有2+k个正数，第一个正数表示初试成绩GE，第二个整数表示复试成绩GI，接下来k个正数依次为填报志愿的顺序。<br>
+>
+>输出要求：第i行为编号为i-1的学校的录取情况，输出学生的编号。学生的编号从0到n-1。如果当期学校没有录取任何学生则输出空行。<br>
+>
+#### Source code:<br>
+[http://www.cnblogs.com/zpfbuaa/p/6776372.html](http://www.cnblogs.com/zpfbuaa/p/6776372.html)
+#### <font color = Blue size = 5> Analysis:</font>
+>为了保存学生志愿信息，可以利用结构体。如下所示：
+>
+><pre>
+>#define CHOOSE 6
+>#define MAX_SIZE 40001
+>#define SCHOOL 101
+>struct Apply{
+>     int ge;
+>     int gi;
+>     double gf;
+>     int choose[CHOOSE];
+>     int id;
+>     bool operator < (const Apply &A) const{
+>         if(gf != A.gf){
+>             return gf > A.gf;
+>         }
+>         else if(ge != A.ge){
+>             return ge > A.ge;
+>         }
+>         else {
+>             return ge > A.ge;
+>         }
+>     }
+> };
+> </pre>
+> 
+> 为了存储学校录取情况，定义如下结构体：<br>
+> 
+> <pre>
+> struct School{
+>     int quota;
+>     int realNum;
+>     int appid[MAX_SIZE];
+> };
+> </pre>
+> 
+> 接下来要先按照成绩规则进行排名，在结构体中一定重载了小于运算符，因此调用STL提供的sort函数即可。
+> 在对成绩做好排序之后，需要进行学校的录取，一次按照成绩排名选择其填报的志愿，如果被学校录取则需要将学生id放入学校的录取名单中，并且该学校的录取名额减去1，实际录取名额加1。同属需要判断当前学校录取的最后一位同学与现在申请该学校的学生的排名是否相同，如果相同那么无论是否超过额定录取名额，都要录取该学生。<br>
+> 
+> <pre>
+> sort(apply,apply+n);
+> int sid;
+> for(int i = 0 ; i < n ; i++){
+>     for(int j = 0 ; j < k ; j++){
+>         sid = apply[i].choose[j];
+>         if(school[sid].quota > 0){
+>             school[sid].appid[school[sid].realNum] = i;
+>             school[sid].realNum++;
+>             school[sid].quota--;
+>             break;
+>         }
+>         else{
+>             int lastid = school[sid].appid[school[sid].realNum-1];
+>             if(apply[i].gf == apply[lastid].gf && apply[i].ge == apply[lastid].ge){
+>                 school[sid].appid[school[sid].realNum]=i;
+>                 school[sid].realNum++;
+>                 school[sid].quota--;
+>                 break;
+>             }
+>         }
+>     }
+> }
+> 
+> for(int i = 0 ; i < m ; i++){
+>     for(int j = 0 ; j < school[i].realNum ; j++){
+>         school[i].appid[j] = apply[school[i].appid[j]].id;//保存学生的id
+>     }
+> }
+> </pre>
+> 
+> 输出学校信息时，需要注意当前学校是否录取有学生:<br>
+> <pre>
+> for(int i = 0 ; i < m ; i++){
+>     if(school[i].realNum==0){
+>         printf("\n");
+>     }
+>     else if(school[i].realNum==1){
+>         printf("%d\n",school[i].appid[0]);
+>     }
+>     else{
+>         sort(school[i].appid,school[i].appid+school[i].realNum);
+>         bool first = true;//第一个学生前面没有前置空格
+>         for(int j = 0 ; j < school[i].realNum ; j++){
+>             if(first==true){
+>                 first = false;
+>             }
+>             else{
+>                 printf(" ");
+>             }
+>             printf("%d",school[i].appid[j]);//学校i的第j个录取的学生的id
+>         }
+>         printf("\n");
+>     }
+> }
+> </pre>
 ## [Back to list](#list)
 
 #### <font color = Green> <span id="1008">题目1008：最短路径问题</span></font>
