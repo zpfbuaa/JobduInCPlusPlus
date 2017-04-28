@@ -4,6 +4,7 @@
 *	[题目1002：Grading(简单判断)](#-题目1002grading)
 *	[题目1003：A+B(带逗号的A+B)](#-题目1003ab)
 *	[题目1005：Graduate Admission(录取算法)](#-题目1005graduate-admission)
+* 	[题目1007：奥运排序问题(自定义排序)](#-1007)
 *	[题目1008：最短路径问题(最短路径问题dijkstra算法)](#-题目1008最短路径问题)
 *	[题目1012：畅通工程(并查集以及路径优化)](#-题目1012畅通工程)
 *	[题目1017：还是畅通工程(最小生成树初步)](#-题目1017还是畅通工程)
@@ -224,6 +225,117 @@
 >     }
 > }
 > </pre>
+## [Back to list](#list)
+
+#### <font color = Green> <span id="1007">题目1007：奥运排序问题</span></font>
+
+
+#### Jobdu Link:<br>
+[http://ac.jobdu.com/problem.php?pid=1007](http://ac.jobdu.com/problem.php?pid=1007)
+#### Problem description:<br>
+>输入要求：有多组数据。<br>
+> 第一行给出国家数N，要求排名的国家数M，国家号从0到N-1。<br>
+> 第二行开始的N行给定国家或地区的奥运金牌数，奖牌数，人口数（百万）。<br>
+> 接下来一行给出M个国家号。<br>
+> 
+> 输出要求：排序有4种方式: 金牌总数 奖牌总数 金牌人口比例 奖牌人口比例<br> 
+> 对每个国家给出最佳排名排名方式 和 最终排名<br>
+> 格式为: 排名:排名方式<br>
+> 如果有相同的最终排名，则输出排名方式最小的那种排名，对于排名方式，金牌总数 < 奖牌总数 < 金牌人口比例 < 奖牌人口比例 <br>
+> 如果有并列排名的情况，即如果出现金牌总数为 100,90,90,80.则排名为1,2,2,4.<br>
+> 每组数据后加一个空行。<br>
+
+#### Source code:<br>
+[http://www.cnblogs.com/zpfbuaa/p/6782981.html](http://www.cnblogs.com/zpfbuaa/p/6782981.html)
+#### <font color = Blue size = 5> Analysis:</font>
+>需要解释一下题目部分内容：排名方式序号为1，2，3，4分别对应按照金牌总数、奖牌总数、金牌人口比例、奖牌人口比例。<br>
+>另外不是对所有的n个国家进行排序，而是对所指定的m个国家进行排序操作。<br>
+>还要注意的是，如果出现金牌总数为 100,90,90,80.则排名为1,2,2,4。因此在排名计算时需要注意重复名次相同但是之后排名并不是紧挨着的！！<br>
+>
+>另外金牌人口比例以及奖牌人口比例可能出现小数，因此需要使用double变量来保存。<br>
+>为了满足题目中的各种变量。声明如下的结构体,具体含义见变量命名：<br>
+><pre>
+>struct Country{
+>     int id;
+>     int goldMedal;
+>     int totalMedal;
+>     int human;
+>     double goldRatio;
+>     double totalRatio;
+>     int rankGold;
+>     int rankTotal;
+>     int rankGoldRatio;
+>     int rankTotalRatio;
+> };
+></pre>
+>
+>为了实现不同的排序，针对qsort函数，编写不同的cmp函数,如下所示：<br>
+>
+><pre>
+>int cmpRankGold(const void* a, const void *b){
+>     return (*(Country*)b).goldMedal - (*(Country*)a).goldMedal;
+> }
+>  
+> int cmpRankTotal(const void* a, const void *b){
+>     return (*(Country*)b).totalMedal - (*(Country*)a).totalMedal;
+> }
+>  
+> int cmpRankGoldRatio(const void* a, const void *b){
+>     return (*(Country*)b).goldRatio - (*(Country*)a).goldRatio;
+> }
+>  
+> int cmpRankTotalRatio(const void* a, const void *b){
+>     return (*(Country*)b).totalRatio - (*(Country*)a).totalRatio;
+> }
+>  
+> int cmpId(const void* a, const void *b){
+>     return (*(Country*)a).id - (*(Country*)b).id;
+> }
+></pre>
+>
+>由于需要排名的只有m个国家因此需要两个Country数组来保存国家获奖排名等信息：
+><pre>
+>\#define MAX_SIZE 1001
+>Country country[MAX_SIZE];
+>Country cal[MAX_SIZE];
+></pre>
+>
+>对于金牌排名按照如下方法：<br>
+><pre>
+>qsort(cal,m,sizeof(Country),cmpRankGold);
+> int rank = 1;
+> cal[0].rankGold = 1;
+> for(int i = 1 ; i < m ; i++){
+>     if(cal[i].goldMedal!=cal[i-1].goldMedal){
+>         rank = i + 1;//需要注意排名的更新！
+>     }
+>     cal[i].rankGold = rank;
+> }
+> </pre>
+> 
+> 在输出时候需要针对不同的国家筛选出针对此国家的最优排名，同时需要记录下最优的排名是哪一种。<br>
+> 
+> <pre>
+> \#define RANK 1
+>for(int i = 0 ; i < m ; i++){
+>     int minRank = cal[i].rankGold;
+>     int rankChoose = RANK;
+>     if(cal[i].rankTotal < minRank){
+>         minRank = cal[i].rankTotal;
+>         rankChoose= RANK + 1;
+>     }
+>     if(cal[i].rankGoldRatio < minRank){
+>         minRank = cal[i].rankGoldRatio;
+>         rankChoose = RANK + 2;
+>     }
+>     if(cal[i].rankTotalRatio < minRank){
+>         minRank = cal[i].rankTotalRatio;
+>         rankChoose = RANK + 3;
+>     }
+>     printf("%d:%d\n",minRank,rankChoose);
+>}
+><pre>
+
 ## [Back to list](#list)
 
 #### <font color = Green> <span id="1008">题目1008：最短路径问题</span></font>
