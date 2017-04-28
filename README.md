@@ -7,6 +7,7 @@
 * 	[题目1007：奥运排序问题(自定义排序)](#-题目1007奥运排序问题)
 *	[题目1008：最短路径问题(最短路径问题dijkstra算法)](#-题目1008最短路径问题)
 *	[题目1012：畅通工程(并查集以及路径优化)](#-题目1012畅通工程)
+*	[题目1016：火星A+B(进制转换新问题)](#-1016)
 *	[题目1017：还是畅通工程(最小生成树初步)](#-题目1017还是畅通工程)
 *	[题目1019：简单计算器(栈的使用)](#-题目1019简单计算器)
 *	[题目1024：畅通工程(最小生成树kruskal算法)](#-题目1024畅通工程)
@@ -464,6 +465,94 @@
 >本题目需要将相互连接的城市放到相同的集合中，集合的划分规则为能够互相连接的城市在一个集合中。因此最终结果是要求出还需要修建多少条道路。也就是将num个相互独立的集合连接需要的道路最小条数，那么就是num-1条道路即可。
 >
 
+## [Back to list](#list)
+
+#### <font color = Green> <span id="1016">题目1016：火星A+B</span></font>
+
+
+#### Jobdu Link:<br>
+[http://ac.jobdu.com/problem.php?pid=1016](http://ac.jobdu.com/problem.php?pid=1016)
+#### Problem description:<br>
+>读入两个不超过25位的火星正整数A和B，计算A+B。需要注意的是：在火星上，整数不是单一进制的，第n位的进制就是第n个素数。例如：地球上的10进制数2，在火星上记为“1,0”，因为火星个位数是2进制的；地球上的10进制数38，在火星上记为“1,1,1,0”，因为火星个位数是2进制的，十位数是3进制的，百位数是5进制的，千位数是7进制的……<br>
+>
+>输入要求：测试输入包含若干测试用例，每个测试用例占一行，包含两个火星正整数A和B，火星整数的相邻两位数用逗号分隔，A和B之间有一个空格间隔。当A或B为0时输入结束，相应的结果不要输出。<br>
+>
+>输出要求：对每个测试用例输出1行，即火星表示法的A+B的值。<br>
+
+#### Source code:<br>
+[http://www.cnblogs.com/zpfbuaa/p/6783445.html](http://www.cnblogs.com/zpfbuaa/p/6783445.html)
+#### <font color = Blue size = 5> Analysis:</font>
+>首先解释一下如何转换。在火星上的`1,0`转为地球上的10进制: 1 * 2 + 0 = 2; 火星上的`1,1,1,0`转为地球上的10进制:`1 * (5 * 3 * 2) + 1 * ( 3 * 2 ) + 1 * (2) + 0 = 38`。<br>
+>
+>提前计算素数：<br>
+>
+><pre>
+>#define MAX_PRIME 26
+>int prime[MAX_PRIME];
+> bool isPrime(int x){
+>     if(x<=1) return false;
+>     if(x==2) return true;
+>     int tmp = sqrt(x)+1;
+>     for(int i = 2 ; i <= tmp ; i++){
+>         if(x%i==0)
+>             return false;
+>     }
+>     return true;
+> }
+> 
+> void calPrime(){
+>     int num = 0;
+>     for(int i = 2 ; num<25 ; i++){
+>         if(isPrime(i)){
+>             num++;
+>             prime[num] = i;
+>         }
+>     }
+> }
+> </pre>
+>其实不必清楚如何转换也可以做题目，只要将对应的位相加并加上进位，保存起来即可。<br>
+>对应题目的输入，有一种很巧妙的方法可以避免后期对字符串的遍历判断操作，而是直接将每一位数字保存在数组中，从高位到低位分别保存在a[0] ~ a[len-1]中。
+><pre>
+>for(i = 1 ; i < MAX_SIZE ; i++){
+>     scanf("%d",&a[i]);
+>     scanf("%c",&c);
+>     if(c==' ')break;
+> }
+> lena = i;
+> for(j = 1 ; j < MAX_SIZE ; j++){
+>     scanf("%d",&b[j]);
+>     scanf("%c",&c);
+>     if(c=='\n')break;
+> }
+> lenb = j;
+> if(a[1]==0 && b[1]==0)
+> break;
+></pre>
+>
+>接下来需要对每一位进行相加操作，为了实现每一位相加，可以提前确定两个数字最长的长度。<br>
+>然后需要对进位进行操作，以及不断保存对应为相加的结果。
+>
+><pre>
+>int maxLen = lena>=lenb ? lena : lenb;//最大长度
+> int carry=0;//进位初始化
+> int len = maxLen;
+> int x,y;
+> for(i = 1 ; i <= maxLen; i++){
+>     if(lena>=1) x=a[lena--];//倒序取数
+>     else x=0;
+>     if(lenb>=1) y=b[lenb--];//倒序取数
+>     else y=0;
+>     sum[len--]=(x+y+carry)%prime[i];//保存当前位
+>     carry=(x+y+carry)/prime[i];//更新进位
+> }
+> if(carry!=0){//最后一位进位不为0，则输出该进位
+>     printf("%d,",carry);
+> }
+> for(i = 1 ; i < maxLen ; i++){
+>     printf("%d,",sum[i]);//前maxLen-1项需要输出','
+> }
+> printf("%d\n",sum[maxLen]);//不输出',' 而是输出换行'\n'
+> </pre>
 ## [Back to list](#list)
 
 #### <font color = Green> <span id="1017">题目1017：还是畅通工程</span></font>
