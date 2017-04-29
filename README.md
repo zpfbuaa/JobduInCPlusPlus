@@ -10,6 +10,7 @@
 *	[题目1016：火星A+B(进制转换新问题)](#-题目1016火星ab)
 *	[题目1017：还是畅通工程(最小生成树初步)](#-题目1017还是畅通工程)
 *	[题目1019：简单计算器(栈的使用)](#-题目1019简单计算器)
+*	[题目1022：游船出租(结构体使用)](#-1022)
 *	[题目1024：畅通工程(最小生成树kruskal算法)](#-题目1024畅通工程)
 *	[题目1028：继续畅通工程(最小生成树kruskal算法)](#-题目1028继续畅通工程)
 *	[题目1040：Prime Number(第k个素数)](#-题目1040prime-number)
@@ -643,6 +644,76 @@
 >按照上面的方法就可以完成简单的计算器了。
 
 ## [Back to list](#list)
+
+#### <font color = Green> <span id="1022">题目1022：游船出租</span></font>
+
+
+#### Jobdu Link:<br>
+[http://ac.jobdu.com/problem.php?pid=1022](http://ac.jobdu.com/problem.php?pid=1022)
+#### Problem description:<br>
+>现有公园游船租赁处请你编写一个租船管理系统。当游客租船时，管理员输入船号并按下S键，系统开始计时；当游客还船时，管理员输入船号并按下E键，系统结束计时。船号为不超过100的正整数。当管理员将0作为船号输入时，表示一天租船工作结束，系统应输出当天的游客租船次数和平均租船时间。<br>
+>注意：由于线路偶尔会有故障，可能出现不完整的纪录，即只有租船没有还船，或者只有还船没有租船的纪录，系统应能自动忽略这种无效纪录。<br>
+>
+>输入要求：测试输入包含若干测试用例，每个测试用例为一整天的租船纪录，格式为：<br>
+>船号（1~100） 键值（S或E） 发生时间（小时:分钟）<br>
+>每一天的纪录保证按时间递增的顺序给出。当读到船号为-1时，全部输入结束，相应的结果不要输出。<br>
+>
+>输出要求：对每个测试用例输出1行，即当天的游客租船次数和平均租船时间（以分钟为单位的精确到个位的整数时间）。<br>
+>
+
+#### Source code:<br>
+[http://www.cnblogs.com/zpfbuaa/p/6785912.html](http://www.cnblogs.com/zpfbuaa/p/6785912.html)
+#### <font color = Blue size = 5> Analysis:</font>
+>保存游船出租情况的结构体如下所示：
+><pre>
+>struct Boat{
+>     int id;//游船编号
+>     int start;//借出时间
+>     int time;//出租总时间
+>     bool rent;//是否借出
+>     Boat(){
+>         time = 0;
+>         rent = false;
+>     }
+> };
+> </pre>
+> 具体实现如下所示：<br>
+> <pre>
+> int num;
+> char key;
+> int hour,minute;
+> int rentCount;
+> double totalTime;
+> while(scanf("%d",&num)!=EOF && num!=-1){
+>     rentCount = totalTime = 0;
+>     while(num != 0){
+>         scanf(" %c %d:%d",&key,&hour,&minute);
+>         if(key == 'S'){
+>             boat[num].id = num;
+>             boat[num].start = hour * 60 + minute;
+>             boat[num].rent = true;
+>         }
+>         else if(key == 'E'){
+>             if(boat[num].rent == true){
+>                 boat[num].time = (hour * 60 + minute) - boat[num].start;
+>                 rentCount++;
+>                 totalTime += boat[num].time;
+>             }
+>         }
+>         scanf("%d",&num);
+>     }
+>     scanf(" %c %d:%d",&key,&hour,&minute);
+>     if(rentCount!=0){
+>         printf("%d %.0f\n",rentCount,totalTime/rentCount);
+>     }
+>     else{
+>         printf("0 0\n");
+>     }
+> }
+> </pre>
+><div align=center><img width="600" height="368" src="http://files.cnblogs.com/files/zpfbuaa/timg.gif"/></div><br>
+## [Back to list](#list)
+
 #### <font color = Green> <span id="1024">题目1024：畅通工程</span></font>
 
 
