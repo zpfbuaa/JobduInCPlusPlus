@@ -1,6 +1,6 @@
 # JobduInCPlusPlus
 
-><div align=center><img width="600" height="368" src="http://files.cnblogs.com/files/zpfbuaa/timg.gif"/></div><br>
+
 ## List
 *	[题目1002：Grading(简单判断)](#-题目1002grading)
 *	[题目1003：A+B(带逗号的A+B)](#-题目1003ab)
@@ -13,6 +13,7 @@
 *	[题目1019：简单计算器(栈的使用)](#-题目1019简单计算器)
 *	[题目1022：游船出租(结构体使用)](#-题目1022游船出租)
 *	[题目1024：畅通工程(最小生成树kruskal算法)](#-题目1024畅通工程)
+*	[题目1025：最大报销额(0-1背包问题)](#-1025)
 *	[题目1028：继续畅通工程(最小生成树kruskal算法)](#-题目1028继续畅通工程)
 *	[题目1040：Prime Number(第k个素数)](#-题目1040prime-number)
 *	[题目1042：Coincidence(最长公共子序列dp题目)](#-题目1042coincidence)
@@ -713,6 +714,7 @@
 > }
 > </pre>
 >
+><div align=center><img width="600" height="368" src="http://files.cnblogs.com/files/zpfbuaa/timg.gif"/></div><br>
 ## [Back to list](#list)
 
 #### <font color = Green> <span id="1024">题目1024：畅通工程</span></font>
@@ -751,6 +753,43 @@
 >flag == true ? printf("%d\n",ans) : printf("?\n");
 ></pre>
 
+## [Back to list](#list)
+
+#### <font color = Green> <span id="1025">题目1025：最大报销额</span></font>
+
+
+#### Jobdu Link:<br>
+[http://ac.jobdu.com/problem.php?pid=1025](http://ac.jobdu.com/problem.php?pid=1025)
+#### Problem description:<br>
+>现有一笔经费可以报销一定额度的发票。允许报销的发票类型包括买图书（A类）、文具（B类）、差旅（C类），要求每张发票的总额不得超过1000元，每张发票上，单项物品的价值不得超过600元。现请你编写程序，在给出的一堆发票中找出可以报销的、不超过给定额度的最大报销额。<br>
+>
+>输入要求：测试输入包含若干测试用例。每个测试用例的第1行包含两个正数 Q 和 N，其中 Q 是给定的报销额度，N（N<=30）是发票张数。随后是 N 行输入，
+>每行的格式为：m Type_1:price_1 Type_2:price_2 ... Type_m:price_m <br>
+>其中正整数 m 是这张发票上所开物品的件数，Type_i 和 price_i 是第 i 项物品的种类和价值。物品种类用一个大写英文字母表示。当N为0时，全部输入结束，相应的结果不要输出。<br>
+>
+>输出要求：对每个测试用例输出1行，即可以报销的最大数额，精确到小数点后2位。<br>
+>
+
+#### Source code:<br>
+[http://www.cnblogs.com/zpfbuaa/p/6786294.html](http://www.cnblogs.com/zpfbuaa/p/6786294.html)
+#### <font color = Blue size = 5> Analysis:</font>
+>看起来用贪心好像可以，但是对于下面的情况，如果报销额度为1000，并且现在有三个满足条件的发票，第一张面额为600，剩下两个面额为500。如果使用贪心则只能报销600元，而实际最大报销为500+500=1000。因此是一个背包问题。背包容量为报销额度，每件物品所占体积为发票的总面额。<br>
+>
+>设状态dp[i]表示报销面额为i分的时候，能够报销的最大的发票总额。对于0-1背包初始化dp[i]均为0。因此状态转移方程为：`dp[j]=max(dp[j],dp[j-pay[i]]+pay[i])`;
+>
+>对于上述的状态转移方程需要说明一点：由于题目中是保存两位有效数字因此该状态数组保存的最小单位为分，而不是元，因此最终计算结果为`dp[q]/100;`.其中设Q为报销额度单位为元，`q=(int)(Q*100);`
+>
+>另外不是所有的发票都符合报销的条件，因此需要提前进行筛选，并且将满足条件的发票总额保存在数组pay[21]中。<br>
+><pre>
+>for(int i = 1 ; i <= idx ; i++){
+>     for(int j = q ; j >= 1 ; j--){
+>         if(pay[i] <= j ){
+>             dp[j] = max(dp[j],dp[j-pay[i]]+pay[i]);
+>         }
+>     }
+> }
+> printf("%.2lf\n",dp[q]/100.00);
+></pre>
 ## [Back to list](#list)
 
 #### <font color = Green> <span id="1028">题目1028：继续畅通工程</span></font>
