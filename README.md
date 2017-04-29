@@ -1,5 +1,6 @@
 # JobduInCPlusPlus
 
+><div align=center><img width="600" height="368" src="http://files.cnblogs.com/files/zpfbuaa/timg.gif"/></div><br>
 ## List
 *	[题目1002：Grading(简单判断)](#-题目1002grading)
 *	[题目1003：A+B(带逗号的A+B)](#-题目1003ab)
@@ -711,7 +712,7 @@
 >     }
 > }
 > </pre>
-><div align=center><img width="600" height="368" src="http://files.cnblogs.com/files/zpfbuaa/timg.gif"/></div><br>
+>
 ## [Back to list](#list)
 
 #### <font color = Green> <span id="1024">题目1024：畅通工程</span></font>
