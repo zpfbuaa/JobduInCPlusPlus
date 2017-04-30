@@ -15,6 +15,7 @@
 *	[题目1024：畅通工程(最小生成树kruskal算法)](#-题目1024畅通工程)
 *	[题目1025：最大报销额(0-1背包问题)](#-题目1025最大报销额)
 *	[题目1028：继续畅通工程(最小生成树kruskal算法)](#-题目1028继续畅通工程)
+*	[题目1029：魔咒词典(STLmap使用)](#-1029)
 *	[题目1040：Prime Number(第k个素数)](#-题目1040prime-number)
 *	[题目1042：Coincidence(最长公共子序列dp题目)](#-题目1042coincidence)
 *	[题目1049：字符串去特定字符(简单判断)](#-题目1049字符串去特定字符)
@@ -843,6 +844,43 @@
 >对于最小生成树使用kruskal算法时需要注意将所有的边按照从小到大进行排序操作`sort(edge+1,edge+1+n*(n-1)/2);`<br>
 >
 
+## [Back to list](#list)
+
+#### <font color = Green> <span id="1029">题目1029：魔咒词典</span></font>
+
+
+#### Jobdu Link:<br>
+[http://ac.jobdu.com/problem.php?pid=1029](http://ac.jobdu.com/problem.php?pid=1029)
+#### Problem description:<br>
+> 给你一部魔咒词典。当哈利听到一个魔咒时，你的程序必须告诉他那个魔咒的功能；当哈利需要某个功能但不知道该用什么魔咒时，你的程序要替他找到相应的魔咒。如果他要的魔咒不在词典中，就输出“what?”<br>
+> 
+> 输入要求：首先列出词典中不超过100000条不同的魔咒词条，每条格式为：`[魔咒] 对应功能` <br>
+>其中“魔咒”和“对应功能”分别为长度不超过20和80的字符串，字符串中保证不包含字符“[”和“]”，且“]”和后面的字符串之间有且仅有一个空格。词典最后一行以“@END@”结束，这一行不属于词典中的词条。<br>
+>词典之后的一行包含正整数N（<=1000），随后是N个测试用例。每个测试用例占一行，或者给出“[魔咒]”，或者给出“对应功能”。<br>
+>
+>输出要求：每个测试用例的输出占一行，输出魔咒对应的功能，或者功能对应的魔咒。如果魔咒不在词典中，就输出“what?”<br>
+
+#### Source code:<br>
+[http://www.cnblogs.com/zpfbuaa/p/6789499.html](http://www.cnblogs.com/zpfbuaa/p/6789499.html)
+#### <font color = Blue size = 5> Analysis:</font>
+>需要注意的地方：给出功能输出魔咒时不输出`[]`。另外注意测试的结束条件为`@END@`。词典中的魔咒和功能中都包含空格，需要读取到空格。但是在将魔咒和功能存放在`map<string,string> myMap`中时，需要注意魔咒和功能之间的空格不能存放到魔咒或者功能中。<br>
+>
+><pre>
+>while(gets(s)){
+>     str = s;
+>     if(str=="@END@") break;
+>     int len = (int)str.size();
+>     int i;
+>     for(i = 0 ; i < len ; i ++){
+>         if(str[i]==']')//查找']'
+>             break;
+>     }
+>     curse = str.substr(0,i+1);//保存魔咒，调用substr函数
+>     fun = str.substr(i+2,len);//不能保存魔咒和功能之间的空格
+>     myMap[curse]=fun;
+>     myMap[fun]=curse;
+> }
+> </pre>
 ## [Back to list](#list)
 
 #### <font color = Green> <span id="1040">题目1040：Prime Number</span></font>
