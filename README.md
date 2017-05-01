@@ -16,6 +16,7 @@
 *	[题目1025：最大报销额(0-1背包问题)](#-题目1025最大报销额)
 *	[题目1028：继续畅通工程(最小生成树kruskal算法)](#-题目1028继续畅通工程)
 *	[题目1029：魔咒词典(STLmap使用)](#-题目1029魔咒词典)
+*	[题目1035：找出直系亲属(计算树的深度)](#-1035)
 *	[题目1040：Prime Number(第k个素数)](#-题目1040prime-number)
 *	[题目1042：Coincidence(最长公共子序列dp题目)](#-题目1042coincidence)
 *	[题目1049：字符串去特定字符(简单判断)](#-题目1049字符串去特定字符)
@@ -879,6 +880,40 @@
 >     fun = str.substr(i+2,len);//不能保存魔咒和功能之间的空格
 >     myMap[curse]=fun;
 >     myMap[fun]=curse;
+> }
+> </pre>
+## [Back to list](#list)
+
+#### <font color = Green> <span id="1035">题目1035：找出直系亲属</span></font>
+
+
+#### Jobdu Link:<br>
+[http://ac.jobdu.com/problem.php?pid=1035](http://ac.jobdu.com/problem.php?pid=1035)
+#### Problem description:<br>
+>如果A，B是C的父母亲，则A，B是C的parent，C是A，B的child，如果A，B是C的（外）祖父，祖母，则A，B是C的grandparent，C是A，B的grandchild，如果A，B是C的（外）曾祖父，曾祖母，则A，B是C的great-grandparent，C是A，B的great-grandchild，之后再多一辈，则在关系上加一个great-。<br>
+>
+>输入要求：输入包含多组测试用例,每组用例首先包含2个整数n（0<=n<=26）和m（0<m<50）, 分别表示有n个亲属关系和m个问题, 然后接下来是n行的形式如ABC的字符串，表示A的父母亲分别是B和C，如果A的父母亲信息不全，则用-代替，例如A-C,再然后是m行形式如FA的字符串,表示询问F和A的关系。<br>
+>当n和m为0时结束输入。<br>
+>
+>输出要求：如果询问的2个人是直系亲属，请按题目描述输出2者的关系，如果没有直系关系，请输出-。<br>
+>
+
+#### Source code:<br>
+[http://www.cnblogs.com/zpfbuaa/p/6792314.html](http://www.cnblogs.com/zpfbuaa/p/6792314.html)
+#### <font color = Blue size = 5> Analysis:</font>
+>题目指出亲属关系的字符串为ABC形式，并且A为孩子，B为父亲，C为母亲。因此最多只有26个关系，可以使用数组保存下每个人的孩子。然后对于查找的字符串FA,只需要去对家谱树中查找F的孩子有谁，是不是等于A,并且统计深度，或者A的孩子有谁，是不是等于F，并且统计深度。<br>
+>对于输出，需要判断是不是父母亲或者孩子，也就是家谱树中的深度差为1.如果大于1，那么需要进行循环输出`great-`,然后输出相应的关系`grandparent`或者`grandchild`.
+>
+>深度查找函数:<br>
+><pre>
+>int find(int a, int b){
+>     int depth = 1;
+>     while(family[a]!=-1){
+>         if(family[a] == b) return depth;
+>         a = family[a];
+>         depth++;
+>     }
+>     return -1;
 > }
 > </pre>
 ## [Back to list](#list)
