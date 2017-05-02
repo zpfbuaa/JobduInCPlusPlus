@@ -19,6 +19,7 @@
 *	[题目1035：找出直系亲属(计算树的深度)](#-题目1035找出直系亲属)
 *	[题目1040：Prime Number(第k个素数)](#-题目1040prime-number)
 *	[题目1042：Coincidence(最长公共子序列dp题目)](#-题目1042coincidence)
+*	[题目1048：判断三角形类型(直角、钝角、锐角)](#-1048)
 *	[题目1049：字符串去特定字符(简单判断)](#-题目1049字符串去特定字符)
 *	[题目1061：成绩排序（自定义排序)](#-题目1061成绩排序)
 *	[题目1076：N的阶乘(大数乘法)](d#-题目1076n的阶乘)
@@ -993,6 +994,29 @@
 >因此最终结果输出`dp[lens1][lens2]`即可。
 
 ## [Back to list](#list)
+#### <font color = Green> <span id="1048">题目1048：判断三角形类型</span></font>
+
+
+#### Jobdu Link:<br>
+[http://ac.jobdu.com/problem.php?pid=1048](http://ac.jobdu.com/problem.php?pid=1048)
+#### Problem description:<br>
+>给定三角形的三条边，a,b,c。判断该三角形类型。<br>
+>
+>输入要求：测试数据有多组，每组输入三角形的三条边。<br>
+>
+>输出要求：对于每组输入,输出直角三角形、锐角三角形、或是钝角三角形。<br>
+
+#### Source code:<br>
+[http://www.cnblogs.com/zpfbuaa/p/6797739.html](http://www.cnblogs.com/zpfbuaa/p/6797739.html)
+#### <font color = Blue size = 5> Analysis:</font>
+>三角形存在定理：任意两边之和大于第三边，任意两边之差小于第三边。<br>
+>三角形形状判断：最长边的平方的其余两边平方和的大小比较。相等则为直角三角形，小于则为锐角三角形、大于则为钝角三角形。<br>
+>
+>最长边：`int maxNum = max(a,max(b,c));`<br>
+>最短边：`int minNum = min(a,min(b,c));`<br>
+>中间边：`int midNum = a+b+c-maxNum-minNum;`<br>
+## [Back to list](#list)
+
 #### <font color = Green> <span id="1049">题目1049：字符串去特定字符</span></font>
 
 
