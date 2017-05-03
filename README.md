@@ -23,7 +23,9 @@
 *	[题目1049：字符串去特定字符(简单判断)](#-题目1049字符串去特定字符)
 *	[题目1061：成绩排序（自定义排序)](#-题目1061成绩排序)
 *	[题目1076：N的阶乘(大数乘法)](d#-题目1076n的阶乘)
+*	[题目1077：最大序列和(最大连续子序列和)](#-1077)
 * 	[题目1078：二叉树遍历(二叉树操作)](#-题目1078二叉树遍历)
+*	[题目1079：手机键盘(对应关系)](#-1079)
 *	[题目1080：进制转换(大整数任意进制转换)](#-题目1080进制转换)
 *	[题目1083：特殊乘法(求模运算符使用)](#-题目1083特殊乘法)
 *	[题目1100：最短路径(最短路径进阶)](#-题目1100最短路径)
@@ -1115,6 +1117,41 @@ bool cmp(Stu a, Stu b){
 ></pre>
 ## [Back to list](#list)
 
+#### <font color = Green> <span id="1077">题目1077：最大序列和</span></font>
+
+
+#### Jobdu Link:<br>
+[http://ac.jobdu.com/problem.php?pid=1077](http://ac.jobdu.com/problem.php?pid=1077)
+#### Problem description:<br>
+>给出一个整数序列S，其中有N个数，定义其中一个非空连续子序列T中所有数的和为T的“序列和”。<br>
+>对于S的所有非空连续子序列T，求最大的序列和。<br>
+>变量条件：N为正整数，N≤1000000，结果序列和在范围（-2^63,2^63-1）以内。<br>
+>
+>输入要求：第一行为一个正整数N，第二行为N个整数，表示序列中的数。<br>
+>
+>输出要求：输入可能包括多组数据，对于每一组输入数据，仅输出一个数，表示最大序列和。<br>
+>
+
+#### Source code:<br>
+[http://www.cnblogs.com/zpfbuaa/p/6803306.html](http://www.cnblogs.com/zpfbuaa/p/6803306.html)
+#### <font color = Blue size = 5> Analysis:</font>
+>比较坑的地方就是输入的数可能直接超过了int的范围，因此需要申请long long 的数组。另外对于初始化的最大求和sum需要初始化LONG_LONG_MIN。在这里给自己一个提醒，以后头文件就写上#include <climits>千万不要忘记了。<br>
+>
+>并不需要记录当前最大连续字序列和的初始位置以及结束位置，只需要记录最大值即可。<br>
+><pre>
+> memset(a,0,sizeof(a));
+> long long  sum = LONG_LONG_MIN;
+> long long tmp = LONG_LONG_MIN;
+> for(int i = 0 ; i < n ; i ++){
+>     scanf("%lld",&a[i]);
+>     if(tmp>0) tmp+=a[i];
+>     else tmp = a[i];
+>     if(tmp>sum) sum=tmp;
+> }
+> printf("%lld\n",sum);
+> </pre>
+## [Back to list](#list)
+
 #### <font color = Green> <span id="1078">题目1078：二叉树遍历</span></font>
 
 
@@ -1153,6 +1190,52 @@ bool cmp(Stu a, Stu b){
 >
 >按照上述思路，解决由前序遍历和中序遍历得到后序遍历。
 
+## [Back to list](#list)
+
+#### <font color = Green> <span id="1079">题目1079：手机键盘</span></font>
+
+
+#### Jobdu Link:<br>
+[http://ac.jobdu.com/problem.php?pid=1079](http://ac.jobdu.com/problem.php?pid=1079)
+#### Problem description:<br>
+>按照手机键盘输入字母的方式，计算所花费的时间。<br>
+> 如：a,b,c都在“1”键上，输入a只需要按一次，输入c需要连续按三次。<br>
+> 如果连续两个字符不在同一个按键上，则可直接按，如：ad需要按两下，kz需要按6下.<br>
+> 如果连续两字符在同一个按键上，则两个按键之间需要等一段时间，如ac，在按了a之后，需要等一会儿才能按c。<br>
+> 现在假设每按一次需要花费一个时间段，等待时间需要花费两个时间段。<br>
+> 现在给出一串字符，需要计算出它所需要花费的时间。<br>
+> 
+> 输入要求：输入可能包括多组数据，一个长度不大于100的字符串，其中只有手机按键上有的小写字母<br>
+> 
+> 输出要求：对于每组数据，输出按出Input所给字符串所需要的时间<br>
+
+#### Source code:<br>
+[http://www.cnblogs.com/zpfbuaa/p/6803262.html](http://www.cnblogs.com/zpfbuaa/p/6803262.html)
+#### <font color = Blue size = 5> Analysis:</font>
+>对于一个使用九键输入的我而言，看到这道题的时候，愣了一下，难道不是abc在数字键2上吗?吓得我赶紧拿出手机看了一眼。<br>
+>并没有很复杂，只是不熟悉这个键盘位置分布的话会比较的尴尬。<br>
+>
+>使用了两个数组，其中一个保存每个小写字母所在的数字键，另外一个数组表示输入当前字母至少需要按下几次。<br>
+>
+><pre>
+>int pos[26]={2,2,2,3,3,3,4,4,4,5,5,5,6,6,6,7,7,7,7,8,8,8,9,9,9,9};
+>int kase[26]={1,2,3,1,2,3,1,2,3,1,2,3,1,2,3,1,2,3,4,1,2,3,1,2,3,4};
+></pre>
+>
+>就是判断相邻字符是否位于同一个数字键即可，然后更新总用时sum。代码如下：<br>
+>
+><pre>
+> int len = (int)strlen(str);
+> int sum = kase[str[0]-'a'];
+> for(int i = 1 ; i < len ; i++){
+>     if(pos[str[i]-'a']!=pos[str[i-1]-'a']){
+>         sum+=(kase[str[i]-'a']);
+>     }
+>     else {
+>         sum+=2+kase[str[i]-'a'];
+>     }
+> }
+> </pre>
 ## [Back to list](#list)
 
 #### <font color = Green> <span id="1080">题目1080：进制转换</span></font>
