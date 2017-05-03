@@ -27,6 +27,7 @@
 * 	[题目1078：二叉树遍历(二叉树操作)](#-题目1078二叉树遍历)
 *	[题目1079：手机键盘(对应关系)](#-题目1079手机键盘)
 *	[题目1080：进制转换(大整数任意进制转换)](#-题目1080进制转换)
+*	[题目1081：递推数列(矩阵二分乘法)](#-1081)
 *	[题目1083：特殊乘法(求模运算符使用)](#-题目1083特殊乘法)
 *	[题目1100：最短路径(最短路径进阶)](#-题目1100最短路径)
 *	[题目1104：整除问题(大数相乘，素数问题)](#-题目1104整除问题)
@@ -1266,6 +1267,71 @@ bool cmp(Stu a, Stu b){
 >data[]数组里面保存的是 待转化的数，因为这里数比较大，不能直接除以2，求模。要一步一步算。首先是第一位1除以2，余数是0，模是1，然后考虑第二个数，注意第二个数的值应该是前一个数与2取模之后得到的1再乘以10，再加上2，即12。然后循环下去，当到了最后一个数的时候，将余数1保存到output数组里面去。这只是第一次相除，因为余数061728394不等于0，所以还要继续循环，模拟除以2的过程，直到各个位都为0，即sum(保存各个位的和)＝ 0，最终的结果就是output数组的倒序输出。
 >
 
+## [Back to list](#list)
+#### <font color = Green> <span id="1081">题目1081：递推数列</span></font>
+
+
+#### Jobdu Link:<br>
+[http://ac.jobdu.com/problem.php?pid=1081](http://ac.jobdu.com/problem.php?pid=1081)
+#### Problem description:<br>
+>给定a0,a1,以及an=p * a(n-1) + q * a(n-2)中的p,q。这里n >= 2。 求第k个数对10000的模。<br>
+>
+>输入要求：多组数据,每组数据输入包括5个整数：a0、a1、p、q、k。<br>
+>
+>输出要求：第k个数a(k)对10000的模。<br>
+>
+
+#### Source code:<br>
+[http://www.cnblogs.com/zpfbuaa/p/6803388.html](http://www.cnblogs.com/zpfbuaa/p/6803388.html)
+#### <font color = Blue size = 5> Analysis:</font>
+>暴力求解,时间复杂度为O(n)：
+><pre>
+>void cal(){
+>     memset(a,0,sizeof(a));
+>     a[0]=a0;
+>     a[1]=a1;
+>     for(int i = 2 ; i <= k ; i++){
+>         a[i] = ( (p * a[i-1]) % 10000 + (q * a[i-2]) % 10000 ) % 10000;
+>     }
+> }
+> </pre>
+>观察上面的递推公式，可以得到以下矩阵关系。
+><pre>
+>/*
+ *  metrixMul
+ *
+ *  | ak   |   | p q |   | ak-1 |
+ *  |      | = |     | * |      |
+ *  | ak-1 |   | 1 0 |   | ak-2 |
+ *
+ *  metrixPow
+ *
+ *  | ak   |   | p q |(k-1)   | a1 |
+ *  |      | = |     |     *  |    |
+ *  | ak-1 |   | 1 0 |        | a0 |
+ *
+ */
+></pre>
+>
+>矩阵求幂可以通过优化可以将时间复杂度优化至O(logn)。题目给出二阶矩阵，矩阵快速求幂首先基于两个矩阵乘法，然后按照奇偶次幂进行乘法运算。下面给出矩阵快速求幂：<br>
+><pre>
+> void metrixPow(int p[2][2], int n){
+>     int tmp[2][2];
+>     tmp[0][0] = p[0][0];
+>     tmp[0][1] = p[0][1];
+>     tmp[1][0] = p[1][0];
+>     tmp[1][1] = p[1][1];
+>     if(n==1) return ;
+>     else if((n&1)==1){//odd
+>         metrixPow(p, n-1);
+>         metrixMul(p, tmp);
+>     }
+>     else{
+>         metrixPow(p,n/2);
+>         metrixMul(p, p);// mind : means metrix p*p
+>     }
+> }
+> </pre>
 ## [Back to list](#list)
 
 #### <font color = Green> <span id="1083">题目1083：特殊乘法</span></font>
