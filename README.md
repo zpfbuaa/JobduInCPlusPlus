@@ -31,6 +31,7 @@
 *	[题目1082：代理服务器(贪心算法)](#-题目1082代理服务器)
 *	[题目1083：特殊乘法(求模运算符使用)](#-题目1083特殊乘法)
 *	[题目1084：整数拆分(递推算法)](#-题目1084整数拆分)
+*	[题目1085：求root(N, k)(二分求幂&进制转换)](#-1085)
 *	[题目1089：数字反转(简单判断)](#-题目1089数字反转)
 *	[题目1100：最短路径(最短路径进阶)](#-题目1100最短路径)
 *	[题目1104：整除问题(大数相乘，素数问题)](#-题目1104整除问题)
@@ -1426,6 +1427,41 @@ bool cmp(Stu a, Stu b){
 >     for(int i = 1 ; i < MAX_SIZE ; i++){
 >         a[i] = (a[i-1]+a[i/2])%MOD;
 >     }
+> }
+> </pre>
+## [Back to list](#list)
+
+#### <font color = Green> <span id="1085">题目1085：求root(N, k)</span></font>
+
+
+#### Jobdu Link:<br>
+[http://ac.jobdu.com/problem.php?pid=1085](http://ac.jobdu.com/problem.php?pid=1085)
+#### Problem description:<br>
+>N<k时，root(N,k) = N，否则，root(N,k) = root(N',k)。N'为N的k进制表示的各位数字之和。输入x,y,k，输出root(x^y,k)的值 (这里^为乘方，不是异或)，2=<k<=16，0<x,y<2000000000，有一半的测试点里 x^y 会溢出int的范围(>=2000000000) <br>
+>
+>输入要求：每组测试数据包括一行，x(0<x<2000000000), y(0<y<2000000000), k(2<=k<=16)<br>
+>
+>输出要求：输入可能有多组数据，对于每一组数据，root(x^y, k)的值<br>
+
+#### Source code:<br>
+
+#### <font color = Blue size = 5> Analysis:</font>
+>二分求幂方法如下：<br>
+>
+><div align=center><img width="523" height="109" src="http://files.cnblogs.com/files/zpfbuaa/1085_%E6%B1%82root%28N%2Ck_1%29.gif"/></div><br>
+>
+><pre>
+>#define L long long
+> L cal(L x, L y, L k){
+>     L ans = 1;
+>     while(y!=0){
+>         if((y&1)==1){
+>             ans = (ans*x)%k;
+>         }
+>         x=(x*x)%k;
+>         y=y>>1;
+>     }
+>     return ans;
 > }
 > </pre>
 ## [Back to list](#list)
