@@ -33,6 +33,7 @@
 *	[题目1084：整数拆分(递推算法)](#-题目1084整数拆分)
 *	[题目1085：求root(N, k)(二分求幂&进制转换)](#-题目1085求rootn-k)
 *	[题目1089：数字反转(简单判断)](#-题目1089数字反转)
+*	[题目1091：棋盘游戏(DFS)](#-1091)
 *	[题目1100：最短路径(最短路径进阶)](#-题目1100最短路径)
 *	[题目1104：整除问题(大数相乘，素数问题)](#-题目1104整除问题)
 *	[题目1111：单词替换(字符串查找)](#-题目1111单词替换)
@@ -1493,6 +1494,55 @@ bool cmp(Stu a, Stu b){
 >     return ans;
 > }
 > </pre>
+## [Back to list](#list)
+
+#### <font color = Green> <span id="1091">题目1091：棋盘游戏</span></font>
+
+
+#### Jobdu Link:<br>
+[http://ac.jobdu.com/problem.php?pid=1091](http://ac.jobdu.com/problem.php?pid=1091)
+#### Problem description:<br>
+>有一个6*6的棋盘，每个棋盘上都有一个数值，现在又一个起始位置和终止位置，请找出一个从起始位置到终止位置代价最小的路径：<br>
+><pre>
+>    1、只能沿上下左右四个方向移动
+>    2、总代价是没走一步的代价之和
+>    3、每步（从a,b到c,d）的代价是c,d上的值与其在a,b上的状态的乘积
+>    4、初始状态为1, 每走一步，状态按如下公式变化：（走这步的代价%4）+1。
+></pre><br>
+>
+>输入要求：第一行有一个正整数n，表示有n组数据。<br>
+>每组数据一开始为6*6的矩阵，矩阵的值为大于等于1小于等于10的值，然后四个整数表示起始坐标和终止坐标。<br>
+>
+>输出要求：输出最小代价。<br>
+
+#### Source code:<br>
+[http://www.cnblogs.com/zpfbuaa/p/6810738.html](http://www.cnblogs.com/zpfbuaa/p/6810738.html)
+#### <font color = Blue size = 5> Analysis:</font>
+>对于给定的图进行不断深度遍历，找到每个可以从起点到达终点的最短的代价。<br>
+>
+>图每个位置初始数字的保存，图中每个位置是否已经访问，到达某个位置之后的下一步移动。可以使用二维数组map保存图的初始数字，使用visited[MAX_SIZE][MAX_SIZE]记录是否已经访问，使用change[2][4]={{-1,1,0,0},{0,0,-1,1}}表示可以进行的下一步移动。<br>
+>
+><pre>
+> void DFS(int x, int y, int status, int sum){
+>     int nextX,nextY,cost;
+>     if(sum < ans){
+>         if(x==xEnd && y==yEnd){
+>             ans = sum;
+>             return ;
+>         }
+>         for(int i = 0 ; i < 4 ; i ++){
+>             nextX = x + change[0][i];
+>             nextY = y + change[1][i];
+>             if(!visited[nextX][nextY] && nextX>=0 && nextX<6 && nextY>=0 && nextY<6){
+>                 cost = map[nextX][nextY]*status;
+>                 visited[nextX][nextY]=true;
+>                 DFS(nextX,nextY,cost%4+1,sum+cost);
+>                 visited[nextX][nextY]=false;
+>             }
+>         }
+>     }
+> }
+></pre>
 ## [Back to list](#list)
 
 #### <font color = Green> <span id="1100">题目1100：最短路径</span></font>
