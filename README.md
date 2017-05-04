@@ -31,6 +31,7 @@
 *	[题目1082：代理服务器(贪心算法)](#-题目1082代理服务器)
 *	[题目1083：特殊乘法(求模运算符使用)](#-题目1083特殊乘法)
 *	[题目1084：整数拆分(递推算法)](#-题目1084整数拆分)
+*	[题目1089：数字反转(简单判断)](#-1089)
 *	[题目1100：最短路径(最短路径进阶)](#-题目1100最短路径)
 *	[题目1104：整除问题(大数相乘，素数问题)](#-题目1104整除问题)
 *	[题目1111：单词替换(字符串查找)](#-题目1111单词替换)
@@ -1425,6 +1426,35 @@ bool cmp(Stu a, Stu b){
 >     for(int i = 1 ; i < MAX_SIZE ; i++){
 >         a[i] = (a[i-1]+a[i/2])%MOD;
 >     }
+> }
+> </pre>
+## [Back to list](#list)
+
+#### <font color = Green> <span id="1089">题目1089：数字反转</span></font>
+
+
+#### Jobdu Link:<br>
+[http://ac.jobdu.com/problem.php?pid=1089](http://ac.jobdu.com/problem.php?pid=1089)
+#### Problem description:<br>
+>12翻一下是21,34翻一下是43,12+34是46,46翻一下是64，现在又任意两个正整数，问他们两个数反转的和是否等于两个数的和的反转。<br>
+>
+>输入要求：第一行一个正整数表示测试数据的个数n。只有n行，每行两个正整数a和b（0<a,b<=10000）。<br>
+>
+>输出要求： 如果满足题目的要求输出a+b的值，否则输出NO。<br>
+
+#### Source code:<br>
+[http://www.cnblogs.com/zpfbuaa/p/6809880.html](http://www.cnblogs.com/zpfbuaa/p/6809880.html)
+#### <font color = Blue size = 5> Analysis:</font>
+>进行数字的翻转：<br>
+><pre>
+> int reverse(int x){
+>     int tmp = x;
+>     int ans = 0;
+>     while(tmp!=0){
+>         ans = ans*10 + tmp%10;
+>         tmp/=10;
+>     }
+>     return ans;
 > }
 > </pre>
 ## [Back to list](#list)
