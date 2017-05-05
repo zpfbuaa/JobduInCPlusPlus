@@ -35,6 +35,7 @@
 *	[题目1089：数字反转(简单判断)](#-题目1089数字反转)
 *	[题目1091：棋盘游戏(DFS)](#-题目1091棋盘游戏)
 *	[题目1095：2的幂次方(递归函数)](#-题目10952的幂次方)
+*	[题目1099：后缀子串排序(qsort自定义cmp函数)](#-1095)
 *	[题目1100：最短路径(最短路径进阶)](#-题目1100最短路径)
 *	[题目1104：整除问题(大数相乘，素数问题)](#-题目1104整除问题)
 *	[题目1111：单词替换(字符串查找)](#-题目1111单词替换)
@@ -1593,6 +1594,33 @@ bool cmp(Stu a, Stu b){
 >     }
 > }
 > </pre>
+## [Back to list](#list)
+
+#### <font color = Green> <span id="1099">题目1099：后缀子串排序</span></font>
+
+
+#### Jobdu Link:<br>
+[http://ac.jobdu.com/problem.php?pid=1099](http://ac.jobdu.com/problem.php?pid=1099)
+#### Problem description:<br>
+>对于一个字符串，将其后缀子串进行排序，例如grain<br>
+>其后缀子串有：`grain`, `rain`, `ain`, `in`, `n`<br>
+>然后对各子串按字典顺序排序，即： <br>
+>ain, grain, in, n, rain
+
+#### Source code:<br>
+[http://www.cnblogs.com/zpfbuaa/p/6813000.html](http://www.cnblogs.com/zpfbuaa/p/6813000.html)
+#### <font color = Blue size = 5> Analysis:</font>
+>给定字符串只是对后缀字符串进行字典序排序操作。因此只需要将该字符串的后缀字符串找出然后排序即可。<br>
+>子串函数substr(startIdx,len)，可用于后缀字符串的不断选择`substr(i,len-i)`。<br>
+>对于长度为len的字符串一共有len个子串（包括自身）。<br>
+>自定义cmp函数如下所示：
+><pre>
+>int cmp(const void * a, const void * b){
+>     string * c = (string* )a;
+>     string * d = (string* )b;
+>     return strcmp(c->c_str(), d->c_str());
+> }
+></pre>
 ## [Back to list](#list)
 
 #### <font color = Green> <span id="1100">题目1100：最短路径</span></font>
