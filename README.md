@@ -34,6 +34,7 @@
 *	[题目1085：求root(N, k)(二分求幂&进制转换)](#-题目1085求rootn-k)
 *	[题目1089：数字反转(简单判断)](#-题目1089数字反转)
 *	[题目1091：棋盘游戏(DFS)](#-题目1091棋盘游戏)
+*	[题目1095：2的幂次方(递归函数)](#-1095)
 *	[题目1100：最短路径(最短路径进阶)](#-题目1100最短路径)
 *	[题目1104：整除问题(大数相乘，素数问题)](#-题目1104整除问题)
 *	[题目1111：单词替换(字符串查找)](#-题目1111单词替换)
@@ -1543,6 +1544,55 @@ bool cmp(Stu a, Stu b){
 >     }
 > }
 ></pre>
+## [Back to list](#list)
+#### <font color = Green> <span id="1095">题目1095：2的幂次方</span></font>
+
+
+#### Jobdu Link:<br>
+[http://ac.jobdu.com/problem.php?pid=1095](http://ac.jobdu.com/problem.php?pid=1095)
+#### Problem description:<br>
+> Every positive number can be presented by the exponential form.For example, `137 = 2^7 + 2^3 + 2^0`。<br>
+>Let's present a^b by the form a(b).Then 137 is presented by `2(7)+2(3)+2(0)`. Since 7 = 2^2 + 2 + 2^0 and 3 = 2 + 2^0 , 137 is finally presented by `2(2(2)+2 +2(0))+2(2+2(0))+2(0)`. <br>
+ 
+> Given a positive number n,your task is to present n with the exponential form which only contains the digits 0 and 2.<br>
+> 
+> For each case, the input file contains a positive integer n (n<=20000).<br>
+
+#### Source code:<br>
+[http://www.cnblogs.com/zpfbuaa/p/6812878.html](http://www.cnblogs.com/zpfbuaa/p/6812878.html)
+#### <font color = Blue size = 5> Analysis:</font>
+>思路：找到数字n的二进制最高位，按照格式输出相应的括号以及数字2。之后这个最高位的位置假设为i，那么同样需要对i进行上述操作，找到i的二进制最高位，输出‘+’以及括号和数字2。<br>
+>
+>递归出口：当n==1 or n==0 时，程序结束进一步递归调用。对于括号的输出以及'+’的输出，当n是第一个操作数时，不输出'+'，其他的操作数均需要输出'+',对于数字2都要输出，对于'('只有当操作数不为1时才输出，因为题目中除了1之外其余的均输出0，同时对于')'也是只有当操作数不为1时才输出。当n==0时，需要输出最小的数字0.<br>
+>
+><pre>
+> void print(int n){
+>     if(n==1) return;
+>     if(n==0){
+>         printf("0");
+>         return;
+>     }
+>     bool first = true;
+>     for(int i = 31 ; i >= 0 ; i--){
+>         if(((n>>i)&1)==1){//find the hightest pos
+>             if(first){
+>                 first = false;
+>             }
+>             else {
+>                 printf("+");
+>             }
+>             printf("2");
+>             if(i!=1){
+>                 printf("(");
+>             }
+>             print(i);//not until i==0 || i==1
+>             if(i!=1){
+>                 printf(")");
+>             }
+>         }
+>     }
+> }
+> </pre>
 ## [Back to list](#list)
 
 #### <font color = Green> <span id="1100">题目1100：最短路径</span></font>
