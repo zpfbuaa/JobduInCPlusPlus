@@ -37,6 +37,7 @@
 *	[题目1095：2的幂次方(递归函数)](#-题目10952的幂次方)
 *	[题目1099：后缀子串排序(qsort自定义cmp函数)](#-题目1099后缀子串排序)
 *	[题目1100：最短路径(最短路径进阶)](#-题目1100最短路径)
+*	[题目1101：计算表达式(栈的使用)](#-1101)
 *	[题目1104：整除问题(大数相乘，素数问题)](#-题目1104整除问题)
 *	[题目1111：单词替换(字符串查找)](#-题目1111单词替换)
 *	[题目1112：拦截导弹(最长非递增子序列)](#-题目1112拦截导弹)
@@ -1675,6 +1676,72 @@ bool cmp(Stu a, Stu b){
 >
 >哈哈哈，当然了上面的城市肯定不是一个三角形了，因为实际道路怎么可能是一个线段呢。城市之间的道路曲曲折折，人生的道路也是如此。也许到达另一个目标的距离不如先到达另一个目标，然后再实现下一个目标。头一次这么晚还有如此清晰的思考，甚至扯到了人生。可能是最近诸事不顺吧，的确人生道路也是曲折的。<br>
 
+## [Back to list](#list)
+
+#### <font color = Green> <span id="1101">题目1101：计算表达式</span></font>
+
+
+#### Jobdu Link:<br>
+[http://ac.jobdu.com/problem.php?pid=1101](http://ac.jobdu.com/problem.php?pid=1101)
+#### Problem description:<br>
+>对于一个不存在括号的表达式进行计算。<br>
+>
+>输入要求：存在多种数据，每组数据一行，表达式不存在空格<br>
+>
+>输入要求：输出计算结果<br>
+
+#### Source code:<br>
+
+#### <font color = Blue size = 5> Analysis:</font>
+>由于不存在括号，只有'+'、'-'、'*'、'/'，四种运算符，并且乘除运算等级最高，加减运算等级最低。<br>
+>为了简化计算，可以将所有的数字都保存到栈中，在保存到栈中之前先将运算等级最高的降低为加减，但是这样依旧不能解决最后的加减运算。因此可以将遇到减去一个数时，可以讲这个数变为0-num，放入栈中。<br>
+>最后只需要将栈中所有的数字经行求和运算即可，不需要经行减法运算。<br>
+>
+>注意：每次输入输入之前需要将栈清空:<br>
+><pre>while(!myStack.empty()) myStack.pop();</pre><br>
+>
+>输入数据放入栈中：<br>
+><pre>
+> while(scanf("%c",&op)!=EOF && op!='\n'){
+>     int nextNum;
+>     scanf("%d",&nextNum);
+>     switch(op){
+>         case '+':{
+>             myStack.push(nextNum);
+>             break;
+>         }
+>         case '-':{
+>             myStack.push(0-nextNum);
+>             break;
+>         }
+>         case '*':{
+>             int tmp1 = myStack.top();
+>             myStack.pop();
+>             myStack.push(tmp1 * nextNum);
+>             break;
+>         }
+>         case '/':{
+>             int tmp2 = myStack.top();
+>             myStack.pop();
+>             myStack.push(tmp2/nextNum);
+>             break;
+>         }
+>         default:
+>             break;
+>     }
+> }
+> </pre>
+> 
+> 输出计算结果:<br>
+> <pre>
+> int ans = 0;
+> while(!myStack.empty()){
+>     int tmp = myStack.top();
+>     ans += tmp;
+>     myStack.pop();
+> }
+> printf("%d\n",ans);
+> </pre>
 ## [Back to list](#list)
 
 #### <font color = Green> <span id="1104">题目1104：整除问题</span></font>
