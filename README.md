@@ -5,6 +5,7 @@
 *	[题目1002：Grading(简单判断)](#-题目1002grading)
 *	[题目1003：A+B(带逗号的A+B)](#-题目1003ab)
 *	[题目1005：Graduate Admission(录取算法)](#-题目1005graduate-admission)
+*	[题目1006：ZOJ问题(递推规律)](#-1006)
 * 	[题目1007：奥运排序问题(自定义排序)](#-题目1007奥运排序问题)
 *	[题目1008：最短路径问题(最短路径问题dijkstra算法)](#-题目1008最短路径问题)
 *	[题目1012：畅通工程(并查集以及路径优化)](#-题目1012畅通工程)
@@ -243,6 +244,60 @@
 >         }
 >         printf("\n");
 >     }
+> }
+> </pre>
+## [Back to list](#list)
+
+#### <font color = Green> <span id="1006">题目1006：ZOJ问题</span></font>
+
+
+#### Jobdu Link:<br>
+[http://ac.jobdu.com/problem.php?pid=1006](http://ac.jobdu.com/problem.php?pid=1006)
+#### Problem description:<br>
+>对给定的字符串(只包含'z','o','j'三种字符),判断他是否能AC。<br>
+>是否AC的规则如下：<br>
+> 1. zoj能AC；<br>
+> 2. 若字符串形式为xzojx，则也能AC，其中x可以是N个'o' 或者为空；<br>
+> 3. 若azbjc 能AC，则azbojac也能AC，其中a,b,c为N个'o'或者为空;<br>
+> 
+> 输入要求：输入包含多组测试用例，每行有一个只包含'z','o','j'三种字符的字符串，字符串长度小于等于1000。<br>
+> 
+> 输出要求：输入包含多组测试用例，每行有一个只包含'z','o','j'三种字符的字符串，字符串长度小于等于1000。<br>
+
+#### Source code:<br>
+[http://www.cnblogs.com/zpfbuaa/p/6828317.html](http://www.cnblogs.com/zpfbuaa/p/6828317.html)
+#### <font color = Blue size = 5> Analysis:</font>
+>记'z'前o的个数为a, 'z'和'j'之间o的个数为b, 'j'之后的o的个数为c.<br>
+> 分析文法可以发现，符合文法的字符串将满足：<br>
+> `1) b != 0`<br>
+> `2) a * b = c`<br>
+>对于统计z前o个个数，以及z和j之间的o，以及j之后的o有不同的方法。其中可以利用标记z以及j的第一个出现位置来进行计算相应的个数。<br>
+>
+>通过以下函数进行求解：<br>
+><pre>
+>bool judge(){
+>     int idxZ = -1 ;
+>     int idxJ = -1 ;
+>     bool zoj = true;
+>     int len = (int)str.size();
+>     for(int i = 0 ; i < len ; i++){
+>         if(str[i]=='z' && idxZ == -1){
+>             idxZ = i;
+>         }
+>         else if(str[i]=='j' && idxJ == -1){
+>             idxJ = i;
+>         }
+>         else if(str[i]!='o'){
+>             zoj = false;
+>         }
+>     }
+>     int a = idxZ;
+>     int b = idxJ - idxZ -1;
+>     int c = len - 1 - idxJ;
+>     if(zoj && idxZ != -1 && idxJ != -1 && (idxZ +1 < idxJ) && a*b==c){
+>         return true;
+>     }
+>     else return false;
 > }
 > </pre>
 ## [Back to list](#list)
