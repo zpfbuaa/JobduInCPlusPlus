@@ -4,10 +4,12 @@
 ## List
 *	[题目1002：Grading(简单判断)](#-题目1002grading)
 *	[题目1003：A+B(带逗号的A+B)](#-题目1003ab)
+*	[题目1004：Median(qsort函数)](#-1004)
 *	[题目1005：Graduate Admission(录取算法)](#-题目1005graduate-admission)
 *	[题目1006：ZOJ问题(递推规律)](#-题目1006zoj问题)
 * 	[题目1007：奥运排序问题(自定义排序)](#-题目1007奥运排序问题)
 *	[题目1008：最短路径问题(最短路径问题dijkstra算法)](#-题目1008最短路径问题)
+*	[题目1009：二叉搜索树(是否为同一个二叉搜索树)](#-1009)
 *	[题目1012：畅通工程(并查集以及路径优化)](#-题目1012畅通工程)
 *	[题目1016：火星A+B(进制转换新问题)](#-题目1016火星ab)
 *	[题目1017：还是畅通工程(最小生成树初步)](#-题目1017还是畅通工程)
@@ -134,6 +136,30 @@
 >else if(!flag1 && !flag2) printf("%d\n",0-num1-num2);
 ></pre>
 
+## [Back to list](#list)
+
+#### <font color = Green> <span id="1004">题目1004：Median</span></font>
+
+
+#### Jobdu Link:<br>
+[http://ac.jobdu.com/problem.php?pid=1004](http://ac.jobdu.com/problem.php?pid=1004)
+#### Problem description:<br>
+>题目大致含义：给两个非递减的数组，找到两个数组的中位数。
+>
+>输入要求：多组数据输入，第一行第一个数字为n,表示第一个数组有n个数字。第二行第二个数字为m,表示第二个数组有m个数字。<br>
+>
+>输出要求：两个数组的中位数。
+
+#### Source code:<br>
+[http://www.cnblogs.com/zpfbuaa/p/6832183.html](http://www.cnblogs.com/zpfbuaa/p/6832183.html)
+#### <font color = Blue size = 5> Analysis:</font>
+>使用一个足够大的数组保存下来全部的数字，进行排序之后求得中位数。<br>
+><pre>
+>int cmp(void const * a,  void const * b){
+>     return * (int * )a - * (int * )b;
+> }
+>qsort(a,n+m,sizeof(a[0]),cmp);
+></pre>
 ## [Back to list](#list)
 
 #### <font color = Green> <span id="1005">题目1005：Graduate Admission</span></font>
@@ -452,6 +478,66 @@
 >
 >
 
+## [Back to list](#list)
+
+#### <font color = Green> <span id="1009">题目1009：二叉搜索树</span></font>
+
+
+#### Jobdu Link:<br>
+[http://ac.jobdu.com/problem.php?pid=1009](http://ac.jobdu.com/problem.php?pid=1009)
+#### Problem description:<br>
+>判断两序列是否为同一二叉搜索树序列。<br>
+>
+>输入要求:
+>开始一个数n，(1<=n<=20) 表示有n个需要判断，n= 0 的时候输入结束。<br>
+>接下去一行是一个序列，序列长度小于10，包含(0~9)的数字，没有重复数字，根据这个序列可以构造出一颗二叉搜索树。<br>
+>接下去的n行有n个序列，每个序列格式跟第一个序列一样，请判断这两个序列是否能组成同一颗二叉搜索树。<br>
+>
+>输出要求：如果序列相同则输出YES，否则输出NO<br>
+
+
+#### Source code:<br>
+[http://www.cnblogs.com/zpfbuaa/p/6832230.html](http://www.cnblogs.com/zpfbuaa/p/6832230.html)
+#### <font color = Blue size = 5> Analysis:</font>
+>关键是确定如何判断两个序列是否为同一个二叉搜索树。可采用方法：判断两个序列的后续遍历和中序遍历是否均相同。如果相同则是同一个二叉搜索树，否则不是。为了方便起见可以将后续遍历结果和中序遍历结果放到string字符串中，通过函数strcmp来判断是否等于0即可。
+>
+><pre>
+>struct Node{
+>     Node * lchild;
+>     Node * rchild;
+>     int c;
+> }tree[110];
+>void inOrder(Node *T){
+>     if(T->lchild!=NULL)
+>         inOrder(T->lchild);
+>     str[(*size)++]=T->c+'0';//size++ and put the character into the str array
+>     if(T->rchild!=NULL)
+>         inOrder(T->rchild);
+> }
+>  
+> void postOrder(Node *T){
+>     if(T->lchild!=NULL)
+>         postOrder(T->lchild);
+>     if(T->rchild!=NULL)
+>         postOrder(T->rchild);
+>     str[(*size)++]=T->c+'0';//size++ and put the character into the str array
+> }
+> 
+> Node * insert(Node *T,int x){
+>     if(T==NULL){
+>         T=creat();
+>         T->c=x;
+>         return T;
+>     }
+>     else if(x<T->c){
+>         T->lchild=insert(T->lchild, x);
+>     }
+>     else if(x>T->c){
+>         T->rchild=insert(T->rchild, x);
+>     }
+>     return T;
+> }
+> </pre>
 ## [Back to list](#list)
 
 #### <font color = Green> <span id="1012">题目1012：畅通工程</span></font>
