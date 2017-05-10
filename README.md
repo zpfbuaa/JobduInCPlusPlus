@@ -10,6 +10,7 @@
 * 	[题目1007：奥运排序问题(自定义排序)](#-题目1007奥运排序问题)
 *	[题目1008：最短路径问题(最短路径问题dijkstra算法)](#-题目1008最短路径问题)
 *	[题目1009：二叉搜索树(是否为同一个二叉搜索树)](#-题目1009二叉搜索树)
+*	[题目1010：A + B(字符串转数字)](#-1010)
 *	[题目1012：畅通工程(并查集以及路径优化)](#-题目1012畅通工程)
 *	[题目1016：火星A+B(进制转换新问题)](#-题目1016火星ab)
 *	[题目1017：还是畅通工程(最小生成树初步)](#-题目1017还是畅通工程)
@@ -536,6 +537,72 @@
 >         T->rchild=insert(T->rchild, x);
 >     }
 >     return T;
+> }
+> </pre>
+## [Back to list](#list)
+
+#### <font color = Green> <span id="1010">题目1010：A + B</span></font>
+
+
+#### Jobdu Link:<br>
+[http://ac.jobdu.com/problem.php?pid=1010](http://ac.jobdu.com/problem.php?pid=1010)
+#### Problem description:<br>
+>读入两个小于100的正整数A和B,计算A+B.<br>
+>需要注意的是:A和B的每一位数字由对应的英文单词给出.<br>
+>
+>输入要求：测试输入包含若干测试用例,每个测试用例占一行,格式为"A + B =",相邻两字符串有一个空格间隔.当A和B同时为0时输入结束,相应的结果不要输出.<br>
+>
+>输出要求：对每个测试用例输出1行,即A+B的值.<br>
+>
+>样例输入：<br>
+>one + two =<br>
+>three four + five six =<br>
+>zero seven + eight nine =<br>
+>zero + zero =<br>
+>
+>样例输出：<br>
+>3<br>
+>90<br>
+>96<br>
+
+#### Source code:<br>
+[http://www.cnblogs.com/zpfbuaa/p/6838791.html](http://www.cnblogs.com/zpfbuaa/p/6838791.html)
+#### <font color = Blue size = 5> Analysis:</font>
+>由于所包含的英文单词只有0~9，则可以保存到char二维数组中。如下所示：
+>
+>`char arr[10][8] ={ "zero","one","two","three","four","five","six","seven","eight","nine"};`<br>
+>
+>通过函数find来找到每个字符串对应的数字，然后需要计算两个加数。第一个加数结束标记为'+'，第二个加数结束为'='。
+><pre>
+>int find(char* str) {
+>     int i;
+>     for (i = 0; i < 10; i++) {
+>         if (strcmp(arr[i], str) == 0)
+>             return i;
+>     }
+>     return 0;
+> }
+> </pre>
+> 
+> 其中的转换如下所示：<br>
+> <pre>
+> while (scanf("%s", temp) != EOF) {
+>     int a = find(temp);
+>     scanf("%s", temp);
+>     if (temp[0] != '+') {// if meet '+' means a is over
+>         a = a * 10 + find(temp);//calculate number a
+>         scanf("%s", temp);
+>     }
+>     scanf("%s", temp);
+>     int b = find(temp);
+>     scanf("%s", temp);
+>     if (temp[0] != '=') {//if meet '=' means b is over
+>         b = b * 10 + find(temp);// calculate number b
+>         scanf("%s", temp);
+>     }
+>     if(a==0 && b==0)//str a is zero && str b is zero means jumping out of loop
+>         break;
+>     printf("%d\n", a + b);//print the answer
 > }
 > </pre>
 ## [Back to list](#list)
