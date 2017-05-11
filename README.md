@@ -11,6 +11,7 @@
 *	[题目1008：最短路径问题(最短路径问题dijkstra算法)](#-题目1008最短路径问题)
 *	[题目1009：二叉搜索树(是否为同一个二叉搜索树)](#-题目1009二叉搜索树)
 *	[题目1010：A + B(字符串转数字)](#-题目1010a--b)
+*	[题目1011：最大连续子序列(标记边界)](#-1011)
 *	[题目1012：畅通工程(并查集以及路径优化)](#-题目1012畅通工程)
 *	[题目1016：火星A+B(进制转换新问题)](#-题目1016火星ab)
 *	[题目1017：还是畅通工程(最小生成树初步)](#-题目1017还是畅通工程)
@@ -603,6 +604,53 @@
 >     if(a==0 && b==0)//str a is zero && str b is zero means jumping out of loop
 >         break;
 >     printf("%d\n", a + b);//print the answer
+> }
+> </pre>
+## [Back to list](#list)
+
+#### <font color = Green> <span id="1011">题目1011：最大连续子序列</span></font>
+
+
+#### Jobdu Link:<br>
+[http://ac.jobdu.com/problem.php?pid=1011](http://ac.jobdu.com/problem.php?pid=1011)
+#### Problem description:<br>
+>输出所给序列的最大连续子序列的和，并且需要输出该子序列的第一个和最后一个元素。
+>
+>输入要求：测试输入包含若干测试用例，每个测试用例占2行，第1行给出正整数K( K< 10000 )，第2行给出K个整数，中间用空格分隔。当K为0时，输入结束，该用例不被处理。<br>
+>
+>输出要求： 对每个测试用例，在1行里输出最大和、最大连续子序列的第一个和最后一个元素，中间用空格分隔。如果最大连续子序列不唯一，则输出序号i和j最小的那个（如输入样例的第2、3组）。若所有K个元素都是负数，则定义其最大和为0，输出整个序列的首尾元素。<br>
+
+#### Source code:<br>
+[http://www.cnblogs.com/zpfbuaa/p/6843045.html](http://www.cnblogs.com/zpfbuaa/p/6843045.html)
+#### <font color = Blue size = 5> Analysis:</font>
+>
+><pre>
+>int sum = a[0], max = a[0];
+> int left =0 , right = 0;
+> int ansLeft = 0, ansRight = 0;
+> int ansMax = max;
+> for(int i = 1 ; i < k ; i++){
+>     if(sum < 0){
+>         sum = 0;
+>         left = right = i;
+>     }
+>     sum += a[i];
+>     right = i;
+>     if(sum > max){//update the sum and ansLeft && ansRight
+>         ansLeft = left;
+>         ansRight = right;
+>         max = sum;
+>         ansMax = max;
+>     }
+> }
+> </pre>
+> 通过判断ansMax是否大于0，来判断整个序列是否都是负数，然后决定不同的输出。<br>
+> <pre>
+> if(ansMax < 0){
+>     printf("0 %d %d\n",a[0],a[k-1]);
+> }
+> else{
+>     printf("%d %d %d\n",ansMax,a[ansLeft],a[ansRight]);
 > }
 > </pre>
 ## [Back to list](#list)
