@@ -13,6 +13,7 @@
 *	[题目1010：A + B(字符串转数字)](#-题目1010a--b)
 *	[题目1011：最大连续子序列(标记边界)](#-题目1011最大连续子序列)
 *	[题目1012：畅通工程(并查集以及路径优化)](#-题目1012畅通工程)
+*	[题目1013：开门人和关门人(结构体使用qsort排序)](#-1013)
 *	[题目1016：火星A+B(进制转换新问题)](#-题目1016火星ab)
 *	[题目1017：还是畅通工程(最小生成树初步)](#-题目1017还是畅通工程)
 *	[题目1019：简单计算器(栈的使用)](#-题目1019简单计算器)
@@ -741,6 +742,69 @@
 >
 
 ## [Back to list](#list)
+#### <font color = Green> <span id="1013">题目1013：开门人和关门人</span></font>
+
+
+#### Jobdu Link:<br>
+[http://ac.jobdu.com/problem.php?pid=1013](http://ac.jobdu.com/problem.php?pid=1013)
+#### Problem description:<br>
+>每天第一个到机房的人要把门打开，最后一个离开的人要把门关好。现有一堆杂乱的机房签到、签离记录，请根据记录找出当天开门和关门的人。<br>
+>
+>输入要求：测试输入的第一行给出记录的总天数N ( N> 0 )，下面列出了N天的记录。 <br>
+>     每天的记录在第一行给出记录的条目数M (M > 0 )，下面是M行，每行的格式为 <br>
+>     证件号码 签到时间 签离时间 <br>
+>     其中时间按“小时:分钟:秒钟”（各占2位）给出，证件号码是长度不超过15的字符串。<br>
+> 
+> 输出要求：对每一天的记录输出1行，即当天开门和关门人的证件号码，中间用1空格分隔。 <br>
+>    注意：在裁判的标准测试输入中，所有记录保证完整，每个人的签到时间在签离时间之前，且没有多人同时签到或者签离的情况。<br>
+
+#### Source code:<br>
+[http://www.cnblogs.com/zpfbuaa/p/6847645.html](http://www.cnblogs.com/zpfbuaa/p/6847645.html)
+#### <font color = Blue size = 5> Analysis:</font>
+>定义签到结构体，记录每个人的标号id，以及签到时间和签退时间。<br>
+><pre>
+>struct Sign{
+>     char id[MAX_SIZE];
+>     int comeH;
+>     int comeM;
+>     int comeS;
+>     int leftH;
+>     int leftM;
+>     int leftS;
+> };
+> </pre>
+> 实现自定义的cmp排序函数，对时间进行排序。开门按照从小到大排序，关门从大到小排序，如下所示：<br>
+> <pre>
+> int cmpOpenDoor(const void * a , const void * b){
+>     Sign * c = (Sign * )a;
+>     Sign * d = (Sign * )b;
+>     if(c->comeH != d->comeH){
+>         return c->comeH - d->comeH;
+>     }
+>     else if(c->comeM != d->comeH){
+>         return c->comeM - d->comeM;
+>     }
+>     else
+>         return c->comeS - d->comeS;
+> }
+>  
+> int cmpCloseDoor(const void * a , const void * b){
+>     Sign * c = (Sign * )a;
+>     Sign * d = (Sign * )b;
+>     if(c->leftH != d->leftH){
+>         return d->leftH - c->leftH;
+>     }
+>     else if(c->leftM != d->leftM){
+>         return d->leftM - c->leftM;
+>     }
+>     else {
+>         return d->leftS - c->leftS;
+>     }
+> }
+></pre>
+>经过排序之后，输出第一个签到的id，输出最后一个签退的id即可。
+## [Back to list](#list)
+
 
 #### <font color = Green> <span id="1016">题目1016：火星A+B</span></font>
 
