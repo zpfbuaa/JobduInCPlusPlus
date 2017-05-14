@@ -15,6 +15,7 @@
 *	[题目1012：畅通工程(并查集以及路径优化)](#-题目1012畅通工程)
 *	[题目1013：开门人和关门人(结构体使用qsort排序)](#-题目1013开门人和关门人)
 * 	[题目1014：排名(结构体使用自定义cmp排序规则)](#-题目1014排名)
+* 	[题目1015：还是A+B(简单判断)](#-1015)
 *	[题目1016：火星A+B(进制转换新问题)](#-题目1016火星ab)
 *	[题目1017：还是畅通工程(最小生成树初步)](#-题目1017还是畅通工程)
 *	[题目1019：简单计算器(栈的使用)](#-题目1019简单计算器)
@@ -842,6 +843,36 @@
 >     else
 >         return strcmp(c->id,d->id);
 > }
+> </pre>
+## [Back to list](#list)
+
+#### <font color = Green> <span id="1015">题目1015：还是A+B</span></font>
+
+
+#### Jobdu Link:<br>
+[http://ac.jobdu.com/problem.php?pid=1015](http://ac.jobdu.com/problem.php?pid=1015)
+#### Problem description:<br>
+>读入两个小于10000的正整数A和B，计算A+B。需要注意的是：如果A和B的末尾K（不超过8）位数字相同，请直接输出-1。<br>
+>
+>输入要求：测试输入包含若干测试用例，每个测试用例占一行，格式为"A B K"，相邻两数字有一个空格间隔。当A和B同时为0时输入结束，相应的结果不要输出。<br>
+>
+>输出要求：对每个测试用例输出1行，即A+B的值或者是-1。<br>
+
+#### Source code:<br>
+[http://www.cnblogs.com/zpfbuaa/p/6854039.html](http://www.cnblogs.com/zpfbuaa/p/6854039.html)
+#### <font color = Blue size = 5> Analysis:</font>
+>
+>判断后k位是否相同，相同输出-1，不同则输出a+b<br>
+><pre>
+> int num = pow(10,k);
+> int tmp1 = a % num ;
+> int tmp2 = b % num ;
+> tmp1 = (tmp1+num)%num;
+> tmp2 = (tmp2+num)%num;
+> if(tmp1 == tmp2)
+> 	printf("-1\n");
+> else
+>	printf("%d\n",a+b);
 > </pre>
 ## [Back to list](#list)
 
