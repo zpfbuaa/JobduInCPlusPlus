@@ -18,6 +18,7 @@
 * 	[题目1015：还是A+B(简单判断)](#-题目1015还是ab)
 *	[题目1016：火星A+B(进制转换新问题)](#-题目1016火星ab)
 *	[题目1017：还是畅通工程(最小生成树初步)](#-题目1017还是畅通工程)
+*	[题目1018：统计同成绩学生人数(简单统计)](#-1018)
 *	[题目1019：简单计算器(栈的使用)](#-题目1019简单计算器)
 *	[题目1022：游船出租(结构体使用)](#-题目1022游船出租)
 *	[题目1024：畅通工程(最小生成树kruskal算法)](#-题目1024畅通工程)
@@ -1013,6 +1014,38 @@
 ></pre>
 
 ## [Back to list](#list)
+#### <font color = Green> <span id="1018">题目1018：统计同成绩学生人数</span></font>
+
+
+#### Jobdu Link:<br>
+[http://ac.jobdu.com/problem.php?pid=1018](http://ac.jobdu.com/problem.php?pid=1018)
+#### Problem description:<br>
+>读入N名学生的成绩，将获得某一给定分数的学生人数输出。<br>
+>
+>输入要求：测试输入包含若干测试用例，每个测试用例的格式为<br>
+
+> 第1行：N<br>
+> 第2行：N名学生的成绩，相邻两数字用一个空格间隔。<br>
+> 第3行：给定分数<br>
+> 当读到N=0时输入结束。其中N不超过1000，成绩分数为（包含）0到100之间的一个整数。<br>
+> 
+> 输出要求：对每个测试用例，将获得给定分数的学生人数输出。<br>
+> 
+
+
+#### Source code:<br>
+[http://www.cnblogs.com/zpfbuaa/p/6858911.html](http://www.cnblogs.com/zpfbuaa/p/6858911.html)
+#### <font color = Blue size = 5> Analysis:</font>
+>注意到题目所给的分数均为整数，并且取值范围为[0,100],因此可以设置数组，使用idx进行统计每个分数的人数。<br>
+><pre>
+> memset(score,0,sizeof(score));
+> for(int i = 0 ; i < n ; i++){
+>     scanf("%d",&temp);
+>     score[temp]++;
+> }
+></pre>
+## [Back to list](#list)
+
 
 #### <font color = Green> <span id="1019">题目1019：简单计算器</span></font><br>
 
