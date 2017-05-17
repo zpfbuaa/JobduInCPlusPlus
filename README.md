@@ -21,6 +21,7 @@
 *	[题目1018：统计同成绩学生人数(简单统计)](#-题目1018统计同成绩学生人数)
 *	[题目1019：简单计算器(栈的使用)](#-题目1019简单计算器)
 *	[题目1020：最小长方形(排除原点)](#-题目1020最小长方形)
+*	[题目1021：统计字符(字符统计)](#-1021)
 *	[题目1022：游船出租(结构体使用)](#-题目1022游船出租)
 *	[题目1024：畅通工程(最小生成树kruskal算法)](#-题目1024畅通工程)
 *	[题目1025：最大报销额(0-1背包问题)](#-题目1025最大报销额)
@@ -1130,6 +1131,33 @@
 >     }
 > }
 > </pre>
+## [Back to list](#list)
+#### <font color = Green> <span id="1021">题目1021：统计字符</span></font>
+
+
+#### Jobdu Link:<br>
+[http://ac.jobdu.com/problem.php?pid=1021](http://ac.jobdu.com/problem.php?pid=1021)
+#### Problem description:<br>
+>统计一个给定字符串中指定的字符出现的次数。<br>
+>
+>输入要求：测试输入包含若干测试用例，每个测试用例包含2行，第1行为一个长度不超过5的字符串，第2行为一个长度不超过80的字符串。注意这里的字符串包含空格，即空格也可能是要求被统计的字符之一。当读到'#'时输入结束，相应的结果不要输出。<br>
+
+#### Source code:<br>
+[http://www.cnblogs.com/zpfbuaa/p/6870016.html](http://www.cnblogs.com/zpfbuaa/p/6870016.html)
+#### <font color = Blue size = 5> Analysis:</font>
+>注意到需要对空格也进行统计。可以使用`cin.getline(strFind,STR_FIND)`进行输入。其中strFind为char数组类型，STR_FIND为定义的最大字符长度。<br>
+>统计每个字符出现的次数:<br>
+><pre>
+> int maxLen = (int)strlen(str);
+> for(int i = 0 ; i < maxLen ; i++){
+>     for(int j = 0 ; j < len ; j++){
+>         if(strFind[j]==str[i]){
+>             strNum[j]++;
+>             break;
+>         }
+>     }
+> }
+></pre>
 ## [Back to list](#list)
 
 #### <font color = Green> <span id="1022">题目1022：游船出租</span></font>
