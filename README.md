@@ -1,5 +1,7 @@
 # JobduInCPlusPlus
 
+## 九度OJ永久关闭
+* 详细见http://www.cskaoyan.com/thread-647811-1-1.html 
 
 ## List
 *	[题目1002：Grading(简单判断)](#-题目1002grading)
